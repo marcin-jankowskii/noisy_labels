@@ -13,15 +13,16 @@ import yaml
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 writer = SummaryWriter('runs/noisy_labels_trainer_{}'.format(timestamp))
 epoch_number = 0
-EPOCHS = 5
-BATCH = 1
+EPOCHS = 60
+BATCH = 6
 best_vloss = 1_000_000.
-path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
+#path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
+path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
 with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
 
 
-batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH,mode ='train')
+batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH,mode ='train',segment = 'tail',annotator= 1)
 train_loader = batch_maker.train_loader
 val_loader = batch_maker.val_loader
 
@@ -105,13 +106,21 @@ for epoch in range(EPOCHS):
 
     avg_vloss = running_vloss / (batch_idx + 1)
     print('LOSS train {} valid {}'.format(avg_loss, avg_vloss))
+
+    writer.add_scalars('Training vs. Validation Loss',
+                    { 'Training' : avg_loss, 'Validation' : avg_vloss },
+                    epoch_number + 1)
+    writer.flush()
+
     scheduler.step(avg_vloss)
 
     # Track best performance, and save the model's state
     if avg_vloss < best_vloss:
         best_vloss = avg_vloss
-        model_path = config['save_model_path'] + '/model_{}_{}'.format(timestamp, epoch_number)
+        model_path = config['save_model_path'] + '/tail_best_model'
         torch.save(model.state_dict(), model_path)
-
+    if epoch_number == EPOCHS - 1:
+        model_path = config['save_model_path'] + '/tail_last_model'
+        torch.save(model.state_dict(), model_path)
 
     epoch_number += 1

@@ -11,13 +11,14 @@ from sklearn.metrics import (
 )
 
 BATCH = 1
-path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
+#path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
+path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
 with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
-model_path = config['save_model_path'] + '/Modele/U-net_plemniki/best'
+model_path = config['save_model_path'] + '/tail_best_model'
 
 
-batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH, mode = 'test')
+batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH, mode = 'test',segment = 'tail',annotator= 1)
 test_loader = batch_maker.test_loader
 
 

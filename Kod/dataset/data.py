@@ -6,19 +6,36 @@ import numpy as np
 from torch.utils.data import TensorDataset, DataLoader
 from skimage.transform import resize
 
+#path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
+path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
 
 
 class ProcessData:
-    def __init__(self, config_path='config.yaml'):
+    def __init__(self, config_path=path_to_config, mode = 'full',annotator = 1):
         with open(config_path, 'r') as config_file:
             self.config = yaml.safe_load(config_file)
+            self.mode = mode
+            self.annotator = annotator
 
     def process_dataset(self, dataset_name):
         dataset_path = self.config['dataset_path']
         dataset_path = dataset_path + dataset_name
         print(dataset_path)
+
+        if self.annotator == 1:
+            name = '/GT1_'
+        elif self.annotator == 2:
+            name = '/GT2_'
+        if self.mode == 'full':
+            segment = 'full/'
+        elif self.mode == 'head':
+            segment = 'head/'
+        elif self.mode == 'tail':
+            segment = 'tail/'
+
+        gt_path = dataset_path + name + segment
         images = sorted(glob.glob(f"{dataset_path}/images/*"))
-        masks = sorted(glob.glob(f"{dataset_path}/GT1_full/*.png"))
+        masks = sorted(glob.glob(f"{gt_path}*.png"))
 
         X = np.zeros((len(images), self.config['image_height'], self.config['image_width'], 3), dtype=np.float32)
         y = np.zeros((len(masks), self.config['image_height'], self.config['image_width'], 1), dtype=np.float32)
@@ -40,9 +57,10 @@ class ProcessData:
 
 
 class BatchMaker:
-    def __init__(self, config_path='config.yaml', batch_size=6, mode = 'all'):
+    def __init__(self, config_path=path_to_config, batch_size=6, mode = 'all',segment = 'full' ,annotator = 1):
         
-        self.process_data = ProcessData(config_path=config_path)
+    
+        self.process_data = ProcessData(config_path=config_path,mode = segment,annotator = annotator)
         self.batch_size = batch_size
         if mode == 'all':
             x_train, y_train = self.process_data.process_dataset('/train')

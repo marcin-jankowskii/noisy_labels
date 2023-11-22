@@ -1,0 +1,2 @@
+https://github.com/qubvel/segmentation_models.pytorch#start
+https://github.com/albumentations-team/albumentations
