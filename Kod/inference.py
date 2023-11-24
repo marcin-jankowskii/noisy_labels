@@ -15,10 +15,10 @@ BATCH = 1
 path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
 with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
-model_path = config['save_model_path'] + '/tail_best_model'
+model_path = config['save_model_path'] + '/mixedGT1_best_model'
 
 
-batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH, mode = 'test',segment = 'tail',annotator= 1)
+batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH, mode = 'test',segment = 'mixed',annotator= 1)
 test_loader = batch_maker.test_loader
 
 
@@ -98,11 +98,11 @@ true_masks_t = (true > threshold).astype(np.uint8)
 predicted_masks_t = (pred > threshold).astype(np.uint8)
 
 for i in range(len(x_images)):
-    plot_sample(x_images, true_masks_t, pred, predicted_masks_t, ix=i)
+    plot_sample(x_images, true, pred, predicted_masks_t, ix=i)
     print('sample {} saved'.format(i))
 
-IoU = jaccard_score(true_masks_t.flatten(), predicted_masks_t.flatten())
-average_precision = average_precision_score(true_masks_t.flatten(), predicted_masks_t.flatten())
+#IoU = jaccard_score(true_masks_t.flatten(), predicted_masks_t.flatten())
+#average_precision = average_precision_score(true_masks_t.flatten(), predicted_masks_t.flatten())
 
-print("IoU: {}".format(IoU))
-print("Average Precision: {}".format(average_precision))    
+#print("IoU: {}".format(IoU))
+#print("Average Precision: {}".format(average_precision))    

@@ -32,6 +32,8 @@ class ProcessData:
             segment = 'head/'
         elif self.mode == 'tail':
             segment = 'tail/'
+        elif self.mode == 'mixed':
+            segment = 'mixed/'    
 
         gt_path = dataset_path + name + segment
         images = sorted(glob.glob(f"{dataset_path}/images/*"))
@@ -49,9 +51,13 @@ class ProcessData:
             mask = cv2.imread(mimg)
             mask = mask.astype(np.float32)
             mask = resize(mask, (self.config['image_height'], self.config['image_width'], 1), mode='constant', preserve_range=True)
+            mask[mask == [0, 0, 0]] = 0  # class 0 to black
+            mask[mask == [0, 255, 0]] = 1  # class 1 to green
+            mask[mask == [255, 0, 0]] = 2  # class 2 to red
+
             # Save images
-            X[n] = x_img / 255.0
-            y[n] = mask / 255.0
+            X[n] = x_img 
+            y[n] = mask 
 
         return X, y
 

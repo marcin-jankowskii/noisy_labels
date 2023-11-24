@@ -8,12 +8,15 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.utils.tensorboard import SummaryWriter
 import datetime
 import yaml
+import matplotlib.pyplot as plt
+import kornia as K
 
 
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 writer = SummaryWriter('runs/noisy_labels_trainer_{}'.format(timestamp))
 epoch_number = 0
-EPOCHS = 60
+num_classes = 2
+EPOCHS = 10
 BATCH = 6
 best_vloss = 1_000_000.
 #path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
@@ -22,13 +25,32 @@ with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
 
 
-batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH,mode ='train',segment = 'tail',annotator= 1)
+batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH,mode ='train',segment = 'mixed',annotator= 1)
 train_loader = batch_maker.train_loader
 val_loader = batch_maker.val_loader
 
 
+class MyAugmentation(nn.Module):
+    def __init__(self):
+        super().__init__()
+        # we define and cache our operators as class members
+        self.k1 = K.augmentation.ColorJitter(0.15, 0.25, 0.25, 0.25)
+        self.k2 = K.augmentation.RandomAffine([-45.0, 45.0], [0.0, 0.15], [0.5, 1.5], [0.0, 0.15])
 
-def train_one_epoch(epoch_index, tb_writer):
+    def forward(self, img: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
+        # 1. apply color only in image
+        # 2. apply geometric tranform
+        img_out = self.k2(self.k1(img))
+
+        # 3. infer geometry params to mask
+        # TODO: this will change in future so that no need to infer params
+        mask_out = self.k2(mask, self.k2._params)
+
+        return img_out, mask_out
+
+
+
+def train_one_epoch(epoch_index, tb_writer,augementation, T_aug = False):
     running_loss = 0.
     last_loss = 0.
     batches = len(train_loader)
@@ -38,10 +60,23 @@ def train_one_epoch(epoch_index, tb_writer):
     # index and do some intra-epoch reporting
     for batch_idx, (inputs, labels) in enumerate(train_loader):
         # Every data instance is an input + label pair
+
+        if T_aug == True:
+            for i in range(inputs.shape[0]):
+                inputs[i], labels[i] = augementation(inputs[i], labels[i])
+
+
         inputs = inputs.to(device)
         labels = labels.to(device)
 
-        # Zero your gradients for every batch!
+
+        #fig, ax = plt.subplots(1, 6, figsize=(20, 10))
+        #for i in range(inputs.shape[0]):
+            #ax[i].imshow(labels[i].cpu().numpy().transpose(1,2,0))
+            #ax[i].contour(labels[i].cpu().numpy().transpose(1,2,0).squeeze(), colors='k', levels=[0.5])
+        #plt.show()
+
+        # Zero your gradients for every batch
         optimizer.zero_grad()
 
         # Make predictions for this batch
@@ -53,6 +88,7 @@ def train_one_epoch(epoch_index, tb_writer):
 
         # Adjust learning weights
         optimizer.step()
+     
 
         # Gather data and report
         running_loss += loss.item()
@@ -76,23 +112,27 @@ else:
 
 model = UNet(3,1)
 model.to(device)
-loss_fn = nn.BCELoss()
+
+# Binary semantic segmentation problem
+#loss_fn = nn.BCELoss()
+# Multi-class semantic segmentation problem
+loss_fn = nn.CrossEntropyLoss()
+
+aug = MyAugmentation()
 
 # Definicja optymalizatora (np. Adam)
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 scheduler = ReduceLROnPlateau(optimizer, 'min')
+
 
 for epoch in range(EPOCHS):
     print('EPOCH {}:'.format(epoch_number + 1))
 
     # Make sure gradient tracking is on, and do a pass over the data
     model.train(True)
-    avg_loss = train_one_epoch(epoch_number, writer)
-
+    avg_loss = train_one_epoch(epoch_number, writer,aug,T_aug = False)
 
     running_vloss = 0.0
-    # Set the model to evaluation mode, disabling dropout and using population
-    # statistics for batch normalization.
     model.eval()
 
     # Disable gradient computation and reduce memory consumption.
@@ -117,10 +157,10 @@ for epoch in range(EPOCHS):
     # Track best performance, and save the model's state
     if avg_vloss < best_vloss:
         best_vloss = avg_vloss
-        model_path = config['save_model_path'] + '/tail_best_model'
+        model_path = config['save_model_path'] + '/mixedGT1_best_model_2'
         torch.save(model.state_dict(), model_path)
     if epoch_number == EPOCHS - 1:
-        model_path = config['save_model_path'] + '/tail_last_model'
+        model_path = config['save_model_path'] + '/mixedGT1_last_model_2'
         torch.save(model.state_dict(), model_path)
 
     epoch_number += 1
