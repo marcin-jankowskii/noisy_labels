@@ -24,7 +24,7 @@ test_loader = batch_maker.test_loader
 
 
 
-def plot_sample(X, y, preds, binary_preds, ix=None):
+def plot_sample(X, y, preds, ix=None):
     """Function to plot the results"""
     if ix is None:
         ix = random.randint(0, len(X))
@@ -47,12 +47,6 @@ def plot_sample(X, y, preds, binary_preds, ix=None):
         #ax[2].contour(y[ix].squeeze(), colors='k', levels=[0.5])
     ax[2].set_title('Sperm Image Predicted')
     ax[2].set_axis_off()
-
-    ax[3].imshow(binary_preds[ix].squeeze(), vmin=0, vmax=1)
-    #if has_mask:
-        #ax[3].contour(y[ix].squeeze(), colors='k', levels=[0.5])
-    ax[3].set_title('Sperm Mask Image Predicted binary')
-    ax[3].set_axis_off()
     plt.savefig(config['save_inf_fig_path']+'/{}.png'.format(ix))
     plt.close()
 
@@ -100,7 +94,7 @@ threshold = 0.5
 predicted_masks_t = (pred > threshold).astype(np.uint8)
 
 for i in range(len(x_images)):
-    plot_sample(x_images, true, pred, predicted_masks_t, ix=i)
+    plot_sample(x_images, true, pred, ix=i)
     print('sample {} saved'.format(i))
 
 #IoU = jaccard_score(true_masks_t.flatten(), predicted_masks_t.flatten())

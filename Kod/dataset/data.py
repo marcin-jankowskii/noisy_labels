@@ -56,7 +56,7 @@ class ProcessData:
             mask[(mask == [0, 0, 255]).all(axis=2)] = [1, 0, 0]      # kategoria "główka"
 
             # Save images
-            X[n] = x_img 
+            X[n] = x_img/255.0 
             y[n] = mask 
 
         return X, y
