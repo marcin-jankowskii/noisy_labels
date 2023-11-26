@@ -40,7 +40,7 @@ class ProcessData:
         masks = sorted(glob.glob(f"{gt_path}*.png"))
 
         X = np.zeros((len(images), self.config['image_height'], self.config['image_width'], 3), dtype=np.float32)
-        y = np.zeros((len(masks), self.config['image_height'], self.config['image_width'], 1), dtype=np.float32)
+        y = np.zeros((len(masks), self.config['image_height'], self.config['image_width'], 3), dtype=np.float32)
 
         for n, (img, mimg) in enumerate(zip(images, masks)):
             # Load images
@@ -50,13 +50,13 @@ class ProcessData:
             # Load masks
             mask = cv2.imread(mimg)
             mask = mask.astype(np.float32)
-            mask = resize(mask, (self.config['image_height'], self.config['image_width'], 1), mode='constant', preserve_range=True)
-            mask[mask == [0, 0, 0]] = 0  # class 0 to black
-            mask[mask == [0, 255, 0]] = 1  # class 1 to green
-            mask[mask == [255, 0, 0]] = 2  # class 2 to red
+            mask = resize(mask, (self.config['image_height'], self.config['image_width'], 3), mode='constant', preserve_range=True)
+            mask[(mask == [0, 0, 0]).all(axis=2)] = [0, 0, 0]       # kategoria "tło"
+            mask[(mask == [0, 255, 0]).all(axis=2)] = [0, 1, 0]      # kategoria "wić"
+            mask[(mask == [0, 0, 255]).all(axis=2)] = [1, 0, 0]      # kategoria "główka"
 
             # Save images
-            X[n] = x_img 
+            X[n] = x_img/255.0
             y[n] = mask 
 
         return X, y

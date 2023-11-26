@@ -10,12 +10,13 @@ from sklearn.metrics import (
     average_precision_score
 )
 
+num_classes = 3
 BATCH = 1
-#path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
-path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
+path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
+#path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
 with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
-model_path = config['save_model_path'] + '/mixedGT1_best_model'
+model_path = config['save_model_path'] + '/mixedGT1_best_model_2'
 
 
 batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH, mode = 'test',segment = 'mixed',annotator= 1)
@@ -23,15 +24,15 @@ test_loader = batch_maker.test_loader
 
 
 
-def plot_sample(X, y, preds, binary_preds, ix=None):
+def plot_sample(X, y, preds,ix=None):
     """Function to plot the results"""
     if ix is None:
         ix = random.randint(0, len(X))
 
     has_mask = y[ix].max() > 0
 
-    fig, ax = plt.subplots(1, 4,figsize=(20, 10))
-    ax[0].imshow(X[ix, ..., 0], cmap='seismic')
+    fig, ax = plt.subplots(1, 3,figsize=(20, 10))
+    ax[0].imshow(X[ix], cmap='seismic')
     #if has_mask:
         #ax[0].contour(y[ix].squeeze(), colors='k', levels=[0.5])
     ax[0].set_title('Sperm Image')
@@ -46,12 +47,6 @@ def plot_sample(X, y, preds, binary_preds, ix=None):
         #ax[2].contour(y[ix].squeeze(), colors='k', levels=[0.5])
     ax[2].set_title('Sperm Image Predicted')
     ax[2].set_axis_off()
-
-    ax[3].imshow(binary_preds[ix].squeeze(), vmin=0, vmax=1)
-    #if has_mask:
-        #ax[3].contour(y[ix].squeeze(), colors='k', levels=[0.5])
-    ax[3].set_title('Sperm Mask Image Predicted binary')
-    ax[3].set_axis_off()
     plt.savefig(config['save_inf_fig_path']+'/{}.png'.format(ix))
     plt.close()
 
@@ -63,7 +58,7 @@ if torch.cuda.is_available():
 else:
     raise Exception("Brak dostępnej karty GPU.")
 
-model = UNet(3,1)
+model = UNet(3,num_classes)
 model.load_state_dict(torch.load(model_path)) 
 model.to(device)
 model.eval() 
@@ -90,15 +85,15 @@ predicted_masks = torch.cat(predicted_masks, dim=0).cpu().numpy()
 
 # Threshold predictions
 x_images = input_images.transpose((0, 2, 3, 1))
-true = true_masks.reshape(119, 512, 512)
-pred = predicted_masks.reshape(119, 512, 512)
+true = true_masks.transpose((0, 2, 3, 1))
+pred = predicted_masks.transpose((0, 2, 3, 1))
 
 threshold = 0.5
 true_masks_t = (true > threshold).astype(np.uint8)
 predicted_masks_t = (pred > threshold).astype(np.uint8)
 
 for i in range(len(x_images)):
-    plot_sample(x_images, true, pred, predicted_masks_t, ix=i)
+    plot_sample(x_images, true, pred,ix=i)
     print('sample {} saved'.format(i))
 
 #IoU = jaccard_score(true_masks_t.flatten(), predicted_masks_t.flatten())

@@ -15,12 +15,12 @@ import kornia as K
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 writer = SummaryWriter('runs/noisy_labels_trainer_{}'.format(timestamp))
 epoch_number = 0
-num_classes = 2
-EPOCHS = 10
-BATCH = 6
+num_classes = 3
+EPOCHS = 300
+BATCH = 1
 best_vloss = 1_000_000.
-#path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
-path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
+path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
+#path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
 with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
 
@@ -110,7 +110,7 @@ else:
     raise Exception("Brak dostępnej karty GPU.")
 
 
-model = UNet(3,1)
+model = UNet(3,num_classes)
 model.to(device)
 
 # Binary semantic segmentation problem
