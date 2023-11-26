@@ -6,8 +6,8 @@ import numpy as np
 from torch.utils.data import TensorDataset, DataLoader
 from skimage.transform import resize
 
-#path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
-path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
+path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
+#path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
 
 
 class ProcessData:
@@ -56,7 +56,7 @@ class ProcessData:
             mask[(mask == [0, 0, 255]).all(axis=2)] = [1, 0, 0]      # kategoria "główka"
 
             # Save images
-            X[n] = x_img/255.0
+            X[n] = x_img 
             y[n] = mask 
 
         return X, y
