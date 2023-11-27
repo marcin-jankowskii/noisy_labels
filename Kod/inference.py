@@ -17,7 +17,7 @@ BATCH = 1
 path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
 with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
-model_path = config['save_model_path'] + '/mixedGT1_best_model_2'
+model_path = config['save_model_path'] + '/mixedGT1_best_model_3'
 
 
 batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH, mode = 'test',segment = 'mixed',annotator= 1)
