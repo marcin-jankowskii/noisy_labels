@@ -17,7 +17,7 @@ BATCH = 1
 path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
 with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
-model_path = config['save_model_path'] + '/mixedGT1_best_model_3'
+model_path = config['save_model_path'] + '/mixedGT1_best_model_2'
 
 
 batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH, mode = 'test',segment = 'mixed',annotator= 1)
@@ -112,16 +112,30 @@ x_images = input_images.transpose((0, 2, 3, 1))
 true = true_masks#.transpose((0, 2, 3, 1))
 pred = predicted_masks#.transpose((0, 2, 3, 1))
 
-threshold = 0.5
-#true_masks_t = (true > threshold).astype(np.uint8)
-predicted_masks_t = (pred > threshold).astype(np.uint8)
+
 
 for i in range(len(x_images)):
     plot_sample(x_images, true, pred, ix=i)
     print('sample {} saved'.format(i))
 
-#IoU = jaccard_score(true_masks_t.flatten(), predicted_masks_t.flatten())
-#average_precision = average_precision_score(true_masks_t.flatten(), predicted_masks_t.flatten())
+all_true_class_ids = []
+all_pred_class_ids = []    
 
-#print("IoU: {}".format(IoU))
-#print("Average Precision: {}".format(average_precision))    x_images
+for true, pred in zip(true, pred):
+    # Przekształć maski z formatu one-hot do formatu identyfikatorów klas
+    true_class_id = np.argmax(true, axis=0)
+    pred_class_id = np.argmax(pred, axis=0)
+    # Dodaj identyfikatory klas do list
+    all_true_class_ids.append(true_class_id.flatten())
+    all_pred_class_ids.append(pred_class_id.flatten())
+
+# Połącz wszystkie identyfikatory klas w jedną listę
+all_true_class_ids = np.concatenate(all_true_class_ids)
+all_pred_class_ids = np.concatenate(all_pred_class_ids)
+
+IoU_per_class = jaccard_score(all_true_class_ids, all_pred_class_ids, average=None)
+
+for i, IoU in enumerate(IoU_per_class):
+    print(f'Jaccard score for class {i}: {IoU}')
+
+
