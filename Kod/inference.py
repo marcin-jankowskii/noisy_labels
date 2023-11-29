@@ -14,6 +14,7 @@ num_classes = 3
 BATCH = 1
 path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
 #path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
+#path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
 with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
 model_path = config['save_model_path'] + '/mixedGT1_best_model_2'
@@ -26,23 +27,45 @@ test_loader = batch_maker.test_loader
 
 def plot_sample(X, y, preds, ix=None):
     """Function to plot the results"""
+    colors = [[0, 0, 0], [0, 255, 0], [255, 0, 0]]  # tło, wić, główka
     if ix is None:
         ix = random.randint(0, len(X))
 
     has_mask = y[ix].max() > 0
 
     fig, ax = plt.subplots(1, 3,figsize=(20, 10))
-    ax[0].imshow(X[ix], cmap='seismic')
+    ax[0].imshow(X[ix])
     #if has_mask:
         #ax[0].contour(y[ix].squeeze(), colors='k', levels=[0.5])
     ax[0].set_title('Sperm Image')
     ax[0].set_axis_off()
 
-    ax[1].imshow(y[ix].squeeze())
+
+    mask_to_display = y[ix]
+    mask_to_display = np.argmax(mask_to_display, axis=0)
+
+    # Utwórz obraz RGB z maski
+    mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
+    for i, color in enumerate(colors):
+        mask_rgb[mask_to_display == i] = color
+
+
+    ax[1].imshow(mask_rgb)
     ax[1].set_title('Sperm Mask Image')
     ax[1].set_axis_off()
 
-    ax[2].imshow(preds[ix].squeeze(), vmin=0, vmax=1)
+
+
+    mask_to_display = preds[ix]
+    mask_to_display = np.argmax(mask_to_display, axis=0)
+
+    # Utwórz obraz RGB z maski
+    mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
+    for i, color in enumerate(colors):
+        mask_rgb[mask_to_display == i] = color
+ 
+
+    ax[2].imshow(mask_rgb)
     #if has_mask:
         #ax[2].contour(y[ix].squeeze(), colors='k', levels=[0.5])
     ax[2].set_title('Sperm Image Predicted')
@@ -70,7 +93,7 @@ true_masks = []
 
 # Pętla do przewidywania na danych testowych
 with torch.no_grad():
-    for inputs, labels in test_loader:
+    for inputs, labels, ids in test_loader:
         inputs = inputs.to(device)
         outputs = model(inputs)
 
@@ -86,19 +109,33 @@ predicted_masks = np.concatenate(predicted_masks, axis=0)
 
 # Threshold predictions
 x_images = input_images.transpose((0, 2, 3, 1))
-true = true_masks.transpose((0, 2, 3, 1))
-pred = predicted_masks.transpose((0, 2, 3, 1))
+true = true_masks#.transpose((0, 2, 3, 1))
+pred = predicted_masks#.transpose((0, 2, 3, 1))
 
-threshold = 0.5
-#true_masks_t = (true > threshold).astype(np.uint8)
-predicted_masks_t = (pred > threshold).astype(np.uint8)
+
 
 for i in range(len(x_images)):
     plot_sample(x_images, true, pred, ix=i)
     print('sample {} saved'.format(i))
 
-#IoU = jaccard_score(true_masks_t.flatten(), predicted_masks_t.flatten())
-#average_precision = average_precision_score(true_masks_t.flatten(), predicted_masks_t.flatten())
+all_true_class_ids = []
+all_pred_class_ids = []    
 
-#print("IoU: {}".format(IoU))
-#print("Average Precision: {}".format(average_precision))    x_images
+for true, pred in zip(true, pred):
+    # Przekształć maski z formatu one-hot do formatu identyfikatorów klas
+    true_class_id = np.argmax(true, axis=0)
+    pred_class_id = np.argmax(pred, axis=0)
+    # Dodaj identyfikatory klas do list
+    all_true_class_ids.append(true_class_id.flatten())
+    all_pred_class_ids.append(pred_class_id.flatten())
+
+# Połącz wszystkie identyfikatory klas w jedną listę
+all_true_class_ids = np.concatenate(all_true_class_ids)
+all_pred_class_ids = np.concatenate(all_pred_class_ids)
+
+IoU_per_class = jaccard_score(all_true_class_ids, all_pred_class_ids, average=None)
+
+for i, IoU in enumerate(IoU_per_class):
+    print(f'Jaccard score for class {i}: {IoU}')
+
+

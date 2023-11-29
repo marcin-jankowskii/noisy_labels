@@ -10,17 +10,19 @@ import datetime
 import yaml
 import matplotlib.pyplot as plt
 import kornia as K
+import numpy as np
 
 
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 writer = SummaryWriter('runs/noisy_labels_trainer_{}'.format(timestamp))
 epoch_number = 0
 num_classes = 3
-EPOCHS = 300
+EPOCHS = 2
 BATCH = 1
 best_vloss = 1_000_000.
 path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
 #path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
+#path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
 with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
 
@@ -58,7 +60,7 @@ def train_one_epoch(epoch_index, tb_writer,augementation, T_aug = False):
     # Here, we use enumerate(training_loader) instead of
     # iter(training_loader) so that we can track the batch
     # index and do some intra-epoch reporting
-    for batch_idx, (inputs, labels) in enumerate(train_loader):
+    for batch_idx, (inputs, labels,ids) in enumerate(train_loader):
         # Every data instance is an input + label pair
 
         if T_aug == True:
@@ -68,6 +70,7 @@ def train_one_epoch(epoch_index, tb_writer,augementation, T_aug = False):
 
         inputs = inputs.to(device)
         labels = labels.to(device)
+        ids = ids.to(device)
 
 
         #fig, ax = plt.subplots(1, 6, figsize=(20, 10))
@@ -82,8 +85,12 @@ def train_one_epoch(epoch_index, tb_writer,augementation, T_aug = False):
         # Make predictions for this batch
         outputs = model(inputs)
 
+
+        #print('Output = '+str(outputs.shape))
+        #print('Labels = ' + str(ids.unique()))
+        #print('Labels_shape = ' + str(ids.shape))
         # Compute the loss and its gradients
-        loss = loss_fn(outputs, labels)
+        loss = loss_fn(outputs, ids)
         loss.backward()
 
         # Adjust learning weights
@@ -98,6 +105,11 @@ def train_one_epoch(epoch_index, tb_writer,augementation, T_aug = False):
             tb_x = epoch_index * len(train_loader) + batch_idx + 1
             tb_writer.add_scalar('Loss/train', last_loss, tb_x)
             running_loss = 0.
+            plt.subplot(1,2,1)
+            plt.imshow(outputs[0].detach().cpu().numpy().transpose(1,2,0))
+            plt.subplot(1,2,2)
+            plt.imshow(labels[0].detach().cpu().numpy().transpose(1,2,0))
+            plt.pause(0.05)
 
     return last_loss
 
@@ -116,7 +128,7 @@ model.to(device)
 # Binary semantic segmentation problem
 #loss_fn = nn.BCELoss()
 # Multi-class semantic segmentation problem
-loss_fn = nn.CrossEntropyLoss()
+loss_fn = nn.CrossEntropyLoss(ignore_index=0)
 
 aug = MyAugmentation()
 
@@ -137,9 +149,10 @@ for epoch in range(EPOCHS):
 
     # Disable gradient computation and reduce memory consumption.
     with torch.no_grad():
-        for batch_idx, (vinputs, vlabels) in enumerate(val_loader):
+        for batch_idx, (vinputs, vlabels,vids) in enumerate(val_loader):
             vinputs = vinputs.to(device)
             vlabels = vlabels.to(device)
+            vids = vids.to(device)
             voutputs = model(vinputs)
             vloss = loss_fn(voutputs, vlabels)
             running_vloss += vloss
@@ -157,10 +170,10 @@ for epoch in range(EPOCHS):
     # Track best performance, and save the model's state
     if avg_vloss < best_vloss:
         best_vloss = avg_vloss
-        model_path = config['save_model_path'] + '/mixedGT1_best_model_2'
+        model_path = config['save_model_path'] + '/mixedGT1_best_model_3'
         torch.save(model.state_dict(), model_path)
     if epoch_number == EPOCHS - 1:
-        model_path = config['save_model_path'] + '/mixedGT1_last_model_2'
+        model_path = config['save_model_path'] + '/mixedGT1_last_model_3'
         torch.save(model.state_dict(), model_path)
 
     epoch_number += 1
