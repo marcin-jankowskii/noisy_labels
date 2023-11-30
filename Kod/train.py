@@ -10,13 +10,14 @@ import datetime
 import yaml
 import matplotlib.pyplot as plt
 import kornia as K
+import numpy as np
 
 
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 writer = SummaryWriter('runs/noisy_labels_trainer_{}'.format(timestamp))
 epoch_number = 0
 num_classes = 3
-EPOCHS = 150
+EPOCHS = 100
 BATCH = 3
 best_vloss = 1_000_000.
 #path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
@@ -26,7 +27,7 @@ with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
 
 
-batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH,mode ='train',segment = 'mixed',annotator= 1)
+batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH,mode ='train',segment = 'mixed',annotator= 2)
 train_loader = batch_maker.train_loader
 val_loader = batch_maker.val_loader
 
@@ -51,7 +52,7 @@ class MyAugmentation(nn.Module):
 
 
 
-def train_one_epoch(epoch_index, tb_writer,augementation, T_aug = False):
+def train_one_epoch(epoch_index, tb_writer,augementation, T_aug = False,div =0):
     running_loss = 0.
     last_loss = 0.
     batches = len(train_loader)
@@ -59,9 +60,10 @@ def train_one_epoch(epoch_index, tb_writer,augementation, T_aug = False):
     # Here, we use enumerate(training_loader) instead of
     # iter(training_loader) so that we can track the batch
     # index and do some intra-epoch reporting
-    for batch_idx, (inputs, labels) in enumerate(train_loader):
+    for batch_idx, (inputs, labels,ids) in enumerate(train_loader):
         # Every data instance is an input + label pair
 
+        div += 1
         if T_aug == True:
             for i in range(inputs.shape[0]):
                 inputs[i], labels[i] = augementation(inputs[i], labels[i])
@@ -69,6 +71,7 @@ def train_one_epoch(epoch_index, tb_writer,augementation, T_aug = False):
 
         inputs = inputs.to(device)
         labels = labels.to(device)
+        ids = ids.to(device)
 
 
         #fig, ax = plt.subplots(1, 6, figsize=(20, 10))
@@ -83,8 +86,12 @@ def train_one_epoch(epoch_index, tb_writer,augementation, T_aug = False):
         # Make predictions for this batch
         outputs = model(inputs)
 
+
+        #print('Output = '+str(outputs.shape))
+        #print('Labels = ' + str(ids.unique()))
+        #print('Labels_shape = ' + str(ids.shape))
         # Compute the loss and its gradients
-        loss = loss_fn(outputs, labels)
+        loss = loss_fn(outputs, ids)
         loss.backward()
 
         # Adjust learning weights
@@ -94,11 +101,17 @@ def train_one_epoch(epoch_index, tb_writer,augementation, T_aug = False):
         # Gather data and report
         running_loss += loss.item()
         if batch_idx % batches == batches - 1 or (batch_idx + 1) % 10 == 0:
-            last_loss = running_loss / batches # loss per batch
+            last_loss = running_loss / div # loss per batch
             print('  batch {} loss: {}'.format(batch_idx + 1, last_loss))
             tb_x = epoch_index * len(train_loader) + batch_idx + 1
             tb_writer.add_scalar('Loss/train', last_loss, tb_x)
             running_loss = 0.
+            #plt.subplot(1,2,1)
+            #plt.imshow(outputs[0].detach().cpu().numpy().transpose(1,2,0))
+            #plt.subplot(1,2,2)
+            #plt.imshow(labels[0].detach().cpu().numpy().transpose(1,2,0))
+            #plt.pause(0.05)
+            div = 0
 
     return last_loss
 
@@ -117,7 +130,18 @@ model.to(device)
 # Binary semantic segmentation problem
 #loss_fn = nn.BCELoss()
 # Multi-class semantic segmentation problem
-loss_fn = nn.CrossEntropyLoss()
+# Assume `num_classes` is the number of classes
+weights = torch.ones(num_classes)
+
+# Set a higher weight for the second class
+weights[0] = 0.1
+weights[1] = 0.7
+weights[2] = 0.4
+
+# If you're using a GPU, move the weights tensor to the same device as your model
+weights = weights.to(device)
+
+loss_fn = nn.CrossEntropyLoss(weight=weights)
 
 aug = MyAugmentation()
 
@@ -138,11 +162,12 @@ for epoch in range(EPOCHS):
 
     # Disable gradient computation and reduce memory consumption.
     with torch.no_grad():
-        for batch_idx, (vinputs, vlabels) in enumerate(val_loader):
+        for batch_idx, (vinputs, vlabels,vids) in enumerate(val_loader):
             vinputs = vinputs.to(device)
             vlabels = vlabels.to(device)
+            vids = vids.to(device)
             voutputs = model(vinputs)
-            vloss = loss_fn(voutputs, vlabels)
+            vloss = loss_fn(voutputs, vids)
             running_vloss += vloss
 
     avg_vloss = running_vloss / (batch_idx + 1)
@@ -158,10 +183,10 @@ for epoch in range(EPOCHS):
     # Track best performance, and save the model's state
     if avg_vloss < best_vloss:
         best_vloss = avg_vloss
-        model_path = config['save_model_path'] + '/mixedGT1_best_model_3'
+        model_path = config['save_model_path'] + '/mixedGT1_best_model_4'
         torch.save(model.state_dict(), model_path)
     if epoch_number == EPOCHS - 1:
-        model_path = config['save_model_path'] + '/mixedGT1_last_model_3'
+        model_path = config['save_model_path'] + '/mixedGT1_last_model_4'
         torch.save(model.state_dict(), model_path)
 
     epoch_number += 1

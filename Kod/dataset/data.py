@@ -16,6 +16,15 @@ def rgb_to_class_id(mask_rgb, class_colors):
         return mask_id
 
 
+
+
+def rgb_to_class_id(mask_rgb, class_colors):
+        mask_id = np.zeros(mask_rgb.shape[:2], dtype=np.int64)
+        for class_id, color in enumerate(class_colors):
+            mask_id[(mask_rgb == color).all(axis=2)] = class_id
+        return mask_id
+
+
 #path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
 #path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
 path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
@@ -57,6 +66,7 @@ class ProcessData:
 
         X = np.zeros((len(images), self.config['image_height'], self.config['image_width'], 3), dtype=np.float32)
         y = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],3), dtype=np.float32)
+        y_id = np.zeros((len(masks),  self.config['image_height'], self.config['image_width']), dtype=np.float32)
 
         for n, (img, mimg) in enumerate(zip(images, masks)):
             # Load images
@@ -68,17 +78,17 @@ class ProcessData:
             mask = mask.astype(np.float32)
             mask = resize(mask, (self.config['image_height'], self.config['image_width'], 3), mode='constant', preserve_range=True)
             mask_id = rgb_to_class_id(mask, class_colors)
-            mask_id = rgb_to_class_id(mask, class_colors)
 
             # Convert mask_id to tensor and then to one-hot format
-            mask_id = torch.from_numpy(mask_id)
-            mask_id = F.one_hot(mask_id, num_classes=len(class_colors))
+            mask = torch.from_numpy(mask_id)
+            mask = F.one_hot(mask, num_classes=len(class_colors))
 
             # Save images and masks
             X[n] = x_img/255.0 
-            y[n] = mask_id
+            y[n] = mask
+            y_id[n] = mask_id
 
-        return X, y
+        return X, y, y_id
 
 
 class BatchMaker:
@@ -88,26 +98,28 @@ class BatchMaker:
         self.process_data = ProcessData(config_path=config_path,mode = segment,annotator = annotator)
         self.batch_size = batch_size
         if mode == 'all':
-            x_train, y_train = self.process_data.process_dataset('/train')
-            x_val, y_val = self.process_data.process_dataset('/test_small')
-            x_test, y_test = self.process_data.process_dataset('/test')
-            self.train_loader = self.create_loader(x_train, y_train, shuffle=True)
-            self.val_loader = self.create_loader(x_val, y_val, shuffle=True)
-            self.test_loader = self.create_loader(x_test, y_test, shuffle=False)
+            x_train, y_train,yid_train = self.process_data.process_dataset('/train')
+            x_val, y_val,yid_val = self.process_data.process_dataset('/test_small')
+            x_test, y_test,yid_test = self.process_data.process_dataset('/test')
+            self.train_loader = self.create_loader(x_train, y_train,yid_train,shuffle=True)
+            self.val_loader = self.create_loader(x_val, y_val,yid_val, shuffle=True)
+            self.test_loader = self.create_loader(x_test, y_test,yid_test ,shuffle=False)
         elif mode == 'train':
-            x_train, y_train = self.process_data.process_dataset('/train')
-            x_val, y_val = self.process_data.process_dataset('/test_small')
-            self.train_loader = self.create_loader(x_train, y_train, shuffle=True)
-            self.val_loader = self.create_loader(x_val, y_val, shuffle=True)
+            x_train, y_train,yid_train = self.process_data.process_dataset('/train')
+            x_val, y_val,yid_val = self.process_data.process_dataset('/test_small')
+            self.train_loader = self.create_loader(x_train, y_train,yid_train, shuffle=True)
+            self.val_loader = self.create_loader(x_val, y_val,yid_val, shuffle=True)
         elif mode == 'test':
-            x_test, y_test = self.process_data.process_dataset('/test')
-            self.test_loader = self.create_loader(x_test, y_test, shuffle=False)
+            x_test, y_test,yid_test = self.process_data.process_dataset('/test')
+            self.test_loader = self.create_loader(x_test, y_test,yid_test, shuffle=False)
         
 
-    def create_loader(self, x, y, shuffle):
+    def create_loader(self, x, y, id, shuffle):
         x = np.transpose(x, (0, 3, 1, 2))
-        y = np.transpose(y, (0, 3, 1, 2))
+        y= np.transpose(y, (0, 3, 1, 2))
+        y_id = id
         x_tensor = torch.from_numpy(x)
         y_tensor = torch.from_numpy(y)
-        dataset = TensorDataset(x_tensor, y_tensor)
+        id_tensor = torch.from_numpy(y_id).type(torch.LongTensor)
+        dataset = TensorDataset(x_tensor, y_tensor, id_tensor)
         return DataLoader(dataset, batch_size=self.batch_size, shuffle=shuffle)

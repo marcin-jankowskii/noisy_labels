@@ -17,10 +17,10 @@ BATCH = 1
 path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
 with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
-model_path = config['save_model_path'] + '/mixedGT1_best_model_2'
+model_path = config['save_model_path'] + '/mixedGT1_best_model_4'
 
 
-batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH, mode = 'test',segment = 'mixed',annotator= 1)
+batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH, mode = 'test',segment = 'mixed',annotator= 2)
 test_loader = batch_maker.test_loader
 
 
@@ -93,7 +93,7 @@ true_masks = []
 
 # Pętla do przewidywania na danych testowych
 with torch.no_grad():
-    for inputs, labels in test_loader:
+    for inputs, labels, ids in test_loader:
         inputs = inputs.to(device)
         outputs = model(inputs)
 
