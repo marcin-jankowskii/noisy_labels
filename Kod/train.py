@@ -17,12 +17,12 @@ timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 writer = SummaryWriter('runs/noisy_labels_trainer_{}'.format(timestamp))
 epoch_number = 0
 num_classes = 3
-EPOCHS = 100
-BATCH = 3
+EPOCHS = 60
+BATCH = 1
 best_vloss = 1_000_000.
-#path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
+path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
 #path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
-path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
+#path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
 with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
 
@@ -152,6 +152,10 @@ scheduler = ReduceLROnPlateau(optimizer, 'min')
 
 for epoch in range(EPOCHS):
     print('EPOCH {}:'.format(epoch_number + 1))
+    #if epoch_number + 1 == 10:
+        #weights[0] = 1
+        #weights[1] = 1
+        #weights[2] = 1
 
     # Make sure gradient tracking is on, and do a pass over the data
     model.train(True)
@@ -183,10 +187,10 @@ for epoch in range(EPOCHS):
     # Track best performance, and save the model's state
     if avg_vloss < best_vloss:
         best_vloss = avg_vloss
-        model_path = config['save_model_path'] + '/mixedGT1_best_model_4'
+        model_path = config['save_model_path'] + '/mixedGT1_best_model_6'
         torch.save(model.state_dict(), model_path)
     if epoch_number == EPOCHS - 1:
-        model_path = config['save_model_path'] + '/mixedGT1_last_model_4'
+        model_path = config['save_model_path'] + '/mixedGT1_last_model_6'
         torch.save(model.state_dict(), model_path)
 
     epoch_number += 1

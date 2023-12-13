@@ -1,79 +1,62 @@
 import numpy as np
 
 class SegmentationMetrics:
-    def __init__(self, true_labels, predicted_labels):
+    def __init__(self, true_labels, predicted_labels, num_classes):
         self.true_labels = true_labels.flatten()
         self.predicted_labels = predicted_labels.flatten()
+        self.num_classes = num_classes
 
     def confusion_matrix(self):
-        tp = np.sum((self.true_labels == 1) & (self.predicted_labels == 1))
-        tn = np.sum((self.true_labels == 0) & (self.predicted_labels == 0))
-        fp = np.sum((self.true_labels == 0) & (self.predicted_labels == 1))
-        fn = np.sum((self.true_labels == 1) & (self.predicted_labels == 0))
-        return tp, tn, fp, fn
+        cm = np.zeros((self.num_classes, self.num_classes), dtype=int)
+        for i in range(self.num_classes):
+            for j in range(self.num_classes):
+                cm[i, j] = np.sum((self.true_labels == i) & (self.predicted_labels == j))
+        return cm
+
+    def tp_tn_fp_fn_per_class(self):
+        cm = self.confusion_matrix()
+        metrics = np.zeros((self.num_classes, 4))  # 4 columns for TP, TN, FP, FN
+        for i in range(self.num_classes):
+            tp = cm[i, i]
+            fp = np.sum(cm[:, i]) - tp
+            fn = np.sum(cm[i, :]) - tp
+            tn = np.sum(cm) - (tp + fp + fn)
+            metrics[i] = [tp, tn, fp, fn]
+        return metrics
 
     def accuracy(self):
-        tp, tn, fp, fn = self.confusion_matrix()
-        return (tp + tn) / (tp + tn + fp + fn)
+        metrics = self.tp_tn_fp_fn_per_class()
+        class_accuracies = (metrics[:, 0] + metrics[:, 1]) / np.sum(metrics, axis=1)
+        return np.mean(class_accuracies)
 
     def precision(self):
-        tp, _, fp, _ = self.confusion_matrix()
-        return tp / (tp + fp)
+        metrics = self.tp_tn_fp_fn_per_class()
+        class_precision = metrics[:, 0] / (metrics[:, 0] + metrics[:, 2])
+        return np.nanmean(np.where(class_precision >= 0, class_precision, np.nan))
 
     def recall(self):
-        tp, _, _, fn = self.confusion_matrix()
-        return tp / (tp + fn)
+        metrics = self.tp_tn_fp_fn_per_class()
+        class_recall = metrics[:, 0] / (metrics[:, 0] + metrics[:, 3])
+        return np.nanmean(np.where(class_recall >= 0, class_recall, np.nan))
 
     def f1(self):
         precision = self.precision()
         recall = self.recall()
-        return 2 * (precision * recall) / (precision + recall)
+        return 2 * (precision * recall) / (precision + recall + 1e-7)
 
     def iou(self):
-        tp, _, fp, fn = self.confusion_matrix()
-        return tp / (tp + fp + fn)
-    
+        metrics = self.tp_tn_fp_fn_per_class()
+        class_iou = metrics[:, 0] / (metrics[:, 0] + metrics[:, 2] + metrics[:, 3])
+        return np.nanmean(np.where(class_iou >= 0, class_iou, np.nan))
+
     def dice(self):
-        tp, _, fp, fn = self.confusion_matrix()
-        return 2*tp / (2*tp + fp + fn)
-    
-    
-    def average_precision(self):
-        # Initialize variables
-        tp, _, fp, fn = self.confusion_matrix()
-        precision = self.precision()
-        recall = self.recall()
-
-        # Sort predictions by confidence
-        sorted_indices = np.argsort(self.predicted_labels)
-        sorted_true_labels = self.true_labels[sorted_indices]
-
-        # Initialize variables
-        precision_list = [precision]
-        recall_list = [recall]
-
-        # Calculate precision and recall for each threshold
-        for i in range(len(sorted_true_labels) - 1, -1, -1):
-            if sorted_true_labels[i] == 1:
-                tp -= 1
-            else:
-                fp -= 1
-            precision = tp / (tp + fp) if tp + fp > 0 else 0
-            recall = tp / (tp + fn) if tp + fn > 0 else 0
-            precision_list.append(precision)
-            recall_list.append(recall)
-
-        # Calculate area under the precision-recall curve
-        ap = 0
-        for i in range(1, len(precision_list)):
-            if recall_list[i] != recall_list[i-1]:
-                ap += precision_list[i] * (recall_list[i] - recall_list[i-1])
-        return ap
+        metrics = self.tp_tn_fp_fn_per_class()
+        class_dice = 2 * metrics[:, 0] / (2 * metrics[:, 0] + metrics[:, 2] + metrics[:, 3])
+        return np.nanmean(np.where(class_dice >= 0, class_dice, np.nan))
 
 # Usage:
-# metrics = SegmentationMetrics(true_labels, predicted_labels)
+# metrics = SegmentationMetrics(true_labels, predicted_labels, num_classes)
+# print(metrics.tp_tn_fp_fn_per_class())
 # print(metrics.accuracy())
 # print(metrics.precision())
-# print(metrics.recall())
-# print(metrics.f1())
-# print(metrics.iou())
+# ... and so on ...
