@@ -26,8 +26,8 @@ def rgb_to_class_id(mask_rgb, class_colors):
 
 
 #path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
-#path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
-path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
+path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
+#path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
 
 class ProcessData:
     def __init__(self, config_path=path_to_config, mode = 'full',annotator = 1):
@@ -101,8 +101,8 @@ class BatchMaker:
             x_train, y_train,yid_train = self.process_data.process_dataset('/train')
             x_val, y_val,yid_val = self.process_data.process_dataset('/test_small')
             x_test, y_test,yid_test = self.process_data.process_dataset('/test')
-            self.train_loader = self.create_loader(x_train, y_train,yid_train,shuffle=True)
-            self.val_loader = self.create_loader(x_val, y_val,yid_val, shuffle=True)
+            self.train_loader = self.create_loader(x_train, y_train,yid_train,shuffle=False)
+            self.val_loader = self.create_loader(x_val, y_val,yid_val, shuffle=False)
             self.test_loader = self.create_loader(x_test, y_test,yid_test ,shuffle=False)
         elif mode == 'train':
             x_train, y_train,yid_train = self.process_data.process_dataset('/train')

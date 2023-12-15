@@ -1,16 +1,18 @@
 from models.Unet import UNet
 from dataset.data import BatchMaker
+from utils.metrics import SegmentationMetrics
 
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.optim.lr_scheduler import ReduceLROnPlateau
+from torch.optim.lr_scheduler import ReduceLROnPlateau, CosineAnnealingLR
 from torch.utils.tensorboard import SummaryWriter
 import datetime
 import yaml
 import matplotlib.pyplot as plt
 import kornia as K
 import numpy as np
+import wandb
 
 
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -18,11 +20,12 @@ writer = SummaryWriter('runs/noisy_labels_trainer_{}'.format(timestamp))
 epoch_number = 0
 num_classes = 3
 EPOCHS = 100
-BATCH = 3
-best_vloss = 1_000_000.
+BATCH = 6
+learning_rate = 0.0001
+best_viou = 1_000_000.
 #path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
-#path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
-path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
+path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
+#path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
 with open(path_to_config, 'r') as config_file:
     config = yaml.safe_load(config_file)
 
@@ -103,8 +106,8 @@ def train_one_epoch(epoch_index, tb_writer,augementation, T_aug = False,div =0):
         if batch_idx % batches == batches - 1 or (batch_idx + 1) % 10 == 0:
             last_loss = running_loss / div # loss per batch
             print('  batch {} loss: {}'.format(batch_idx + 1, last_loss))
-            tb_x = epoch_index * len(train_loader) + batch_idx + 1
-            tb_writer.add_scalar('Loss/train', last_loss, tb_x)
+            #tb_x = epoch_index * len(train_loader) + batch_idx + 1
+            #tb_writer.add_scalar('Loss/train', last_loss, tb_x)
             running_loss = 0.
             #plt.subplot(1,2,1)
             #plt.imshow(outputs[0].detach().cpu().numpy().transpose(1,2,0))
@@ -134,9 +137,9 @@ model.to(device)
 weights = torch.ones(num_classes)
 
 # Set a higher weight for the second class
-weights[0] = 0.1
-weights[1] = 0.7
-weights[2] = 0.4
+# weights[0] = 0.1
+# weights[1] = 0.7
+# weights[2] = 0.4
 
 # If you're using a GPU, move the weights tensor to the same device as your model
 weights = weights.to(device)
@@ -146,8 +149,13 @@ loss_fn = nn.CrossEntropyLoss(weight=weights)
 aug = MyAugmentation()
 
 # Definicja optymalizatora (np. Adam)
-optimizer = optim.Adam(model.parameters(), lr=0.001)
-scheduler = ReduceLROnPlateau(optimizer, 'min')
+optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+scheduler = CosineAnnealingLR(optimizer, T_max=EPOCHS)
+
+wandb.init(project="noisy_labels", entity="segsperm")
+wandb.run.name = writer
+wandb.watch(model, log="all")
+
 
 
 for epoch in range(EPOCHS):
@@ -158,6 +166,7 @@ for epoch in range(EPOCHS):
     avg_loss = train_one_epoch(epoch_number, writer,aug,T_aug = False)
 
     running_vloss = 0.0
+    running_viou = 0.0
     model.eval()
 
     # Disable gradient computation and reduce memory consumption.
@@ -167,26 +176,45 @@ for epoch in range(EPOCHS):
             vlabels = vlabels.to(device)
             vids = vids.to(device)
             voutputs = model(vinputs)
+            preds = torch.argmax(voutputs, dim=1)  # assuming a classification task
+            metrics = SegmentationMetrics(num_classes)
+            preds1 = preds.cpu().numpy()
+            vids1 = vids.cpu().numpy()
+            metrics.update_confusion_matrix(vids1, preds1)
+            mean_iou = metrics.mean_iou()
             vloss = loss_fn(voutputs, vids)
             running_vloss += vloss
+            viou = 1 - mean_iou
+            running_viou += viou
+
 
     avg_vloss = running_vloss / (batch_idx + 1)
+    avg_viou = running_viou / (batch_idx + 1)
     print('LOSS train {} valid {}'.format(avg_loss, avg_vloss))
+    print('IOU valid {}'.format(avg_viou))
 
     writer.add_scalars('Training vs. Validation Loss',
                     { 'Training' : avg_loss, 'Validation' : avg_vloss },
                     epoch_number + 1)
+    
+    writer.add_scalar('Validation IOU', avg_viou, epoch_number + 1)
+    
+    for param_group in optimizer.param_groups:
+            current_lr = param_group['lr']
+            writer.add_scalar('Learning Rate', current_lr, epoch_number + 1)
+
     writer.flush()
 
-    scheduler.step(avg_vloss)
+
+    scheduler.step(avg_viou)
 
     # Track best performance, and save the model's state
-    if avg_vloss < best_vloss:
-        best_vloss = avg_vloss
-        model_path = config['save_model_path'] + '/mixedGT1_best_model_4'
+    if avg_viou < best_viou:
+        best_viou = avg_viou
+        model_path = config['save_model_path'] + '/mixedGT1_best_model_5'
         torch.save(model.state_dict(), model_path)
     if epoch_number == EPOCHS - 1:
-        model_path = config['save_model_path'] + '/mixedGT1_last_model_4'
+        model_path = config['save_model_path'] + '/mixedGT1_last_model_5'
         torch.save(model.state_dict(), model_path)
 
     epoch_number += 1
