@@ -1,0 +1,17 @@
+
+/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/train
+/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3070 Laptop GPU
+/home/nitro/Studia/Praca Dyplomowa/Modele i daneAnnotator:1, Augmentation:False, Optimizer:Adam, Scheduler:CosineAnnealingLR, Epochs: 100,Batch_Size:3, Start_lr:0.0001, Loss: CrossEntropyLoss, Timestamp: 2023-12-16-22-00_best_model
+Epoch 1, Train Loss: 0.8873023837804794, Validation Loss: 0.9271257743239403, Validation IOU: 0.696486674459772
+Model saved
+Epoch 2, Train Loss: 0.787472903314564, Validation Loss: 0.8149403408169746, Validation IOU: 0.5915058317431847
+Model saved
+Traceback (most recent call last):
+  File "/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/train2.py", line 189, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,name)
+  File "/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/train2.py", line 94, in main
+    train_loss,images,lbls,preds = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+  File "/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/train2.py", line 34, in train
+    images = inputs.detach().cpu().numpy().transpose(0, 2, 3, 1)
+KeyboardInterrupt

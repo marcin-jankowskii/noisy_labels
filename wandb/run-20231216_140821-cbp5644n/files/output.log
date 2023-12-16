@@ -1,0 +1,8 @@
+
+/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/train
+/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3070 Laptop GPU
+Traceback (most recent call last):
+  File "/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/train2.py", line 174, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,T_aug = config.augmentation)
+TypeError: main() got multiple values for argument 'T_aug'

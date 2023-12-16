@@ -1,0 +1,13 @@
+
+/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/train
+/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3070 Laptop GPU
+Traceback (most recent call last):
+  File "/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/train2.py", line 172, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug)
+  File "/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/train2.py", line 108, in main
+    model_path = config['save_model_path'] + '/mixedGT1_best_model_5'
+  File "/home/nitro/miniconda3/envs/tf/lib/python3.10/site-packages/wandb/sdk/wandb_config.py", line 130, in __getitem__
+    return self._items[key]
+KeyError: 'save_model_path'
+Epoch 1, Train Loss: 0.8870258269210657, Validation Loss: 0.9139463305473328, Validation IOU: 0.7077744727864124

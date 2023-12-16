@@ -1,0 +1,1 @@
+/home/nitro/Studia/Praca Dyplomowa/Modele i daneAnnotator:2, Augmentation:False, Optimizer:Adam, Scheduler:CosineAnnealingLR, Epochs: 10,Batch_Size:3, Start_lr:0.0001, Loss: CrossEntropyLoss, Timestamp: 2023-12-16-16-02_last_model
