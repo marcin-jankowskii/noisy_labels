@@ -1,0 +1,13 @@
+
+/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/train
+/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3070 Laptop GPU
+(512,)
+Traceback (most recent call last):
+  File "/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/train.py", line 231, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,name)
+  File "/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/train.py", line 145, in main
+    plot_sample(images[0], lbls[0],preds[0], ix=255)
+  File "/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/train.py", line 38, in plot_sample
+    mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
+IndexError: tuple index out of range

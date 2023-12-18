@@ -6,38 +6,32 @@ import numpy as np
 from torch.utils.data import TensorDataset, DataLoader
 from skimage.transform import resize
 import torch.nn.functional as F
+import random
+
+path_dict ={'laptop':'/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml',
+            'lab':'/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml',
+            'komputer':'/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
+            }
+
+path_config = {"place": "laptop"
+               }
 
 
 
 def rgb_to_class_id(mask_rgb, class_colors):
-        mask_id = np.zeros(mask_rgb.shape[:2], dtype=np.int64)
+        mask_id = np.zeros(mask_rgb.shape[:2], dtype=np.float32)
         for class_id, color in enumerate(class_colors):
             mask_id[(mask_rgb == color).all(axis=2)] = class_id
         return mask_id
 
-
-
-
-def rgb_to_class_id(mask_rgb, class_colors):
-        mask_id = np.zeros(mask_rgb.shape[:2], dtype=np.int64)
-        for class_id, color in enumerate(class_colors):
-            mask_id[(mask_rgb == color).all(axis=2)] = class_id
-        return mask_id
-
-
-#path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
-#path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
-path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
 
 class ProcessData:
-    def __init__(self, config_path=path_to_config, mode = 'full',annotator = 1):
+    def __init__(self, config_path=path_dict[path_config['place']], mode = 'full',annotator = 1):
         with open(config_path, 'r') as config_file:
             self.config = yaml.safe_load(config_file)
             self.mode = mode
             self.annotator = annotator
 
-   
-   
 
     def process_dataset(self, dataset_name):
         dataset_path = self.config['dataset_path']
@@ -65,8 +59,9 @@ class ProcessData:
         class_colors = [[0, 0, 0], [0, 255, 0], [0, 0, 255]]  # tło, wić, główka
 
         X = np.zeros((len(images), self.config['image_height'], self.config['image_width'], 3), dtype=np.float32)
-        y = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],3), dtype=np.float32)
+        y = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],), dtype=np.float32)
         y_id = np.zeros((len(masks),  self.config['image_height'], self.config['image_width']), dtype=np.float32)
+
 
         for n, (img, mimg) in enumerate(zip(images, masks)):
             # Load images
@@ -79,20 +74,16 @@ class ProcessData:
             mask = resize(mask, (self.config['image_height'], self.config['image_width'], 3), mode='constant', preserve_range=True)
             mask_id = rgb_to_class_id(mask, class_colors)
 
-            # Convert mask_id to tensor and then to one-hot format
-            mask = torch.from_numpy(mask_id)
-            mask = F.one_hot(mask, num_classes=len(class_colors))
 
             # Save images and masks
             X[n] = x_img/255.0 
-            y[n] = mask
+            y[n] = mask_id
             y_id[n] = mask_id
 
         return X, y, y_id
 
-
 class BatchMaker:
-    def __init__(self, config_path=path_to_config, batch_size=6, mode = 'all',segment = 'full' ,annotator = 1):
+    def __init__(self, config_path=path_dict[path_config['place']], batch_size=6, mode = 'all',segment = 'full' ,annotator = 1):
         
     
         self.process_data = ProcessData(config_path=config_path,mode = segment,annotator = annotator)
@@ -116,7 +107,7 @@ class BatchMaker:
 
     def create_loader(self, x, y, id, shuffle):
         x = np.transpose(x, (0, 3, 1, 2))
-        y= np.transpose(y, (0, 3, 1, 2))
+        y= id
         y_id = id
         x_tensor = torch.from_numpy(x)
         y_tensor = torch.from_numpy(y)

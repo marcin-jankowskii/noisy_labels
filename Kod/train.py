@@ -13,7 +13,54 @@ import yaml
 import matplotlib.pyplot as plt
 import numpy as np
 import wandb
+import random
 
+def plot_sample(X, y, preds, ix=None):
+    """Function to plot the results"""
+    colors = [[0, 0, 0], [0, 255, 0], [255, 0, 0]]  # tło, wić, główka
+    if ix is None:
+        ix = random.randint(0, len(X))
+
+    has_mask = y[ix].max() > 0
+
+    fig, ax = plt.subplots(1, 3,figsize=(20, 10))
+    ax[0].imshow(X[ix])
+    #if has_mask:
+        #ax[0].contour(y[ix].squeeze(), colors='k', levels=[0.5])
+    ax[0].set_title('Sperm Image')
+    ax[0].set_axis_off()
+
+
+    mask_to_display = y[ix]
+    print(mask_to_display.shape)
+
+    # Utwórz obraz RGB z maski
+    mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
+    for i, color in enumerate(colors):
+        mask_rgb[mask_to_display == i] = color
+
+
+    ax[1].imshow(mask_rgb)
+    ax[1].set_title('Sperm Mask Image')
+    ax[1].set_axis_off()
+
+
+
+    mask_to_display = preds[ix]
+
+    # Utwórz obraz RGB z maski
+    mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
+    for i, color in enumerate(colors):
+        mask_rgb[mask_to_display == i] = color
+ 
+
+    ax[2].imshow(mask_rgb)
+    #if has_mask:
+        #ax[2].contour(y[ix].squeeze(), colors='k', levels=[0.5])
+    ax[2].set_title('Sperm Image Predicted')
+    ax[2].set_axis_off()
+    wandb.log({"train/plot": wandb.Image(fig)})
+    plt.close()
 
 def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,epoch_number):
     model.train()
@@ -22,7 +69,7 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
 
         if T_aug == True:
             for i in range(inputs.shape[0]):
-                inputs[i], labels[i] = augumentation(inputs[i], labels[i])
+                inputs[i] = augumentation(inputs[i], labels[i])
 
 
         inputs = inputs.to(device)
@@ -32,30 +79,29 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
         output = model(inputs)
 
         images = inputs.detach().cpu().numpy().transpose(0, 2, 3, 1)
-        lbls = labels.detach().cpu().numpy().transpose(0, 2, 3, 1)
-        preds = output.detach().cpu().numpy().transpose(0, 2, 3, 1)
+        lbls = labels.detach().cpu().numpy()
+        preds = output.detach().cpu().numpy()
+        preds = np.argmax(preds, axis=1)
 
         loss = loss_fn(output, ids)
         loss.backward()
         optimizer.step()
         total_loss += loss.item()
     avg_loss = total_loss / len(train_loader)
-    scheduler.step()
 
+    if config.scheduler != 'ReduceLROnPlateau':
+        scheduler.step()
     metrics = {"train/train_loss": avg_loss, 
                "train/lr": optimizer.param_groups[0]['lr'],
                        "train/epoch": epoch_number
                        }
     
  
- 
-    
-  
     wandb.log(metrics)
 
     return avg_loss,images,lbls,preds
 
-def val(model, validation_loader, loss_fn,epoch_number):
+def val(model, validation_loader, loss_fn,epoch_number,scheduler):
     model.eval()
     total_loss = 0
     total_iou = 0
@@ -78,6 +124,9 @@ def val(model, validation_loader, loss_fn,epoch_number):
     avg_loss = total_loss / len(validation_loader)
     avg_iou = total_iou / len(validation_loader)
 
+    if config.scheduler == 'ReduceLROnPlateau':
+        scheduler.step(avg_iou)
+
     val_metrics = {"val/val_loss": avg_loss, 
                     "val/val_iou": avg_iou,
                     "val/epoch": epoch_number
@@ -92,16 +141,9 @@ def main(model, train_loader, validation_loader, optimizer,scheduler,loss_fn, ep
     for epoch in range(epochs):
         epoch_number = epoch +1
         train_loss,images,lbls,preds = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
-        validation_loss, validation_iou = val(model, validation_loader, loss_fn,epoch_number)
+        validation_loss, validation_iou = val(model, validation_loader, loss_fn,epoch_number,scheduler)
+        plot_sample(images, lbls,preds, ix=0)
 
-        imgs = {
-            "train_images/Inputs": [wandb.Image(images[0], caption='Input image')],
-            "train_images/True Labels": [wandb.Image(lbls[0], caption='True label')],
-            "train_images/Predicted Labels": [wandb.Image(preds[0], caption='Predicted label')],
-            "train_images/Epoch": epoch_number
-        } 
-        
-        wandb.log(imgs)
         print(f'Epoch {epoch_number}, Train Loss: {train_loss}, Validation Loss: {validation_loss}, Validation IOU: {validation_iou}')
 
         if validation_iou < best_iou:
@@ -132,14 +174,14 @@ timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
 
 wandb.init(project="noisy_labels", entity="segsperm",
             config={
-            "epochs": 100,
+            "epochs": 1,
             "batch_size": 3,
             "lr": 1e-4,
             "annotator": 1,
-            "augmentation": False,
+            "augmentation": True,
             "loss": "CrossEntropyLoss",
             "optimizer": "Adam",
-            "scheduler": "CosineAnnealingLR",
+            "scheduler": "ReduceLROnPlateau",
             "place": "laptop"
             })
 
@@ -175,7 +217,7 @@ optimizer_dict = {'Adam': optim.Adam(model.parameters(), lr=config.lr),
 
 weights = weights.to(device)
 loss_fn = loss_dict[wandb.config.loss]
-aug = MyAugmentation()
+
 optimizer = optimizer_dict[config.optimizer]
 
 scheduler_dict = {'CosineAnnealingLR': CosineAnnealingLR(optimizer, T_max=config.epochs),
@@ -184,6 +226,7 @@ scheduler_dict = {'CosineAnnealingLR': CosineAnnealingLR(optimizer, T_max=config
 
 scheduler = scheduler_dict[config.scheduler]
 wandb.watch(model, log="all")
+aug = MyAugmentation()
 t_aug = config.augmentation
 main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,name)
 
