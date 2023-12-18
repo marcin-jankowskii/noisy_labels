@@ -174,14 +174,14 @@ timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
 
 wandb.init(project="noisy_labels", entity="segsperm",
             config={
-            "epochs": 1,
+            "epochs": 100,
             "batch_size": 3,
             "lr": 1e-4,
             "annotator": 1,
             "augmentation": True,
             "loss": "CrossEntropyLoss",
             "optimizer": "Adam",
-            "scheduler": "ReduceLROnPlateau",
+            "scheduler": "CosineAnnealingLR",
             "place": "laptop"
             })
 

@@ -61,22 +61,22 @@ class MyAugmentation(nn.Module):
                 direction = direction / torch.norm(direction)  # Normalizacja do długości jednostkowej
 
                 end_point1 = self.calculate_endpoint(start_point, direction, 512)
-                if end_point1[0] > 512:
-                    end_point1[0] = 512
+                if end_point1[0] > 511:
+                    end_point1[0] = 511
                 elif end_point1[0] < 0:
                     end_point1[0] = 0
-                if end_point1[1] > 512:
-                    end_point1[1] = 512
+                if end_point1[1] > 511:
+                    end_point1[1] = 511
                 elif end_point1[1] < 0:
                     end_point1[1] = 0
                 
                 end_point2 = self.calculate_endpoint(start_point, -direction, 512)
-                if end_point2[0] > 512:
-                    end_point2[0] = 512
+                if end_point2[0] > 511:
+                    end_point2[0] = 511
                 elif end_point2[0] < 0:
                     end_point2[0] = 0
-                if end_point2[1] > 512:
-                    end_point2[1] = 512
+                if end_point2[1] > 511:
+                    end_point2[1] = 511
                 elif end_point2[1] < 0:
                     end_point2[1] = 0
 
