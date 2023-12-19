@@ -32,7 +32,6 @@ def plot_sample(X, y, preds, ix=None):
 
 
     mask_to_display = y[ix]
-    print(mask_to_display.shape)
 
     # Utwórz obraz RGB z maski
     mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)

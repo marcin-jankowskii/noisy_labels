@@ -56,11 +56,19 @@ class MyAugmentation(nn.Module):
                 idx = contour.shape[0] // 8
                 start_point = torch.tensor(contour[idx].squeeze(), dtype=torch.float32)
                 start_point[0] = start_point[0] -5
+                if start_point[0] > 511:
+                    start_point[0] = 511
+                elif start_point[0] < 0:
+                    start_point[0] = 0
+                if start_point[1] > 511:
+                    start_point[1] = 511
+                elif start_point[1] < 0:
+                    start_point[1] = 0
                 # Obliczanie kierunku linii
                 direction = torch.tensor(contour[idx + 1] - contour[idx - 1], dtype=torch.float32).squeeze()
                 direction = direction / torch.norm(direction)  # Normalizacja do długości jednostkowej
 
-                end_point1 = self.calculate_endpoint(start_point, direction, 512)
+                end_point1 = self.calculate_endpoint(start_point, direction, 511)
                 if end_point1[0] > 511:
                     end_point1[0] = 511
                 elif end_point1[0] < 0:
@@ -70,7 +78,7 @@ class MyAugmentation(nn.Module):
                 elif end_point1[1] < 0:
                     end_point1[1] = 0
                 
-                end_point2 = self.calculate_endpoint(start_point, -direction, 512)
+                end_point2 = self.calculate_endpoint(start_point, -direction, 511)
                 if end_point2[0] > 511:
                     end_point2[0] = 511
                 elif end_point2[0] < 0:
