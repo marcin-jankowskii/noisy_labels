@@ -1,0 +1,28 @@
+2023-12-19 15:30:47,481 INFO    MainThread:5964 [wandb_setup.py:_flush():76] Current SDK version is 0.16.1
+2023-12-19 15:30:47,481 INFO    MainThread:5964 [wandb_setup.py:_flush():76] Configure stats pid to 5964
+2023-12-19 15:30:47,482 INFO    MainThread:5964 [wandb_setup.py:_flush():76] Loading settings from /home/cal314-1/.config/wandb/settings
+2023-12-19 15:30:47,482 INFO    MainThread:5964 [wandb_setup.py:_flush():76] Loading settings from /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/wandb/settings
+2023-12-19 15:30:47,482 INFO    MainThread:5964 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-12-19 15:30:47,482 INFO    MainThread:5964 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-12-19 15:30:47,482 INFO    MainThread:5964 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'Kod/train.py', 'program_abspath': '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py', 'program': '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py'}
+2023-12-19 15:30:47,482 INFO    MainThread:5964 [wandb_init.py:_log_setup():524] Logging user logs to /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/wandb/run-20231219_153047-7g5mkd7y/logs/debug.log
+2023-12-19 15:30:47,482 INFO    MainThread:5964 [wandb_init.py:_log_setup():525] Logging internal logs to /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/wandb/run-20231219_153047-7g5mkd7y/logs/debug-internal.log
+2023-12-19 15:30:47,482 INFO    MainThread:5964 [wandb_init.py:init():564] calling init triggers
+2023-12-19 15:30:47,483 INFO    MainThread:5964 [wandb_init.py:init():571] wandb.init called with sweep_config: {}
+config: {'epochs': 300, 'batch_size': 3, 'lr': 0.0001, 'annotator': 1, 'augmentation': True, 'loss': 'CrossEntropyLoss', 'optimizer': 'Adam', 'scheduler': 'CosineAnnealingLR', 'place': 'lab'}
+2023-12-19 15:30:47,483 INFO    MainThread:5964 [wandb_init.py:init():614] starting backend
+2023-12-19 15:30:47,483 INFO    MainThread:5964 [wandb_init.py:init():618] setting up manager
+2023-12-19 15:30:47,488 INFO    MainThread:5964 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-12-19 15:30:47,489 INFO    MainThread:5964 [wandb_init.py:init():624] backend started and connected
+2023-12-19 15:30:47,496 INFO    MainThread:5964 [wandb_init.py:init():716] updated telemetry
+2023-12-19 15:30:47,539 INFO    MainThread:5964 [wandb_init.py:init():749] communicating run to backend with 90.0 second timeout
+2023-12-19 15:30:48,108 ERROR   MainThread:5964 [wandb_init.py:init():775] encountered error: It appears that you do not have permission to access the requested resource. Please reach out to the project owner to grant you access. If you have the correct permissions, verify that there are no issues with your networking setup.(Error 404: Not Found)
+2023-12-19 15:30:48,325 ERROR   MainThread:5964 [wandb_init.py:init():1188] It appears that you do not have permission to access the requested resource. Please reach out to the project owner to grant you access. If you have the correct permissions, verify that there are no issues with your networking setup.(Error 404: Not Found)
+Traceback (most recent call last):
+  File "/home/cal314-1/miniconda3/envs/marcin/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 1170, in init
+    run = wi.init()
+          ^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcin/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 781, in init
+    raise error
+wandb.errors.CommError: It appears that you do not have permission to access the requested resource. Please reach out to the project owner to grant you access. If you have the correct permissions, verify that there are no issues with your networking setup.(Error 404: Not Found)
+2023-12-19 15:30:49,327 WARNING MsgRouterThr:5964 [router.py:message_loop():77] message_loop has been closed

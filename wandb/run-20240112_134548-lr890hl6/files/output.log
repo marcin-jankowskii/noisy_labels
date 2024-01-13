@@ -1,0 +1,24 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+torch.Size([512, 512])
+torch.Size([512, 512])
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py:78: UserWarning: Defining your `__torch_function__` as a plain method is deprecated and will be an error in future, please define it as a classmethod. (Triggered internally at ../torch/csrc/utils/python_arg_parser.cpp:368.)
+  ids = ids.to(torch.LongTensor)
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 261, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 157, in main
+    train_loss,train_iou,images,lbls,preds = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 78, in train
+    ids = ids.to(torch.LongTensor)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcin/lib/python3.11/site-packages/torch/_tensor.py", line 1386, in __torch_function__
+    ret = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+TypeError: to() received an invalid combination of arguments - got (torch.tensortype), but expected one of:
+ * (torch.device device, torch.dtype dtype, bool non_blocking, bool copy, *, torch.memory_format memory_format)
+ * (torch.dtype dtype, bool non_blocking, bool copy, *, torch.memory_format memory_format)
+ * (Tensor tensor, bool non_blocking, bool copy, *, torch.memory_format memory_format)

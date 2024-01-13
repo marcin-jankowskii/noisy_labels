@@ -1,122 +1,223 @@
 from models.Unet import UNet
 from dataset.data import BatchMaker
 from utils.metrics import SegmentationMetrics
+from utils.augmentation import MyAugmentation
 
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from torch.utils.data import DataLoader
 from torch.optim.lr_scheduler import ReduceLROnPlateau, CosineAnnealingLR
-from torch.utils.tensorboard import SummaryWriter
 import datetime
 import yaml
 import matplotlib.pyplot as plt
-import kornia as K
 import numpy as np
 import wandb
+import random
+import segmentation_models_pytorch as smp
 
 
-timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-writer = SummaryWriter('runs/noisy_labels_trainer_{}'.format(timestamp))
-epoch_number = 0
-num_classes = 3
-EPOCHS = 100
-BATCH = 6
-learning_rate = 0.0001
-best_viou = 1_000_000.
-#path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
-path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
-#path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
-with open(path_to_config, 'r') as config_file:
-    config = yaml.safe_load(config_file)
+def plot_sample(X, y, preds, ix=None):
+    """Function to plot the results"""
+    colors = [[0, 0, 0], [0, 255, 0], [255, 0, 0]]  # tło, wić, główka
+    if ix is None:
+        ix = random.randint(0, len(X))
+
+    has_mask = y[ix].max() > 0
+
+    fig, ax = plt.subplots(1, 3,figsize=(20, 10))
+    ax[0].imshow(X[ix])
+    #if has_mask:
+        #ax[0].contour(y[ix].squeeze(), colors='k', levels=[0.5])
+    ax[0].set_title('Sperm Image')
+    ax[0].set_axis_off()
 
 
-batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH,mode ='train',segment = 'mixed',annotator= 2)
-train_loader = batch_maker.train_loader
-val_loader = batch_maker.val_loader
+    mask_to_display = y[ix]
+
+    # Utwórz obraz RGB z maski
+    mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
+    for i, color in enumerate(colors):
+        mask_rgb[mask_to_display == i] = color
 
 
-class MyAugmentation(nn.Module):
-    def __init__(self):
-        super().__init__()
-        # we define and cache our operators as class members
-        self.k1 = K.augmentation.ColorJitter(0.15, 0.25, 0.25, 0.25)
-        self.k2 = K.augmentation.RandomAffine([-45.0, 45.0], [0.0, 0.15], [0.5, 1.5], [0.0, 0.15])
-
-    def forward(self, img: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
-        # 1. apply color only in image
-        # 2. apply geometric tranform
-        img_out = self.k2(self.k1(img))
-
-        # 3. infer geometry params to mask
-        # TODO: this will change in future so that no need to infer params
-        mask_out = self.k2(mask, self.k2._params)
-
-        return img_out, mask_out
+    ax[1].imshow(mask_rgb)
+    ax[1].set_title('Sperm Mask Image')
+    ax[1].set_axis_off()
 
 
 
-def train_one_epoch(epoch_index, tb_writer,augementation, T_aug = False,div =0):
-    running_loss = 0.
-    last_loss = 0.
-    batches = len(train_loader)
+    mask_to_display = preds[ix]
 
-    # Here, we use enumerate(training_loader) instead of
-    # iter(training_loader) so that we can track the batch
-    # index and do some intra-epoch reporting
+    # Utwórz obraz RGB z maski
+    mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
+    for i, color in enumerate(colors):
+        mask_rgb[mask_to_display == i] = color
+ 
+
+    ax[2].imshow(mask_rgb)
+    #if has_mask:
+        #ax[2].contour(y[ix].squeeze(), colors='k', levels=[0.5])
+    ax[2].set_title('Sperm Image Predicted')
+    ax[2].set_axis_off()
+    wandb.log({"train/plot": wandb.Image(fig)})
+    plt.close()
+
+def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,epoch_number):
+    model.train()
+    total_loss = 0
+    total_iou = 0
     for batch_idx, (inputs, labels,ids) in enumerate(train_loader):
-        # Every data instance is an input + label pair
-
-        div += 1
+        
         if T_aug == True:
             for i in range(inputs.shape[0]):
-                inputs[i], labels[i] = augementation(inputs[i], labels[i])
+                inputs[i],ids[i] = augumentation(inputs[i], ids[i])
 
-
+        ids = ids.type(torch.LongTensor)
         inputs = inputs.to(device)
         labels = labels.to(device)
         ids = ids.to(device)
-
-
-        #fig, ax = plt.subplots(1, 6, figsize=(20, 10))
-        #for i in range(inputs.shape[0]):
-            #ax[i].imshow(labels[i].cpu().numpy().transpose(1,2,0))
-            #ax[i].contour(labels[i].cpu().numpy().transpose(1,2,0).squeeze(), colors='k', levels=[0.5])
-        #plt.show()
-
-        # Zero your gradients for every batch
         optimizer.zero_grad()
+        output = model(inputs)
 
-        # Make predictions for this batch
-        outputs = model(inputs)
+        images = inputs.detach().cpu().numpy().transpose(0, 2, 3, 1)
+        lbls = labels.detach().cpu().numpy()
+        preds_out = output.detach().cpu().numpy()
+        preds_out = np.argmax(preds_out, axis=1)
+        
+        preds = torch.argmax(output, dim=1) 
+        metrics = SegmentationMetrics(num_classes)
+        metrics.update_confusion_matrix(ids.cpu().numpy(), preds.cpu().numpy())
+        mean_iou = metrics.mean_iou()
+        viou = 1 - mean_iou
 
-
-        #print('Output = '+str(outputs.shape))
-        #print('Labels = ' + str(ids.unique()))
-        #print('Labels_shape = ' + str(ids.shape))
-        # Compute the loss and its gradients
-        loss = loss_fn(outputs, ids)
+        loss = loss_fn(output, ids)
         loss.backward()
-
-        # Adjust learning weights
         optimizer.step()
-     
 
-        # Gather data and report
-        running_loss += loss.item()
-        if batch_idx % batches == batches - 1 or (batch_idx + 1) % 10 == 0:
-            last_loss = running_loss / div # loss per batch
-            print('  batch {} loss: {}'.format(batch_idx + 1, last_loss))
-            #tb_x = epoch_index * len(train_loader) + batch_idx + 1
-            #tb_writer.add_scalar('Loss/train', last_loss, tb_x)
-            running_loss = 0.
-            #plt.subplot(1,2,1)
-            #plt.imshow(outputs[0].detach().cpu().numpy().transpose(1,2,0))
-            #plt.subplot(1,2,2)
-            #plt.imshow(labels[0].detach().cpu().numpy().transpose(1,2,0))
-            #plt.pause(0.05)
-            div = 0
+        total_iou += viou
+        total_loss += loss.item()
+    avg_loss = total_loss / len(train_loader)
+    avg_iou = total_iou / len(train_loader)
 
-    return last_loss
+    if config.scheduler != 'ReduceLROnPlateau':
+        scheduler.step()
+    metrics = {"train/train_loss": avg_loss, 
+               "train/train_iou": avg_iou,
+               "train/lr": optimizer.param_groups[0]['lr'],
+                       "train/epoch": epoch_number
+                       }
+    
+ 
+    wandb.log(metrics)
+
+    return avg_loss,avg_iou,images,lbls,preds_out
+
+def val(model, validation_loader, loss_fn,epoch_number,scheduler):
+    model.eval()
+    total_loss = 0
+    total_iou = 0
+    with torch.no_grad():
+        for batch_idx, (vinputs, vlabels,vids) in enumerate(val_loader):
+            vids = vids.type(torch.LongTensor)
+            vinputs = vinputs.to(device)
+            vlabels = vlabels.to(device)
+            vids = vids.to(device)
+            voutputs = model(vinputs)
+            preds = torch.argmax(voutputs, dim=1) 
+         
+
+            metrics = SegmentationMetrics(num_classes)
+            metrics.update_confusion_matrix(vids.cpu().numpy(), preds.cpu().numpy())
+            mean_iou = metrics.mean_iou()
+            viou = 1 - mean_iou
+            total_iou += viou
+            loss = loss_fn(voutputs, vids)
+            total_loss += loss.item()
+    avg_loss = total_loss / len(validation_loader)
+    avg_iou = total_iou / len(validation_loader)
+
+    if config.scheduler == 'ReduceLROnPlateau':
+        scheduler.step(avg_iou)
+
+    val_metrics = {"val/val_loss": avg_loss, 
+                    "val/val_iou": avg_iou,
+                    "val/epoch": epoch_number
+                       }
+    wandb.log(val_metrics)
+    return avg_loss,avg_iou
+
+def main(model, train_loader, validation_loader, optimizer,scheduler,loss_fn, epochs,augumentation,T_aug,name):
+
+    best_iou = 1000000
+
+    for epoch in range(epochs):
+        epoch_number = epoch +1
+        train_loss,train_iou,images,lbls,preds = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+        validation_loss, validation_iou = val(model, validation_loader, loss_fn,epoch_number,scheduler)
+        plot_sample(images, lbls,preds, ix=0)
+
+        print(f'Epoch {epoch_number}, Train Loss: {train_loss}, Train Iou: {train_iou}, Validation Loss: {validation_loss}, Validation IOU: {validation_iou}')
+
+        if validation_iou < best_iou:
+            best_iou = validation_iou
+            model_path = yaml_config['save_model_path'] +'/'+ name + '_best_model'
+            torch.save(model.state_dict(), model_path)
+            #wandb.save(model_path)
+            print('Model saved')
+        if epoch_number == epochs:
+            model_path = yaml_config['save_model_path'] +'/'+ name + '_last_model'
+            torch.save(model.state_dict(), model_path)
+            #wandb.save(model_path)
+            print('Model saved')
+
+num_classes = 3
+
+
+
+path_dict ={'laptop':'/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml',
+            'lab':'/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml',
+            'komputer':'/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
+            }
+
+model_dict = {'myUNet': UNet(3,num_classes),
+              'smpUNet': smp.Unet(in_channels = 3, classes=num_classes),
+              'smpUNet++': smp.UnetPlusPlus(in_channels = 3, classes=num_classes),
+}
+
+
+timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
+
+
+wandb.init(project="noisy_labels", entity="segsperm",
+            config={
+            "epochs": 100,
+            "batch_size": 22,
+            "lr": 1e-4,
+            "annotator": 1,
+            "model": 'smpUNet++',
+            "augmentation": True,
+            "loss": "CrossEntropyLossWeight",
+            "optimizer": "Adam",
+            "scheduler": "CosineAnnealingLR",
+            "place": "lab"
+            })
+
+config = wandb.config
+
+name = (f'Annotator:{config.annotator}_Model:{config.model}_Augmentation:{config.augmentation}_Optimizer:{config.optimizer}_Scheduler:{config.scheduler}_Epochs:_{config.epochs}_Batch_Size:{config.batch_size}_Start_lr:{config.lr}_Loss:{config.loss}_Timestamp:{timestamp}')
+save_name = name = (f'Annotator_{config.annotator}_Model_{config.model}_Augmentation_{config.augmentation}_Optimizer_{config.optimizer}_Scheduler_{config.scheduler}_Epochs_{config.epochs}_Batch_Size_{config.batch_size}_Start_lr_{config.lr}_Loss_{config.loss}_Timestamp_{timestamp}')
+wandb.run.name = name
+
+
+
+
+with open(path_dict[config.place], 'r') as config_file:
+    yaml_config = yaml.safe_load(config_file)
+
+batch_maker = BatchMaker(config_path=path_dict[config.place], batch_size=config.batch_size,mode ='train',segment = 'mixed',annotator= config.annotator)
+train_loader = batch_maker.train_loader
+val_loader = batch_maker.val_loader
 
 
 if torch.cuda.is_available():
@@ -127,94 +228,35 @@ else:
     raise Exception("Brak dostępnej karty GPU.")
 
 
-model = UNet(3,num_classes)
+model = model_dict[config.model]
 model.to(device)
 
-# Binary semantic segmentation problem
-#loss_fn = nn.BCELoss()
-# Multi-class semantic segmentation problem
-# Assume `num_classes` is the number of classes
+optimizer_dict = {'Adam': optim.Adam(model.parameters(), lr=config.lr),
+                  'SGD': optim.SGD(model.parameters(), lr=config.lr),
+                  'RMSprop': optim.RMSprop(model.parameters(), lr=config.lr)
+                  }
+
 weights = torch.ones(num_classes)
-
-# Set a higher weight for the second class
-# weights[0] = 0.1
-# weights[1] = 0.7
-# weights[2] = 0.4
-
-# If you're using a GPU, move the weights tensor to the same device as your model
+weights[0] = 0.1
+weights[1] = 0.7
+weights[2] = 0.4
 weights = weights.to(device)
 
-loss_fn = nn.CrossEntropyLoss(weight=weights)
+loss_dict = {'CrossEntropyLoss': nn.CrossEntropyLoss(),
+             'CrossEntropyLossWeight': nn.CrossEntropyLoss(weight=weights)}
 
-aug = MyAugmentation()
+loss_fn = loss_dict[wandb.config.loss]
 
-# Definicja optymalizatora (np. Adam)
-optimizer = optim.Adam(model.parameters(), lr=learning_rate)
-scheduler = CosineAnnealingLR(optimizer, T_max=EPOCHS)
+optimizer = optimizer_dict[config.optimizer]
 
-wandb.init(project="noisy_labels", entity="segsperm")
-wandb.run.name = writer
+scheduler_dict = {'CosineAnnealingLR': CosineAnnealingLR(optimizer, T_max=config.epochs),
+                  'ReduceLROnPlateau': ReduceLROnPlateau(optimizer, mode='min'),
+                  'None': None}
+
+scheduler = scheduler_dict[config.scheduler]
 wandb.watch(model, log="all")
+aug = MyAugmentation()
+t_aug = config.augmentation
+main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
 
 
-
-for epoch in range(EPOCHS):
-    print('EPOCH {}:'.format(epoch_number + 1))
-
-    # Make sure gradient tracking is on, and do a pass over the data
-    model.train(True)
-    avg_loss = train_one_epoch(epoch_number, writer,aug,T_aug = False)
-
-    running_vloss = 0.0
-    running_viou = 0.0
-    model.eval()
-
-    # Disable gradient computation and reduce memory consumption.
-    with torch.no_grad():
-        for batch_idx, (vinputs, vlabels,vids) in enumerate(val_loader):
-            vinputs = vinputs.to(device)
-            vlabels = vlabels.to(device)
-            vids = vids.to(device)
-            voutputs = model(vinputs)
-            preds = torch.argmax(voutputs, dim=1)  # assuming a classification task
-            metrics = SegmentationMetrics(num_classes)
-            preds1 = preds.cpu().numpy()
-            vids1 = vids.cpu().numpy()
-            metrics.update_confusion_matrix(vids1, preds1)
-            mean_iou = metrics.mean_iou()
-            vloss = loss_fn(voutputs, vids)
-            running_vloss += vloss
-            viou = 1 - mean_iou
-            running_viou += viou
-
-
-    avg_vloss = running_vloss / (batch_idx + 1)
-    avg_viou = running_viou / (batch_idx + 1)
-    print('LOSS train {} valid {}'.format(avg_loss, avg_vloss))
-    print('IOU valid {}'.format(avg_viou))
-
-    writer.add_scalars('Training vs. Validation Loss',
-                    { 'Training' : avg_loss, 'Validation' : avg_vloss },
-                    epoch_number + 1)
-    
-    writer.add_scalar('Validation IOU', avg_viou, epoch_number + 1)
-    
-    for param_group in optimizer.param_groups:
-            current_lr = param_group['lr']
-            writer.add_scalar('Learning Rate', current_lr, epoch_number + 1)
-
-    writer.flush()
-
-
-    scheduler.step(avg_viou)
-
-    # Track best performance, and save the model's state
-    if avg_viou < best_viou:
-        best_viou = avg_viou
-        model_path = config['save_model_path'] + '/mixedGT1_best_model_5'
-        torch.save(model.state_dict(), model_path)
-    if epoch_number == EPOCHS - 1:
-        model_path = config['save_model_path'] + '/mixedGT1_last_model_5'
-        torch.save(model.state_dict(), model_path)
-
-    epoch_number += 1

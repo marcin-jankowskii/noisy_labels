@@ -1,0 +1,15 @@
+
+/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/train
+/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3070 Laptop GPU
+Epoch 1, Train Loss: 0.9051454501847426, Validation Loss: 0.9111941456794739, Validation IOU: 0.7108395431292701
+[34m[1mwandb[39m[22m: [33mWARNING[39m Saving files without folders. If you want to preserve sub directories pass base_path to wandb.save, i.e. wandb.save("/mnt/folder/file.h5", base_path="/mnt")
+Epoch 2, Train Loss: 0.8048338852822781, Validation Loss: 0.7981015145778656, Validation IOU: 0.6661810754303696
+Epoch 3, Train Loss: 0.7413623361951776, Validation Loss: 0.7692142277956009, Validation IOU: 0.6977115794101365
+Epoch 4, Train Loss: 0.7000753386980958, Validation Loss: 0.6970470100641251, Validation IOU: 0.6606473253630909
+Epoch 5, Train Loss: 0.6740238525801234, Validation Loss: 0.6843750327825546, Validation IOU: 0.6699951723699291
+Epoch 6, Train Loss: 0.6574114714231756, Validation Loss: 0.6501674130558968, Validation IOU: 0.6601162730848033
+Epoch 7, Train Loss: 0.6469549524287382, Validation Loss: 0.6573440358042717, Validation IOU: 0.6649767805766262
+Epoch 8, Train Loss: 0.6406926545831892, Validation Loss: 0.6537543460726738, Validation IOU: 0.6559030541059802
+Epoch 9, Train Loss: 0.6373170440395673, Validation Loss: 0.6423314288258553, Validation IOU: 0.657431945871574
+Epoch 10, Train Loss: 0.6359011638495657, Validation Loss: 0.6456900909543037, Validation IOU: 0.6584302620771106

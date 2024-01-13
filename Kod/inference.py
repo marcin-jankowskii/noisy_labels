@@ -5,25 +5,10 @@ import yaml
 import numpy as np
 import matplotlib.pyplot as plt
 import random
-from sklearn.metrics import (
-    jaccard_score,
-    average_precision_score
-)
-
-num_classes = 3
-BATCH = 1
-#path_to_config = '/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
-path_to_config = '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml'
-#path_to_config = '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml'
-with open(path_to_config, 'r') as config_file:
-    config = yaml.safe_load(config_file)
-model_path = config['save_model_path'] + '/mixedGT1_best_model_5'
-
-
-batch_maker = BatchMaker(config_path=path_to_config, batch_size=BATCH, mode = 'test',segment = 'mixed',annotator= 2)
-test_loader = batch_maker.test_loader
-
-
+import wandb
+import datetime
+from utils.metrics import SegmentationMetrics
+import segmentation_models_pytorch as smp
 
 def plot_sample(X, y, preds, ix=None):
     """Function to plot the results"""
@@ -42,7 +27,6 @@ def plot_sample(X, y, preds, ix=None):
 
 
     mask_to_display = y[ix]
-    mask_to_display = np.argmax(mask_to_display, axis=0)
 
     # Utwórz obraz RGB z maski
     mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
@@ -57,7 +41,6 @@ def plot_sample(X, y, preds, ix=None):
 
 
     mask_to_display = preds[ix]
-    mask_to_display = np.argmax(mask_to_display, axis=0)
 
     # Utwórz obraz RGB z maski
     mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
@@ -70,9 +53,83 @@ def plot_sample(X, y, preds, ix=None):
         #ax[2].contour(y[ix].squeeze(), colors='k', levels=[0.5])
     ax[2].set_title('Sperm Image Predicted')
     ax[2].set_axis_off()
-    plt.savefig(config['save_inf_fig_path']+'/{}.png'.format(ix))
+    plt.savefig(yaml_config['save_inf_fig_path']+'/{}.png'.format(ix))
+    wandb.log({"inference/plot": wandb.Image(fig)})
     plt.close()
 
+def predict(model, test_loader):
+    model.eval() 
+    input_images = []
+    predicted_masks = []
+    true_masks = []  
+    with torch.no_grad():
+        for inputs, labels, ids in test_loader:
+            inputs = inputs.to(device)
+            outputs = model(inputs)
+
+        
+            input_images.append(inputs.cpu())
+            predicted_masks.append(outputs.cpu())
+            true_masks.append(ids.cpu())  
+
+    input_images = np.concatenate(input_images, axis=0)
+    true_masks = np.concatenate(true_masks, axis=0) 
+    predicted_masks = np.concatenate(predicted_masks, axis=0)
+
+    x_images = input_images.transpose((0, 2, 3, 1))
+    true = true_masks
+    pred = np.argmax(predicted_masks, axis=1)
+
+
+    for i in range(len(x_images)):
+        plot_sample(x_images, true,pred, ix=i)
+        print('sample {} saved'.format(i))
+
+    metrics = SegmentationMetrics(num_classes)
+    metrics.update_confusion_matrix(true, pred)
+    mean_iou = metrics.mean_iou()
+    iou = metrics.calculate_iou_per_class()
+    print("Mean IoU:", mean_iou)
+    print("IoU dla każdej klasy:", iou)
+
+    test_metrics =  {"inference/Mean Iou": mean_iou, 
+                     "inference/Iou for each class": iou,
+                       }
+    wandb.log(test_metrics)
+
+
+num_classes = 3
+path_dict ={'laptop':'/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml',
+            'lab':'/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml',
+            'komputer':'/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
+            } 
+
+model_dict = {'myUNet': UNet(3,num_classes),
+              'smpUNet': smp.Unet(in_channels = 3, classes=num_classes),
+              'smpUNet++': smp.UnetPlusPlus(in_channels = 3, classes=num_classes),
+}   
+
+wandb.init(project="noisy_labels", entity="segsperm",
+            config={
+            "model": "smpUNet++",
+            "batch_size": 1,
+            "annotator": 1,
+            "place": 'lab'
+            })
+
+config = wandb.config
+
+with open(path_dict[config.place], 'r') as config_file:
+    yaml_config = yaml.safe_load(config_file)
+
+saved_model_name = 'Annotator_1_Model_smpUNet++_Augmentation_True_Optimizer_Adam_Scheduler_CosineAnnealingLR_Epochs_100_Batch_Size_6_Start_lr_0.0001_Loss_CrossEntropyLossWeight_Timestamp_2024-01-12-14-27_best_model'    
+model_path = yaml_config['save_model_path'] + '/' + saved_model_name
+name = (f'Inference: Model_name: {saved_model_name}')
+
+wandb.run.name = name
+batch_maker = BatchMaker(config_path=path_dict[config.place], batch_size=config.batch_size, mode = 'test',segment = 'mixed',annotator= config.annotator)
+test_loader = batch_maker.test_loader
+num_classes = 3
 
 if torch.cuda.is_available():
     gpu_name = torch.cuda.get_device_name(0)  
@@ -81,61 +138,7 @@ if torch.cuda.is_available():
 else:
     raise Exception("Brak dostępnej karty GPU.")
 
-model = UNet(3,num_classes)
+model = model_dict[config.model]
 model.load_state_dict(torch.load(model_path)) 
 model.to(device)
-model.eval() 
-
-# Listy do przechowywania obrazów wejściowych, predykcji i etykiet 
-input_images = []
-predicted_masks = []
-true_masks = []  
-
-# Pętla do przewidywania na danych testowych
-with torch.no_grad():
-    for inputs, labels, ids in test_loader:
-        inputs = inputs.to(device)
-        outputs = model(inputs)
-
-    
-        input_images.append(inputs.cpu())
-        predicted_masks.append(outputs.cpu())
-        true_masks.append(labels.cpu())  
-
-input_images = np.concatenate(input_images, axis=0)
-true_masks = np.concatenate(true_masks, axis=0) 
-#predicted_masks = torch.cat(predicted_masks, dim=0).cpu().numpy() 
-predicted_masks = np.concatenate(predicted_masks, axis=0) 
-
-# Threshold predictions
-x_images = input_images.transpose((0, 2, 3, 1))
-true = true_masks#.transpose((0, 2, 3, 1))
-pred = predicted_masks#.transpose((0, 2, 3, 1))
-
-
-
-for i in range(len(x_images)):
-    plot_sample(x_images, true, pred, ix=i)
-    print('sample {} saved'.format(i))
-
-all_true_class_ids = []
-all_pred_class_ids = []    
-
-for true, pred in zip(true, pred):
-    # Przekształć maski z formatu one-hot do formatu identyfikatorów klas
-    true_class_id = np.argmax(true, axis=0)
-    pred_class_id = np.argmax(pred, axis=0)
-    # Dodaj identyfikatory klas do list
-    all_true_class_ids.append(true_class_id.flatten())
-    all_pred_class_ids.append(pred_class_id.flatten())
-
-# Połącz wszystkie identyfikatory klas w jedną listę
-all_true_class_ids = np.concatenate(all_true_class_ids)
-all_pred_class_ids = np.concatenate(all_pred_class_ids)
-
-IoU_per_class = jaccard_score(all_true_class_ids, all_pred_class_ids, average=None)
-
-for i, IoU in enumerate(IoU_per_class):
-    print(f'Jaccard score for class {i}: {IoU}')
-
-
+predict(model, test_loader)

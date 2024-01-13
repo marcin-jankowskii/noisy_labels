@@ -1,0 +1,8 @@
+
+/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/train
+/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3070 Laptop GPU
+Traceback (most recent call last):
+  File "/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/train2.py", line 167, in <module>
+    print(model_path = yaml_config['save_model_path'] + name + '_best_model')
+TypeError: 'model_path' is an invalid keyword argument for print()

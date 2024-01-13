@@ -1,0 +1,21 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Epoch 1, Train Loss: 0.9438357435994678, Validation Loss: 0.8878113254904747, Validation IOU: 0.503237718393414
+/media/cal314-1/9E044F59044F3415/Marcin/Data/model/Annotator:1, Augmentation:True, Optimizer:Adam, Scheduler:CosineAnnealingLR, Epochs: 300,Batch_Size:3, Start_lr:0.0001, Loss: CrossEntropyLoss, Timestamp: 2023-12-19-15-40_best_model
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 231, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 152, in main
+    torch.save(model.state_dict(), model_path)
+  File "/home/cal314-1/miniconda3/envs/marcin/lib/python3.11/site-packages/torch/serialization.py", line 618, in save
+    with _open_zipfile_writer(f) as opened_zipfile:
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcin/lib/python3.11/site-packages/torch/serialization.py", line 492, in _open_zipfile_writer
+    return container(name_or_buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcin/lib/python3.11/site-packages/torch/serialization.py", line 463, in __init__
+    super().__init__(torch._C.PyTorchFileWriter(self.name))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: File /media/cal314-1/9E044F59044F3415/Marcin/Data/model/Annotator:1, Augmentation:True, Optimizer:Adam, Scheduler:CosineAnnealingLR, Epochs: 300,Batch_Size:3, Start_lr:0.0001, Loss: CrossEntropyLoss, Timestamp: 2023-12-19-15-40_best_model cannot be opened.
