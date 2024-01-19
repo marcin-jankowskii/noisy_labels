@@ -60,7 +60,7 @@ class ProcessData:
 
         X = np.zeros((len(images), self.config['image_height'], self.config['image_width'], 3), dtype=np.float32)
         y = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],), dtype=np.float32)
-        y_id = np.zeros((len(masks),  self.config['image_height'], self.config['image_width']), dtype=np.float32)
+        #y_id = np.zeros((len(masks),  self.config['image_height'], self.config['image_width']), dtype=np.float32)
 
 
         for n, (img, mimg) in enumerate(zip(images, masks)):
@@ -83,9 +83,8 @@ class ProcessData:
 
             X[n] = x_img
             y[n] = mask_id
-            y_id[n] = mask_id
 
-        return X, y, y_id
+        return X, y
 
 class BatchMaker:
     def __init__(self, config_path=path_dict[path_config['place']], batch_size=6, mode = 'all',segment = 'full' ,annotator = 1):
@@ -94,28 +93,25 @@ class BatchMaker:
         self.process_data = ProcessData(config_path=config_path,mode = segment,annotator = annotator)
         self.batch_size = batch_size
         if mode == 'all':
-            x_train, y_train,yid_train = self.process_data.process_dataset('/train')
-            x_val, y_val,yid_val = self.process_data.process_dataset('/test_small')
-            x_test, y_test,yid_test = self.process_data.process_dataset('/test')
-            self.train_loader = self.create_loader(x_train, y_train,yid_train,shuffle=False)
-            self.val_loader = self.create_loader(x_val, y_val,yid_val, shuffle=False)
-            self.test_loader = self.create_loader(x_test, y_test,yid_test ,shuffle=False)
+            x_train, y_train = self.process_data.process_dataset('/train')
+            x_val, y_val = self.process_data.process_dataset('/test_small')
+            x_test, y_test = self.process_data.process_dataset('/test')
+            self.train_loader = self.create_loader(x_train, y_train,shuffle=False)
+            self.val_loader = self.create_loader(x_val, y_val, shuffle=False)
+            self.test_loader = self.create_loader(x_test, y_test ,shuffle=False)
         elif mode == 'train':
-            x_train, y_train,yid_train = self.process_data.process_dataset('/train')
-            x_val, y_val,yid_val = self.process_data.process_dataset('/test_small')
-            self.train_loader = self.create_loader(x_train, y_train,yid_train, shuffle=True)
-            self.val_loader = self.create_loader(x_val, y_val,yid_val, shuffle=True)
+            x_train, y_train = self.process_data.process_dataset('/train')
+            x_val, y_val = self.process_data.process_dataset('/test_small')
+            self.train_loader = self.create_loader(x_train, y_train, shuffle=True)
+            self.val_loader = self.create_loader(x_val, y_val, shuffle=True)
         elif mode == 'test':
-            x_test, y_test,yid_test = self.process_data.process_dataset('/test')
-            self.test_loader = self.create_loader(x_test, y_test,yid_test, shuffle=False)
+            x_test, y_test = self.process_data.process_dataset('/test')
+            self.test_loader = self.create_loader(x_test, y_test, shuffle=False)
         
 
-    def create_loader(self, x, y, id, shuffle):
+    def create_loader(self, x, y, shuffle):
         x = np.transpose(x, (0, 3, 1, 2))
-        y= id
-        y_id = id
         x_tensor = torch.from_numpy(x)
-        y_tensor = torch.from_numpy(y)
-        id_tensor = torch.from_numpy(y_id).type(torch.float64)
-        dataset = TensorDataset(x_tensor, y_tensor, id_tensor)
+        y_tensor = torch.from_numpy(y).type(torch.float64)
+        dataset = TensorDataset(x_tensor, y_tensor)
         return DataLoader(dataset, batch_size=self.batch_size, shuffle=shuffle)

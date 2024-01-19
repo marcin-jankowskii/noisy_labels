@@ -14,8 +14,8 @@ class MyAugmentation(nn.Module):
         self.k1 = K.augmentation.ColorJitter(brightness=0.2, contrast=0.3)
         self.k2 = K.augmentation.RandomHorizontalFlip(p=0.5, p_batch=1.0, same_on_batch=False, keepdim=False)
         self.k3 = K.augmentation.RandomVerticalFlip(p=0.5, p_batch=1.0, same_on_batch=False, keepdim=False)
-        self.k4 = K.augmentation.RandomRotation(45.0,same_on_batch=False, align_corners=True, p=0.5, keepdim=False)
-        self.k5 = K.augmentation.RandomResizedCrop((512, 512), scale=(0.67, 0.67), ratio=(0.75, 1.333), same_on_batch=False)
+        self.k4 = K.augmentation.RandomRotation(45.0,same_on_batch=False, align_corners=True, p=0.5, keepdim=False,resample='nearest')
+        self.k5 = K.augmentation.RandomResizedCrop((512, 512), scale=(0.67, 0.67), ratio=(0.75, 1.333), same_on_batch=False,resample='bilinear',p=0.5, align_corners= True)
 
 
     def forward(self, img: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
@@ -27,15 +27,16 @@ class MyAugmentation(nn.Module):
         img_out = self.k2(img_out)
         img_out = self.k3(img_out)
         img_out = self.k4(img_out)
-        img_out = self.k5(img_out)
+        #img_out = self.k5(img_out)
         mask_out = self.k2(mask, self.k2._params)
         mask_out = self.k3(mask_out, self.k3._params)
         mask_out = self.k4(mask_out, self.k4._params)
-        mask_out = self.k5(mask_out, self.k5._params)
+        #mask_out = self.k5(mask_out, self.k5._params)
         #img_out, mask_out, mhead_out = self.randomDeform3(img_out, mask_out, mhead)
 
         return img_out, mask_out
     
+
 
     def find_contours(self,mask: torch.Tensor):
         # Konwersja maski do formatu używanego przez OpenCV
@@ -245,7 +246,7 @@ class MyAugmentation(nn.Module):
                         segment_img = img[:,:, start_point[1]:end_point[1], start_point[0]:end_point[0]].clone()
                         
                         if min(segment_img.shape[2], segment_img.shape[3]) >= 5:
-                            blurred_segment = K.filters.box_blur(segment_img,(3,3))
+                            blurred_segment = K.filters.box_blur(segment_img,(5,5))
                             #print("bluruje")
                         else:
                             blurred_segment = segment_img  

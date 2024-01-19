@@ -17,7 +17,7 @@ import random
 import segmentation_models_pytorch as smp
 
 
-def plot_sample(X, y, preds, ix=None):
+def plot_sample(X, y, preds, ix=None,mode = 'train'):
     """Function to plot the results"""
     colors = [[0, 0, 0], [0, 255, 0], [255, 0, 0]]  # tło, wić, główka
     if ix is None:
@@ -60,14 +60,17 @@ def plot_sample(X, y, preds, ix=None):
         #ax[2].contour(y[ix].squeeze(), colors='k', levels=[0.5])
     ax[2].set_title('Sperm Image Predicted')
     ax[2].set_axis_off()
-    wandb.log({"train/plot": wandb.Image(fig)})
+    if mode == 'train':
+        wandb.log({"train/plot": wandb.Image(fig)})
+    if mode == 'val':
+        wandb.log({"val/plot": wandb.Image(fig)})
     plt.close()
 
 def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,epoch_number):
     model.train()
     total_loss = 0
     total_iou = 0
-    for batch_idx, (inputs, labels,ids) in enumerate(train_loader):
+    for batch_idx, (inputs,ids) in enumerate(train_loader):
         
         if T_aug == True:
             for i in range(inputs.shape[0]):
@@ -75,16 +78,16 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
 
         ids = ids.type(torch.LongTensor)
         inputs = inputs.to(device)
-        labels = labels.to(device)
         ids = ids.to(device)
         optimizer.zero_grad()
         output = model(inputs)
 
         images = inputs.detach().cpu().numpy().transpose(0, 2, 3, 1)
-        lbls = labels.detach().cpu().numpy()
+        ids_numpy = ids.detach().cpu().numpy()
+
         preds_out = output.detach().cpu().numpy()
         preds_out = np.argmax(preds_out, axis=1)
-        
+
         preds = torch.argmax(output, dim=1) 
         metrics = SegmentationMetrics(num_classes)
         metrics.update_confusion_matrix(ids.cpu().numpy(), preds.cpu().numpy())
@@ -97,8 +100,10 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
 
         total_iou += viou
         total_loss += loss.item()
+        
     avg_loss = total_loss / len(train_loader)
     avg_iou = total_iou / len(train_loader)
+
 
     if config.scheduler != 'ReduceLROnPlateau':
         scheduler.step()
@@ -111,22 +116,22 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
  
     wandb.log(metrics)
 
-    return avg_loss,avg_iou,images,lbls,preds_out
+    return avg_loss,avg_iou,images,ids_numpy,preds_out
 
 def val(model, validation_loader, loss_fn,epoch_number,scheduler):
     model.eval()
     total_loss = 0
     total_iou = 0
     with torch.no_grad():
-        for batch_idx, (vinputs, vlabels,vids) in enumerate(val_loader):
+        for batch_idx, (vinputs,vids) in enumerate(val_loader):
             vids = vids.type(torch.LongTensor)
             vinputs = vinputs.to(device)
-            vlabels = vlabels.to(device)
+            images = vinputs.cpu().numpy().transpose(0, 2, 3, 1)
             vids = vids.to(device)
+            vids_numpy = vids.cpu().numpy()
             voutputs = model(vinputs)
             preds = torch.argmax(voutputs, dim=1) 
-         
-
+            preds_out = preds.cpu().numpy()
             metrics = SegmentationMetrics(num_classes)
             metrics.update_confusion_matrix(vids.cpu().numpy(), preds.cpu().numpy())
             mean_iou = metrics.mean_iou()
@@ -145,7 +150,7 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
                     "val/epoch": epoch_number
                        }
     wandb.log(val_metrics)
-    return avg_loss,avg_iou
+    return avg_loss,avg_iou,images,vids_numpy,preds_out
 
 def main(model, train_loader, validation_loader, optimizer,scheduler,loss_fn, epochs,augumentation,T_aug,name):
 
@@ -154,8 +159,9 @@ def main(model, train_loader, validation_loader, optimizer,scheduler,loss_fn, ep
     for epoch in range(epochs):
         epoch_number = epoch +1
         train_loss,train_iou,images,lbls,preds = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
-        validation_loss, validation_iou = val(model, validation_loader, loss_fn,epoch_number,scheduler)
-        plot_sample(images, lbls,preds, ix=0)
+        validation_loss, validation_iou,vimages,vlbls,vpreds = val(model, validation_loader, loss_fn,epoch_number,scheduler)
+        plot_sample(images, lbls,preds, ix=0,mode = 'train')
+        plot_sample(vimages,vlbls,vpreds, ix=0,mode = 'val')
 
         print(f'Epoch {epoch_number}, Train Loss: {train_loss}, Train Iou: {train_iou}, Validation Loss: {validation_loss}, Validation IOU: {validation_iou}')
 
@@ -191,13 +197,13 @@ timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
 
 wandb.init(project="noisy_labels", entity="segsperm",
             config={
-            "epochs": 100,
+            "epochs": 300,
             "batch_size": 22,
             "lr": 1e-4,
             "annotator": 1,
             "model": 'smpUNet++',
             "augmentation": True,
-            "loss": "CrossEntropyLossWeight",
+            "loss": "CrossEntropyLoss",
             "optimizer": "Adam",
             "scheduler": "CosineAnnealingLR",
             "place": "lab"
