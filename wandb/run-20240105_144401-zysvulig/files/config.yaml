@@ -1,0 +1,69 @@
+wandb_version: 1
+
+epochs:
+  desc: null
+  value: 100
+batch_size:
+  desc: null
+  value: 6
+lr:
+  desc: null
+  value: 0.0001
+annotator:
+  desc: null
+  value: 2
+model:
+  desc: null
+  value: smpUNet++
+augmentation:
+  desc: null
+  value: true
+loss:
+  desc: null
+  value: CrossEntropyLossWeight
+optimizer:
+  desc: null
+  value: Adam
+scheduler:
+  desc: null
+  value: CosineAnnealingLR
+place:
+  desc: null
+  value: lab
+_wandb:
+  desc: null
+  value:
+    python_version: 3.11.5
+    cli_version: 0.16.1
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1704462241.726441
+    t:
+      1:
+      - 1
+      - 41
+      - 49
+      - 55
+      - 63
+      - 74
+      - 79
+      2:
+      - 1
+      - 41
+      - 49
+      - 55
+      - 63
+      - 74
+      - 79
+      3:
+      - 1
+      - 16
+      - 17
+      - 23
+      - 37
+      4: 3.11.5
+      5: 0.16.1
+      8:
+      - 5
+      13: linux-x86_64

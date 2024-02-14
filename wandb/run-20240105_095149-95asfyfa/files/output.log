@@ -1,0 +1,29 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Epoch 1, Train Loss: 0.9415757184227308, Validation Loss: 0.8785840272903442, Validation IOU: 0.6668842229118358
+Model saved
+Epoch 2, Train Loss: 0.8617402497265074, Validation Loss: 0.8322043567895889, Validation IOU: 0.6470206325017902
+Model saved
+Epoch 3, Train Loss: 0.8196524398194419, Validation Loss: 0.7985174506902695, Validation IOU: 0.6511247105122602
+Epoch 4, Train Loss: 0.7852322691016727, Validation Loss: 0.7717802375555038, Validation IOU: 0.650947435735195
+Epoch 5, Train Loss: 0.7553526593579186, Validation Loss: 0.7447146028280258, Validation IOU: 0.6524897741687974
+Epoch 6, Train Loss: 0.7292339247133997, Validation Loss: 0.7227062880992889, Validation IOU: 0.6429901919511891
+Model saved
+Epoch 7, Train Loss: 0.7077086394031843, Validation Loss: 0.7035620808601379, Validation IOU: 0.643132111201099
+Epoch 8, Train Loss: 0.6883798432019022, Validation Loss: 0.685683086514473, Validation IOU: 0.6425987123475939
+Model saved
+Epoch 9, Train Loss: 0.6717641651630402, Validation Loss: 0.6673737913370132, Validation IOU: 0.6507893541299565
+Epoch 10, Train Loss: 0.657555932799975, Validation Loss: 0.6558632254600525, Validation IOU: 0.6470814889794014
+Epoch 11, Train Loss: 0.6457900098628468, Validation Loss: 0.6461205929517746, Validation IOU: 0.6515622932804781
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 233, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 142, in main
+    train_loss,images,lbls,preds = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 88, in train
+    total_loss += loss.item()
+                  ^^^^^^^^^^^
+KeyboardInterrupt

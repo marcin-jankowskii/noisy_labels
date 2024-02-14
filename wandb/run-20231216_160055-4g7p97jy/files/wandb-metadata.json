@@ -1,0 +1,128 @@
+{
+    "os": "Linux-6.2.0-39-generic-x86_64-with-glibc2.35",
+    "python": "3.10.13",
+    "heartbeatAt": "2023-12-16T15:00:57.620498",
+    "startedAt": "2023-12-16T15:00:55.759976",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/train2.py",
+    "codePathLocal": "Kod/train2.py",
+    "codePath": "Kod/train2.py",
+    "git": {
+        "remote": "https://github.com/marcin-jankowskii/noisy_labels",
+        "commit": "76931a9c6c06c4746c4309353161338c78488560"
+    },
+    "email": "marcinjankowskirep@gmail.com",
+    "root": "/home/nitro/Studia/Praca Dyplomowa/noisy_labels",
+    "host": "nitro-Nitro-AN517-41",
+    "username": "nitro",
+    "executable": "/home/nitro/miniconda3/envs/tf/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 2.940125,
+        "min": 1200.0,
+        "max": 3200.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 4.263,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 1.2,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 3.554,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 1.2,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 4.264,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 3.813,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 4.273,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 1.2,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 3.904,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 1.2,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 4.205,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 4.347,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 3.564,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 4.194,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 4.438,
+            "min": 1200.0,
+            "max": 3200.0
+        },
+        {
+            "current": 1.2,
+            "min": 1200.0,
+            "max": 3200.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 77.36371612548828,
+            "used": 27.780319213867188
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3070 Laptop GPU",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3070 Laptop GPU",
+            "memory_total": 8589934592
+        }
+    ],
+    "memory": {
+        "total": 30.69601058959961
+    }
+}

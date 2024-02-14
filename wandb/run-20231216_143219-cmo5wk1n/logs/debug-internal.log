@@ -1,0 +1,365 @@
+2023-12-16 14:32:19,361 INFO    StreamThr :26140 [internal.py:wandb_internal():86] W&B internal server running at pid: 26140, started at: 2023-12-16 14:32:19.361310
+2023-12-16 14:32:19,362 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status
+2023-12-16 14:32:19,365 INFO    WriterThread:26140 [datastore.py:open_for_write():85] open: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/run-cmo5wk1n.wandb
+2023-12-16 14:32:19,366 DEBUG   SenderThread:26140 [sender.py:send():382] send: header
+2023-12-16 14:32:19,369 DEBUG   SenderThread:26140 [sender.py:send():382] send: run
+2023-12-16 14:32:19,799 INFO    SenderThread:26140 [dir_watcher.py:__init__():211] watching files in: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files
+2023-12-16 14:32:19,799 INFO    SenderThread:26140 [sender.py:_start_run_threads():1136] run started: cmo5wk1n with start time 1702733539.361146
+2023-12-16 14:32:19,804 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: check_version
+2023-12-16 14:32:19,805 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: check_version
+2023-12-16 14:32:19,958 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: run_start
+2023-12-16 14:32:21,128 DEBUG   HandlerThread:26140 [system_info.py:__init__():32] System info init
+2023-12-16 14:32:21,128 DEBUG   HandlerThread:26140 [system_info.py:__init__():47] System info init done
+2023-12-16 14:32:21,128 INFO    HandlerThread:26140 [system_monitor.py:start():194] Starting system monitor
+2023-12-16 14:32:21,128 INFO    SystemMonitor:26140 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-12-16 14:32:21,129 INFO    HandlerThread:26140 [system_monitor.py:probe():214] Collecting system info
+2023-12-16 14:32:21,129 INFO    SystemMonitor:26140 [interfaces.py:start():190] Started cpu monitoring
+2023-12-16 14:32:21,130 INFO    SystemMonitor:26140 [interfaces.py:start():190] Started disk monitoring
+2023-12-16 14:32:21,130 INFO    SystemMonitor:26140 [interfaces.py:start():190] Started gpu monitoring
+2023-12-16 14:32:21,131 INFO    SystemMonitor:26140 [interfaces.py:start():190] Started memory monitoring
+2023-12-16 14:32:21,131 INFO    SystemMonitor:26140 [interfaces.py:start():190] Started network monitoring
+2023-12-16 14:32:21,137 DEBUG   HandlerThread:26140 [system_info.py:probe():196] Probing system
+2023-12-16 14:32:21,137 ERROR   gpu       :26140 [interfaces.py:monitor():144] Failed to sample metric: No data
+2023-12-16 14:32:21,137 ERROR   gpu       :26140 [interfaces.py:monitor():144] Failed to sample metric: No data
+2023-12-16 14:32:21,139 DEBUG   HandlerThread:26140 [system_info.py:_probe_git():181] Probing git
+2023-12-16 14:32:21,144 DEBUG   HandlerThread:26140 [system_info.py:_probe_git():189] Probing git done
+2023-12-16 14:32:21,144 DEBUG   HandlerThread:26140 [system_info.py:probe():244] Probing system done
+2023-12-16 14:32:21,144 DEBUG   HandlerThread:26140 [system_monitor.py:probe():223] {'os': 'Linux-6.2.0-39-generic-x86_64-with-glibc2.35', 'python': '3.10.13', 'heartbeatAt': '2023-12-16T13:32:21.137419', 'startedAt': '2023-12-16T13:32:19.356679', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/train2.py', 'codePathLocal': 'Kod/train2.py', 'codePath': 'Kod/train2.py', 'git': {'remote': 'https://github.com/marcin-jankowskii/noisy_labels', 'commit': '76931a9c6c06c4746c4309353161338c78488560'}, 'email': 'marcinjankowskirep@gmail.com', 'root': '/home/nitro/Studia/Praca Dyplomowa/noisy_labels', 'host': 'nitro-Nitro-AN517-41', 'username': 'nitro', 'executable': '/home/nitro/miniconda3/envs/tf/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 3.3344375000000004, 'min': 1200.0, 'max': 3200.0}, 'cpu_freq_per_core': [{'current': 4.009, 'min': 1200.0, 'max': 3200.0}, {'current': 1.2, 'min': 1200.0, 'max': 3200.0}, {'current': 3.537, 'min': 1200.0, 'max': 3200.0}, {'current': 3.2, 'min': 1200.0, 'max': 3200.0}, {'current': 3.542, 'min': 1200.0, 'max': 3200.0}, {'current': 4.032, 'min': 1200.0, 'max': 3200.0}, {'current': 3.787, 'min': 1200.0, 'max': 3200.0}, {'current': 3.951, 'min': 1200.0, 'max': 3200.0}, {'current': 4.415, 'min': 1200.0, 'max': 3200.0}, {'current': 4.415, 'min': 1200.0, 'max': 3200.0}, {'current': 3.535, 'min': 1200.0, 'max': 3200.0}, {'current': 3.722, 'min': 1200.0, 'max': 3200.0}, {'current': 3.608, 'min': 1200.0, 'max': 3200.0}, {'current': 1.2, 'min': 1200.0, 'max': 3200.0}, {'current': 3.998, 'min': 1200.0, 'max': 3200.0}, {'current': 1.2, 'min': 1200.0, 'max': 3200.0}], 'disk': {'/': {'total': 77.36371612548828, 'used': 27.765174865722656}}, 'gpu': 'NVIDIA GeForce RTX 3070 Laptop GPU', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3070 Laptop GPU', 'memory_total': 8589934592}], 'memory': {'total': 30.69601058959961}}
+2023-12-16 14:32:21,144 INFO    HandlerThread:26140 [system_monitor.py:probe():224] Finished collecting system info
+2023-12-16 14:32:21,144 INFO    HandlerThread:26140 [system_monitor.py:probe():227] Publishing system info
+2023-12-16 14:32:21,144 DEBUG   HandlerThread:26140 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-12-16 14:32:21,144 DEBUG   HandlerThread:26140 [system_info.py:_save_pip():68] Saving pip packages done
+2023-12-16 14:32:21,144 DEBUG   HandlerThread:26140 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-12-16 14:32:21,801 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/requirements.txt
+2023-12-16 14:32:21,802 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/conda-environment.yaml
+2023-12-16 14:32:24,196 DEBUG   HandlerThread:26140 [system_info.py:_save_conda():87] Saving conda packages done
+2023-12-16 14:32:24,196 INFO    HandlerThread:26140 [system_monitor.py:probe():229] Finished publishing system info
+2023-12-16 14:32:24,199 DEBUG   SenderThread:26140 [sender.py:send():382] send: files
+2023-12-16 14:32:24,199 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file wandb-metadata.json with policy now
+2023-12-16 14:32:24,202 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:32:24,204 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:32:24,207 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:32:24,493 DEBUG   SenderThread:26140 [sender.py:send():382] send: telemetry
+2023-12-16 14:32:24,493 DEBUG   SenderThread:26140 [sender.py:send():382] send: telemetry
+2023-12-16 14:32:24,494 DEBUG   SenderThread:26140 [sender.py:send():382] send: run
+2023-12-16 14:32:24,495 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:32:24,695 INFO    SenderThread:26140 [sender.py:send_run():1010] updated run: cmo5wk1n
+2023-12-16 14:32:24,800 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/config.yaml
+2023-12-16 14:32:24,801 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/conda-environment.yaml
+2023-12-16 14:32:24,801 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/wandb-metadata.json
+2023-12-16 14:32:24,801 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/output.log
+2023-12-16 14:32:24,953 INFO    wandb-upload_0:26140 [upload_job.py:push():131] Uploaded file /tmp/tmpej3gynnqwandb/k2vspl52-wandb-metadata.json
+2023-12-16 14:32:26,801 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/output.log
+2023-12-16 14:32:29,697 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:32:34,698 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:32:39,203 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:32:39,203 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:32:39,203 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:32:40,507 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:32:45,507 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:32:50,511 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:32:50,808 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/config.yaml
+2023-12-16 14:32:54,203 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:32:54,203 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:32:54,245 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:32:56,467 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:33:01,468 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:33:06,468 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:33:09,203 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:33:09,203 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:33:09,245 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:33:11,545 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:33:16,815 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/output.log
+2023-12-16 14:33:17,244 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:33:17,631 DEBUG   SenderThread:26140 [sender.py:send():382] send: telemetry
+2023-12-16 14:33:18,815 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/output.log
+2023-12-16 14:33:21,131 DEBUG   SystemMonitor:26140 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-12-16 14:33:21,133 DEBUG   SenderThread:26140 [sender.py:send():382] send: stats
+2023-12-16 14:33:23,136 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:33:23,817 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/config.yaml
+2023-12-16 14:33:24,203 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:33:24,203 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:33:24,204 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:33:28,469 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:33:33,469 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:33:38,470 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:33:39,203 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:33:39,203 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:33:39,244 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:33:43,514 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:33:48,515 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:33:51,133 DEBUG   SenderThread:26140 [sender.py:send():382] send: stats
+2023-12-16 14:33:54,134 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:33:54,203 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:33:54,204 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:33:54,245 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:33:59,560 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:34:04,561 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:34:09,203 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:34:09,203 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:34:09,245 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:34:10,475 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:34:15,475 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:34:20,476 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:34:21,133 DEBUG   SenderThread:26140 [sender.py:send():382] send: stats
+2023-12-16 14:34:22,135 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-16 14:34:22,136 DEBUG   SenderThread:26140 [sender.py:send():382] send: history
+2023-12-16 14:34:22,137 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: summary_record
+2023-12-16 14:34:22,139 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file wandb-summary.json with policy end
+2023-12-16 14:34:22,831 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/wandb-summary.json
+2023-12-16 14:34:23,284 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-16 14:34:23,285 DEBUG   SenderThread:26140 [sender.py:send():382] send: history
+2023-12-16 14:34:23,285 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: summary_record
+2023-12-16 14:34:23,285 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file wandb-summary.json with policy end
+2023-12-16 14:34:23,832 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/wandb-summary.json
+2023-12-16 14:34:23,998 DEBUG   SenderThread:26140 [sender.py:send():382] send: files
+2023-12-16 14:34:23,998 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file media/images/train_images/Inputs_2_dd103352ff53fb29fb6b.png with policy now
+2023-12-16 14:34:24,006 DEBUG   SenderThread:26140 [sender.py:send():382] send: files
+2023-12-16 14:34:24,006 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file media/images/train_images/True Labels_2_18a92c4d33d59c08ed10.png with policy now
+2023-12-16 14:34:24,014 DEBUG   SenderThread:26140 [sender.py:send():382] send: files
+2023-12-16 14:34:24,014 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file media/images/train_images/Predicted Labels_2_0e46eb68b70c47284440.png with policy now
+2023-12-16 14:34:24,019 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-16 14:34:24,020 DEBUG   SenderThread:26140 [sender.py:send():382] send: history
+2023-12-16 14:34:24,021 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: summary_record
+2023-12-16 14:34:24,022 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file wandb-summary.json with policy end
+2023-12-16 14:34:24,203 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:34:24,203 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:34:24,205 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:34:24,514 INFO    wandb-upload_1:26140 [upload_job.py:push():131] Uploaded file /tmp/tmpej3gynnqwandb/rc847jqd-media/images/train_images/True Labels_2_18a92c4d33d59c08ed10.png
+2023-12-16 14:34:24,576 INFO    wandb-upload_0:26140 [upload_job.py:push():131] Uploaded file /tmp/tmpej3gynnqwandb/ugdx3nm3-media/images/train_images/Inputs_2_dd103352ff53fb29fb6b.png
+2023-12-16 14:34:24,832 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/wandb-summary.json
+2023-12-16 14:34:24,832 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images/True Labels_2_18a92c4d33d59c08ed10.png
+2023-12-16 14:34:24,833 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images/Inputs_2_dd103352ff53fb29fb6b.png
+2023-12-16 14:34:24,833 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images/Predicted Labels_2_0e46eb68b70c47284440.png
+2023-12-16 14:34:24,833 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images
+2023-12-16 14:34:24,833 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images
+2023-12-16 14:34:24,833 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media
+2023-12-16 14:34:25,065 INFO    wandb-upload_2:26140 [upload_job.py:push():131] Uploaded file /tmp/tmpej3gynnqwandb/mmjdgwr5-media/images/train_images/Predicted Labels_2_0e46eb68b70c47284440.png
+2023-12-16 14:34:25,344 INFO    wandb-upload_1:26140 [upload_job.py:push():131] Uploaded file /tmp/tmpej3gynnqwandb/bvst4l7n-media/images/train_images/True Labels_2_18a92c4d33d59c08ed10.png
+2023-12-16 14:34:25,501 INFO    wandb-upload_0:26140 [upload_job.py:push():131] Uploaded file /tmp/tmpej3gynnqwandb/v4qq0tzm-media/images/train_images/Inputs_2_dd103352ff53fb29fb6b.png
+2023-12-16 14:34:26,011 INFO    wandb-upload_2:26140 [upload_job.py:push():131] Uploaded file /tmp/tmpej3gynnqwandb/8lf9z0tc-media/images/train_images/Predicted Labels_2_0e46eb68b70c47284440.png
+2023-12-16 14:34:26,380 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:34:31,381 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:34:36,381 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:34:39,204 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:34:39,204 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:34:39,249 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:34:41,510 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:34:46,511 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:34:51,134 DEBUG   SenderThread:26140 [sender.py:send():382] send: stats
+2023-12-16 14:34:52,135 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:34:54,203 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:34:54,204 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:34:54,249 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:34:57,451 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:35:02,451 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:35:07,452 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:35:09,204 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:35:09,204 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:35:09,245 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:35:12,524 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:35:17,525 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:35:21,134 DEBUG   SenderThread:26140 [sender.py:send():382] send: stats
+2023-12-16 14:35:23,135 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:35:24,204 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:35:24,204 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:35:24,245 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:35:28,542 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-16 14:35:28,543 DEBUG   SenderThread:26140 [sender.py:send():382] send: history
+2023-12-16 14:35:28,543 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: summary_record
+2023-12-16 14:35:28,544 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:35:28,545 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file wandb-summary.json with policy end
+2023-12-16 14:35:28,858 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/wandb-summary.json
+2023-12-16 14:35:29,682 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-16 14:35:29,683 DEBUG   SenderThread:26140 [sender.py:send():382] send: history
+2023-12-16 14:35:29,683 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: summary_record
+2023-12-16 14:35:29,683 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file wandb-summary.json with policy end
+2023-12-16 14:35:29,759 DEBUG   SenderThread:26140 [sender.py:send():382] send: files
+2023-12-16 14:35:29,759 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file media/images/train_images/Inputs_5_4fe647f275f8656f8481.png with policy now
+2023-12-16 14:35:29,767 DEBUG   SenderThread:26140 [sender.py:send():382] send: files
+2023-12-16 14:35:29,767 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file media/images/train_images/True Labels_5_b7847d14598bfc8c75bc.png with policy now
+2023-12-16 14:35:29,774 DEBUG   SenderThread:26140 [sender.py:send():382] send: files
+2023-12-16 14:35:29,774 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file media/images/train_images/Predicted Labels_5_e02ddecc82f81109e188.png with policy now
+2023-12-16 14:35:29,780 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-16 14:35:29,780 DEBUG   SenderThread:26140 [sender.py:send():382] send: history
+2023-12-16 14:35:29,781 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: summary_record
+2023-12-16 14:35:29,781 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file wandb-summary.json with policy end
+2023-12-16 14:35:29,858 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/wandb-summary.json
+2023-12-16 14:35:29,858 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images/Predicted Labels_5_e02ddecc82f81109e188.png
+2023-12-16 14:35:29,858 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images/True Labels_5_b7847d14598bfc8c75bc.png
+2023-12-16 14:35:29,859 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_created():271] file/dir created: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images/Inputs_5_4fe647f275f8656f8481.png
+2023-12-16 14:35:29,859 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images
+2023-12-16 14:35:30,201 INFO    wandb-upload_2:26140 [upload_job.py:push():131] Uploaded file /tmp/tmpej3gynnqwandb/9umqnpum-media/images/train_images/True Labels_5_b7847d14598bfc8c75bc.png
+2023-12-16 14:35:30,244 INFO    wandb-upload_1:26140 [upload_job.py:push():131] Uploaded file /tmp/tmpej3gynnqwandb/hoz4r3i0-media/images/train_images/Inputs_5_4fe647f275f8656f8481.png
+2023-12-16 14:35:30,433 INFO    wandb-upload_0:26140 [upload_job.py:push():131] Uploaded file /tmp/tmpej3gynnqwandb/iqme2fxj-media/images/train_images/Predicted Labels_5_e02ddecc82f81109e188.png
+2023-12-16 14:35:30,778 INFO    wandb-upload_2:26140 [upload_job.py:push():131] Uploaded file /tmp/tmpej3gynnqwandb/y5evuelr-media/images/train_images/True Labels_5_b7847d14598bfc8c75bc.png
+2023-12-16 14:35:30,999 INFO    wandb-upload_1:26140 [upload_job.py:push():131] Uploaded file /tmp/tmpej3gynnqwandb/8igwgiag-media/images/train_images/Inputs_5_4fe647f275f8656f8481.png
+2023-12-16 14:35:31,642 INFO    wandb-upload_0:26140 [upload_job.py:push():131] Uploaded file /tmp/tmpej3gynnqwandb/um6kk1l9-media/images/train_images/Predicted Labels_5_e02ddecc82f81109e188.png
+2023-12-16 14:35:33,782 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:35:38,783 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:35:39,204 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:35:39,204 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:35:39,205 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:35:44,529 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:35:49,529 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:35:51,135 DEBUG   SenderThread:26140 [sender.py:send():382] send: stats
+2023-12-16 14:35:54,204 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:35:54,204 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:35:54,245 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:35:54,581 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:35:59,581 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:36:04,582 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:36:09,204 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-16 14:36:09,204 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: stop_status
+2023-12-16 14:36:09,245 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:36:10,445 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:36:15,446 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:36:18,486 DEBUG   SenderThread:26140 [sender.py:send():382] send: exit
+2023-12-16 14:36:18,486 INFO    SenderThread:26140 [sender.py:send_exit():589] handling exit code: 255
+2023-12-16 14:36:18,486 INFO    SenderThread:26140 [sender.py:send_exit():591] handling runtime: 238
+2023-12-16 14:36:18,487 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file wandb-summary.json with policy end
+2023-12-16 14:36:18,487 INFO    SenderThread:26140 [sender.py:send_exit():597] send defer
+2023-12-16 14:36:18,487 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:18,487 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 0
+2023-12-16 14:36:18,488 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:18,488 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 0
+2023-12-16 14:36:18,488 INFO    SenderThread:26140 [sender.py:transition_state():617] send defer: 1
+2023-12-16 14:36:18,488 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:18,488 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 1
+2023-12-16 14:36:18,488 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:18,488 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 1
+2023-12-16 14:36:18,488 INFO    SenderThread:26140 [sender.py:transition_state():617] send defer: 2
+2023-12-16 14:36:18,488 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:18,488 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 2
+2023-12-16 14:36:18,488 INFO    HandlerThread:26140 [system_monitor.py:finish():203] Stopping system monitor
+2023-12-16 14:36:18,488 DEBUG   SystemMonitor:26140 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-12-16 14:36:18,488 DEBUG   SystemMonitor:26140 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-12-16 14:36:18,488 INFO    HandlerThread:26140 [interfaces.py:finish():202] Joined cpu monitor
+2023-12-16 14:36:18,489 INFO    HandlerThread:26140 [interfaces.py:finish():202] Joined disk monitor
+2023-12-16 14:36:18,552 INFO    HandlerThread:26140 [interfaces.py:finish():202] Joined gpu monitor
+2023-12-16 14:36:18,553 INFO    HandlerThread:26140 [interfaces.py:finish():202] Joined memory monitor
+2023-12-16 14:36:18,553 INFO    HandlerThread:26140 [interfaces.py:finish():202] Joined network monitor
+2023-12-16 14:36:18,553 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:18,553 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 2
+2023-12-16 14:36:18,553 INFO    SenderThread:26140 [sender.py:transition_state():617] send defer: 3
+2023-12-16 14:36:18,553 DEBUG   SenderThread:26140 [sender.py:send():382] send: stats
+2023-12-16 14:36:18,553 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:18,554 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 3
+2023-12-16 14:36:18,554 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:18,554 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 3
+2023-12-16 14:36:18,554 INFO    SenderThread:26140 [sender.py:transition_state():617] send defer: 4
+2023-12-16 14:36:18,554 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:18,554 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 4
+2023-12-16 14:36:18,555 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:18,555 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 4
+2023-12-16 14:36:18,555 INFO    SenderThread:26140 [sender.py:transition_state():617] send defer: 5
+2023-12-16 14:36:18,555 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:18,555 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 5
+2023-12-16 14:36:18,556 DEBUG   SenderThread:26140 [sender.py:send():382] send: summary
+2023-12-16 14:36:18,556 INFO    SenderThread:26140 [sender.py:_save_file():1392] saving file wandb-summary.json with policy end
+2023-12-16 14:36:18,557 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:18,557 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 5
+2023-12-16 14:36:18,557 INFO    SenderThread:26140 [sender.py:transition_state():617] send defer: 6
+2023-12-16 14:36:18,557 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:18,557 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 6
+2023-12-16 14:36:18,557 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:18,557 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 6
+2023-12-16 14:36:18,557 INFO    SenderThread:26140 [sender.py:transition_state():617] send defer: 7
+2023-12-16 14:36:18,557 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:36:18,558 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:18,558 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 7
+2023-12-16 14:36:18,558 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:18,558 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 7
+2023-12-16 14:36:18,878 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/wandb-summary.json
+2023-12-16 14:36:19,486 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: poll_exit
+2023-12-16 14:36:20,445 INFO    SenderThread:26140 [sender.py:transition_state():617] send defer: 8
+2023-12-16 14:36:20,446 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: poll_exit
+2023-12-16 14:36:20,446 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:20,447 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 8
+2023-12-16 14:36:20,447 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:20,447 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 8
+2023-12-16 14:36:20,447 INFO    SenderThread:26140 [job_builder.py:build():298] Attempting to build job artifact
+2023-12-16 14:36:20,447 INFO    SenderThread:26140 [job_builder.py:_get_source_type():428] is repo sourced job
+2023-12-16 14:36:20,464 INFO    SenderThread:26140 [job_builder.py:build():404] adding wandb-job metadata file
+2023-12-16 14:36:20,473 INFO    SenderThread:26140 [sender.py:transition_state():617] send defer: 9
+2023-12-16 14:36:20,474 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:20,474 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 9
+2023-12-16 14:36:20,474 DEBUG   SenderThread:26140 [sender.py:send():382] send: artifact
+2023-12-16 14:36:20,489 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: poll_exit
+2023-12-16 14:36:20,880 INFO    Thread-12 :26140 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/output.log
+2023-12-16 14:36:21,705 INFO    wandb-upload_2:26140 [upload_job.py:push():86] Skipped uploading /home/nitro/.local/share/wandb/artifacts/staging/tmprgtl464l
+2023-12-16 14:36:22,027 INFO    wandb-upload_1:26140 [upload_job.py:push():89] Uploaded file /home/nitro/.local/share/wandb/artifacts/staging/tmpcmyofi9k
+2023-12-16 14:36:23,269 INFO    SenderThread:26140 [sender.py:send_artifact():1470] sent artifact job-https___github.com_marcin-jankowskii_noisy_labels_Kod_train2.py - {'id': 'QXJ0aWZhY3Q6NjY4NDcwMzM5', 'state': 'PENDING', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjEyMzk4NDQ2OA==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6NjY4NDU1NDA2', 'versionIndex': 0}}}
+2023-12-16 14:36:23,269 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:23,269 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 9
+2023-12-16 14:36:23,269 INFO    SenderThread:26140 [dir_watcher.py:finish():358] shutting down directory watcher
+2023-12-16 14:36:23,883 INFO    SenderThread:26140 [dir_watcher.py:finish():388] scan: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files
+2023-12-16 14:36:23,883 INFO    SenderThread:26140 [dir_watcher.py:finish():402] scan save: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/wandb-summary.json wandb-summary.json
+2023-12-16 14:36:23,884 INFO    SenderThread:26140 [dir_watcher.py:finish():402] scan save: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/output.log output.log
+2023-12-16 14:36:23,889 INFO    SenderThread:26140 [dir_watcher.py:finish():402] scan save: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/requirements.txt requirements.txt
+2023-12-16 14:36:23,889 INFO    SenderThread:26140 [dir_watcher.py:finish():402] scan save: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/wandb-metadata.json wandb-metadata.json
+2023-12-16 14:36:23,889 INFO    SenderThread:26140 [dir_watcher.py:finish():402] scan save: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/config.yaml config.yaml
+2023-12-16 14:36:23,891 INFO    SenderThread:26140 [dir_watcher.py:finish():402] scan save: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/conda-environment.yaml conda-environment.yaml
+2023-12-16 14:36:23,898 INFO    SenderThread:26140 [dir_watcher.py:finish():402] scan save: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images/Predicted Labels_5_e02ddecc82f81109e188.png media/images/train_images/Predicted Labels_5_e02ddecc82f81109e188.png
+2023-12-16 14:36:23,898 INFO    SenderThread:26140 [dir_watcher.py:finish():402] scan save: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images/Inputs_5_4fe647f275f8656f8481.png media/images/train_images/Inputs_5_4fe647f275f8656f8481.png
+2023-12-16 14:36:23,898 INFO    SenderThread:26140 [dir_watcher.py:finish():402] scan save: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images/True Labels_2_18a92c4d33d59c08ed10.png media/images/train_images/True Labels_2_18a92c4d33d59c08ed10.png
+2023-12-16 14:36:23,898 INFO    SenderThread:26140 [dir_watcher.py:finish():402] scan save: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images/Predicted Labels_2_0e46eb68b70c47284440.png media/images/train_images/Predicted Labels_2_0e46eb68b70c47284440.png
+2023-12-16 14:36:23,898 INFO    SenderThread:26140 [dir_watcher.py:finish():402] scan save: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images/True Labels_5_b7847d14598bfc8c75bc.png media/images/train_images/True Labels_5_b7847d14598bfc8c75bc.png
+2023-12-16 14:36:23,898 INFO    SenderThread:26140 [dir_watcher.py:finish():402] scan save: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/media/images/train_images/Inputs_2_dd103352ff53fb29fb6b.png media/images/train_images/Inputs_2_dd103352ff53fb29fb6b.png
+2023-12-16 14:36:23,898 INFO    SenderThread:26140 [sender.py:transition_state():617] send defer: 10
+2023-12-16 14:36:23,898 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: poll_exit
+2023-12-16 14:36:23,898 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:23,898 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 10
+2023-12-16 14:36:23,898 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:23,898 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 10
+2023-12-16 14:36:23,898 INFO    SenderThread:26140 [file_pusher.py:finish():175] shutting down file pusher
+2023-12-16 14:36:24,337 INFO    wandb-upload_0:26140 [upload_job.py:push():131] Uploaded file /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/wandb-summary.json
+2023-12-16 14:36:24,337 INFO    wandb-upload_1:26140 [upload_job.py:push():131] Uploaded file /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/output.log
+2023-12-16 14:36:24,338 INFO    wandb-upload_2:26140 [upload_job.py:push():131] Uploaded file /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/requirements.txt
+2023-12-16 14:36:24,452 INFO    wandb-upload_4:26140 [upload_job.py:push():131] Uploaded file /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/conda-environment.yaml
+2023-12-16 14:36:24,452 INFO    wandb-upload_3:26140 [upload_job.py:push():131] Uploaded file /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/files/config.yaml
+2023-12-16 14:36:24,653 INFO    Thread-11 (_thread_body):26140 [sender.py:transition_state():617] send defer: 11
+2023-12-16 14:36:24,653 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:24,653 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 11
+2023-12-16 14:36:24,654 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:24,654 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 11
+2023-12-16 14:36:24,654 INFO    SenderThread:26140 [file_pusher.py:join():181] waiting for file pusher
+2023-12-16 14:36:24,654 INFO    SenderThread:26140 [sender.py:transition_state():617] send defer: 12
+2023-12-16 14:36:24,654 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:24,654 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 12
+2023-12-16 14:36:24,654 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:24,655 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 12
+2023-12-16 14:36:24,655 INFO    SenderThread:26140 [file_stream.py:finish():595] file stream finish called
+2023-12-16 14:36:25,493 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: keepalive
+2023-12-16 14:36:25,609 INFO    SenderThread:26140 [file_stream.py:finish():599] file stream finish is done
+2023-12-16 14:36:25,609 INFO    SenderThread:26140 [sender.py:transition_state():617] send defer: 13
+2023-12-16 14:36:25,610 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:25,610 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 13
+2023-12-16 14:36:25,610 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: status_report
+2023-12-16 14:36:25,610 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:25,610 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 13
+2023-12-16 14:36:25,610 INFO    SenderThread:26140 [sender.py:transition_state():617] send defer: 14
+2023-12-16 14:36:25,610 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: defer
+2023-12-16 14:36:25,610 INFO    HandlerThread:26140 [handler.py:handle_request_defer():172] handle defer: 14
+2023-12-16 14:36:25,611 DEBUG   SenderThread:26140 [sender.py:send():382] send: final
+2023-12-16 14:36:25,611 DEBUG   SenderThread:26140 [sender.py:send():382] send: footer
+2023-12-16 14:36:25,611 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: defer
+2023-12-16 14:36:25,611 INFO    SenderThread:26140 [sender.py:send_request_defer():613] handle sender defer: 14
+2023-12-16 14:36:25,611 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: poll_exit
+2023-12-16 14:36:25,611 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: poll_exit
+2023-12-16 14:36:25,612 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: server_info
+2023-12-16 14:36:25,613 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: server_info
+2023-12-16 14:36:25,617 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: get_summary
+2023-12-16 14:36:25,618 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: sampled_history
+2023-12-16 14:36:25,618 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-16 14:36:25,618 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: job_info
+2023-12-16 14:36:25,813 DEBUG   SenderThread:26140 [sender.py:send_request():409] send_request: job_info
+2023-12-16 14:36:25,814 INFO    MainThread:26140 [wandb_run.py:_footer_history_summary_info():3837] rendering history
+2023-12-16 14:36:25,815 INFO    MainThread:26140 [wandb_run.py:_footer_history_summary_info():3869] rendering summary
+2023-12-16 14:36:25,815 INFO    MainThread:26140 [wandb_run.py:_footer_sync_info():3796] logging synced files
+2023-12-16 14:36:25,816 DEBUG   HandlerThread:26140 [handler.py:handle_request():146] handle_request: shutdown
+2023-12-16 14:36:25,816 INFO    HandlerThread:26140 [handler.py:finish():866] shutting down handler
+2023-12-16 14:36:26,619 INFO    WriterThread:26140 [datastore.py:close():294] close: /home/nitro/Studia/Praca Dyplomowa/noisy_labels/wandb/run-20231216_143219-cmo5wk1n/run-cmo5wk1n.wandb
+2023-12-16 14:36:26,814 INFO    SenderThread:26140 [sender.py:finish():1548] shutting down sender
+2023-12-16 14:36:26,814 INFO    SenderThread:26140 [file_pusher.py:finish():175] shutting down file pusher
+2023-12-16 14:36:26,815 INFO    SenderThread:26140 [file_pusher.py:join():181] waiting for file pusher

@@ -1,0 +1,18 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Epoch 1, Train Loss: 1.0403643223372372, Train Iou: 0.7686848003778423, Validation Loss: 0.870345950126648, Validation IOU: 0.642193371946539
+Model saved
+Epoch 2, Train Loss: 0.7299825305288489, Train Iou: 0.6258820035149604, Validation Loss: 0.6708342134952545, Validation IOU: 0.591304547120487
+Model saved
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 260, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 156, in main
+    train_loss,train_iou,images,lbls,preds = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 90, in train
+    metrics.update_confusion_matrix(ids.cpu().numpy(), preds.cpu().numpy())
+                                                       ^^^^^^^^^^^
+KeyboardInterrupt

@@ -1,0 +1,34 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Epoch 1, Train Loss: 0.8890279680490494, Train Iou: 0.7680903114359172, Validation Loss: 0.7598689198493958, Validation IOU: 0.6586234106928534
+Model saved
+Epoch 2, Train Loss: 0.6093547374010087, Train Iou: 0.6454503812518783, Validation Loss: 0.5531949996948242, Validation IOU: 0.5739797876437287
+Model saved
+Epoch 3, Train Loss: 0.4845870867371559, Train Iou: 0.574592551360645, Validation Loss: 0.5170067250728607, Validation IOU: 0.49958817800844685
+Model saved
+Epoch 4, Train Loss: 0.3984996721148491, Train Iou: 0.476239935138176, Validation Loss: 0.4066919833421707, Validation IOU: 0.4948603131925858
+Model saved
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 261, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 157, in main
+    train_loss,train_iou,images,lbls,preds = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 74, in train
+    inputs[i],ids[i] = augumentation(inputs[i], ids[i])
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcin/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcin/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/utils/augmentation.py", line 24, in forward
+    img_out = self.add_circles(img_out,mask)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/utils/augmentation.py", line 203, in add_circles
+    mask1_np = cv2.GaussianBlur(mask1_np, (kernel,kernel), 0)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

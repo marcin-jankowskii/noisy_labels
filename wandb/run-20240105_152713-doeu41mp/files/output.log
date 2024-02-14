@@ -1,0 +1,43 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Epoch 1, Train Loss: 0.3098234355242716, Validation Loss: 0.2641543000936508, Validation IOU: 0.6388574651660341
+Model saved
+Epoch 2, Train Loss: 0.06666210961217682, Validation Loss: 0.30881134793162346, Validation IOU: 0.640897671889006
+Epoch 3, Train Loss: 0.04509407892409298, Validation Loss: 0.32880545407533646, Validation IOU: 0.6331034904265351
+Model saved
+Epoch 4, Train Loss: 0.04120442260884576, Validation Loss: 0.35114872455596924, Validation IOU: 0.6407783930692541
+Epoch 5, Train Loss: 0.03662648952255646, Validation Loss: 0.376943975687027, Validation IOU: 0.6391367692012898
+Epoch 6, Train Loss: 0.03536900880539583, Validation Loss: 0.375295914709568, Validation IOU: 0.6343454962857835
+Epoch 7, Train Loss: 0.02906035766419437, Validation Loss: 0.3883924335241318, Validation IOU: 0.6249464956280497
+Model saved
+Epoch 8, Train Loss: 0.026735895701373618, Validation Loss: 0.40036559104919434, Validation IOU: 0.6300679299725448
+Epoch 9, Train Loss: 0.027172679210909538, Validation Loss: 0.42117224633693695, Validation IOU: 0.6442610101042767
+Epoch 10, Train Loss: 0.026615870974233583, Validation Loss: 0.43225284665822983, Validation IOU: 0.6388620345213974
+Epoch 11, Train Loss: 0.028076810904571578, Validation Loss: 0.43022221326828003, Validation IOU: 0.6316363248588398
+Epoch 12, Train Loss: 0.028033666532590158, Validation Loss: 0.4356677532196045, Validation IOU: 0.6316775679138242
+Epoch 13, Train Loss: 0.02583362572153823, Validation Loss: 0.45446374267339706, Validation IOU: 0.6368161586032088
+Epoch 14, Train Loss: 0.02457815923521088, Validation Loss: 0.46094296872615814, Validation IOU: 0.6338892212370275
+Epoch 15, Train Loss: 0.023179172512350812, Validation Loss: 0.45151831209659576, Validation IOU: 0.6380966782490436
+Epoch 16, Train Loss: 0.022226776656073827, Validation Loss: 0.45655255764722824, Validation IOU: 0.6416559491029866
+Epoch 17, Train Loss: 0.020481517021026876, Validation Loss: 0.48061268776655197, Validation IOU: 0.634915851287732
+Epoch 18, Train Loss: 0.02057148630006446, Validation Loss: 0.47585276514291763, Validation IOU: 0.6242741283394929
+Model saved
+Epoch 19, Train Loss: 0.018830135063682165, Validation Loss: 0.49155519902706146, Validation IOU: 0.6276330082344436
+Epoch 20, Train Loss: 0.01963483161913852, Validation Loss: 0.485100194811821, Validation IOU: 0.6454469687575963
+Epoch 21, Train Loss: 0.018524525518943038, Validation Loss: 0.49151967465877533, Validation IOU: 0.6340332868327476
+Epoch 22, Train Loss: 0.016682730327981215, Validation Loss: 0.5072804316878319, Validation IOU: 0.6271486179497815
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 259, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 155, in main
+    train_loss,train_iou,images,lbls,preds = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 95, in train
+    loss.backward()
+  File "/home/cal314-1/miniconda3/envs/marcin/lib/python3.11/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/cal314-1/miniconda3/envs/marcin/lib/python3.11/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a6ace05f-693d-4182-880e-025139ab1171" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Kod/help.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/help.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/inference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/0.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/10.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/100.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/100.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/101.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/101.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/102.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/102.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/103.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/103.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/104.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/104.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/105.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/105.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/106.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/106.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/107.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/107.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/108.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/108.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/109.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/109.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/11.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/11.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/110.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/110.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/111.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/111.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/112.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/112.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/113.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/113.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/114.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/114.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/115.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/115.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/116.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/116.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/117.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/117.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/118.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/118.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/12.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/12.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/13.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/13.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/14.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/14.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/15.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/15.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/16.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/16.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/17.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/17.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/18.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/18.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/19.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/19.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/20.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/20.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/21.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/21.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/22.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/22.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/23.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/23.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/24.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/24.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/25.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/25.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/26.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/26.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/27.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/27.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/28.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/28.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/29.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/29.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/30.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/30.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/31.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/31.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/32.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/32.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/33.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/33.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/34.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/34.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/35.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/35.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/36.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/36.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/37.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/37.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/38.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/38.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/39.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/39.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/40.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/40.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/41.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/41.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/42.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/42.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/43.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/43.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/44.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/44.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/45.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/45.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/46.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/46.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/47.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/47.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/48.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/48.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/49.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/49.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/50.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/51.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/51.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/52.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/52.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/53.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/53.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/54.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/54.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/56.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/56.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/57.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/57.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/58.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/58.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/59.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/59.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/60.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/60.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/61.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/61.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/62.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/62.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/63.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/63.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/64.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/64.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/65.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/65.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/66.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/66.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/67.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/67.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/68.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/68.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/69.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/69.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/70.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/70.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/71.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/71.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/72.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/72.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/73.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/73.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/74.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/74.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/75.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/75.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/76.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/76.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/77.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/77.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/78.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/78.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/79.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/79.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/8.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/80.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/80.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/81.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/81.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/82.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/82.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/83.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/83.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/84.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/84.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/85.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/85.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/86.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/86.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/87.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/87.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/88.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/88.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/89.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/89.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/9.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/9.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/90.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/90.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/91.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/91.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/92.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/92.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/93.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/93.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/94.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/94.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/95.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/95.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/96.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/96.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/97.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/97.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/98.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/98.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/results/99.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/results/99.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kod/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kod/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wandb/debug-cli.cal314-1.log" beforeDir="false" afterPath="$PROJECT_DIR$/wandb/debug-cli.cal314-1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wandb/debug-internal.log" beforeDir="false" afterPath="$PROJECT_DIR$/wandb/debug-internal.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wandb/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/wandb/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wandb/latest-run" beforeDir="false" afterPath="$PROJECT_DIR$/wandb/latest-run" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;marcin-jankowskii&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="d705606e-48b6-4cd1-b457-52d1cc17d295" />
+        <option name="url" value="https://github.com/marcin-jankowskii/noisy_labels" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2ZZj9qIY4WNLQK2U8KleWXPVoMB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.inference.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;multiclass&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-7a29c1521ef0-c986f194a52a-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.11799.298" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a6ace05f-693d-4182-880e-025139ab1171" name="Changes" comment="" />
+      <created>1702636348627</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1702636348627</updated>
+      <workItem from="1702636349847" duration="323000" />
+      <workItem from="1702636679677" duration="3893000" />
+      <workItem from="1707475352716" duration="1149000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/noisy_labels$inference.coverage" NAME="inference Coverage Results" MODIFIED="1707479860199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Kod" />
+  </component>
+</project>
