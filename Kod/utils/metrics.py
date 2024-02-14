@@ -35,7 +35,7 @@ class SegmentationMetrics:
 
     def mean_iou(self):
         iou_scores = self.calculate_iou_per_class()
-        return np.mean(iou_scores)
+        return np.mean(iou_scores[1:])
     
     def calculate_accuracy(self):
         correct = np.diag(self.confusion_matrix).sum()
@@ -64,9 +64,9 @@ class SegmentationMetrics:
 
     def mean_precision_recall_f1(self):
         precision, recall, f1 = self.calculate_precision_recall_f1_per_class()
-        mean_precision = np.mean(precision)
-        mean_recall = np.mean(recall)
-        mean_f1 = np.mean(f1)
+        mean_precision = np.mean(precision[1:])
+        mean_recall = np.mean(recall[1:])
+        mean_f1 = np.mean(f1[1:])
         return mean_precision, mean_recall, mean_f1
     
 

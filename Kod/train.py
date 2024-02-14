@@ -70,16 +70,38 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
     model.train()
     total_loss = 0
     total_iou = 0
-    for batch_idx, (inputs,ids) in enumerate(train_loader):
+    for batch_idx, data in enumerate(train_loader):
+        if len(data) == 2:
+            inputs, ids = data
+        elif len(data) == 3: 
+            inputs, intersections, unions = data
         
         if T_aug == True:
             for i in range(inputs.shape[0]):
-                inputs[i],ids[i] = augumentation(inputs[i], ids[i])
+                if len(data) == 2:
+                    inputs[i],ids[i] = augumentation(inputs[i], ids[i])
+                elif len(data) == 3:
+                    inputs[i],intersections[i] = augumentation(inputs[i], intersections[i])
 
-        ids = ids.type(torch.LongTensor)
+
         inputs = inputs.to(device)
-        ids = ids.to(device)
+        if len(data) == 2:
+            ids = ids.type(torch.LongTensor)
+            ids = ids.to(device)
+        elif len(data) == 3:
+            intersections = intersections.type(torch.LongTensor)
+            unions = unions.type(torch.LongTensor)
+            ids = intersections.to(device)
+            if config.mode == 'intersection_and_union':
+                unions = unions.to(device)
+
+    
         optimizer.zero_grad()
+
+        if config.mode == 'intersection_and_union':
+            inputs = intersections.to(device)
+            ids = unions.to(device)
+  
         output = model(inputs)
         preds = torch.argmax(output, dim=1) 
         metrics = SegmentationMetrics(num_classes)
@@ -87,7 +109,11 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
         mean_iou = metrics.mean_iou()
         viou = 1 - mean_iou
 
-        loss = loss_fn(output, ids)
+        if config.mode == 'intersection_and_union':
+            loss = loss_fn(output, ids) + 2*loss_fn(output-inputs, ids - inputs)
+        else:
+            loss = loss_fn(output, ids)
+
         loss.backward()
         optimizer.step()
 
@@ -116,12 +142,27 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
     total_loss = 0
     total_iou = 0
     with torch.no_grad():
-        for batch_idx, (vinputs,vids) in enumerate(validation_loader):
-            vids = vids.type(torch.LongTensor)
+        for batch_idx, data in enumerate(validation_loader):
+
+            if len(data) == 2:
+                vinputs, vids = data
+                vids = vids.type(torch.LongTensor)
+                vids = vids.to(device)
+                vids_numpy = vids.detach().cpu().numpy()
+            elif len(data) == 3:
+                vinputs, vintersections, vunions = data
+                vintersections = vintersections.type(torch.LongTensor)
+                vids = vintersections.to(device)
+                vids_numpy = vids.detach().cpu().numpy()
+                vunions = vunions.type(torch.LongTensor)
+         
             vinputs = vinputs.to(device)
             images = vinputs.detach().cpu().numpy().transpose(0, 2, 3, 1)
-            vids = vids.to(device)
-            vids_numpy = vids.detach().cpu().numpy()
+
+            if config.mode == 'intersection_and_union':
+                vinputs = vintersections.to(device)
+                vids = vunions.to(device)
+
             voutputs = model(vinputs)
             preds = torch.argmax(voutputs, dim=1) 
             preds_out = preds.detach().cpu().numpy()
@@ -129,9 +170,15 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
             metrics.update_confusion_matrix(vids.cpu().numpy(), preds.cpu().numpy())
             mean_iou = metrics.mean_iou()
             viou = 1 - mean_iou
+            
+            if config.mode == 'intersection_and_union':
+                loss = loss_fn(voutputs, vids) + 2*loss_fn(voutputs-vinputs, vids - vinputs)
+            else:
+                loss = loss_fn(voutputs, vids)
+
             total_iou += viou
-            loss = loss_fn(voutputs, vids)
             total_loss += loss.item()
+  
     avg_loss = total_loss / len(validation_loader)
     avg_iou = total_iou / len(validation_loader)
 
@@ -171,8 +218,6 @@ def main(model, train_loader, validation_loader, optimizer,scheduler,loss_fn, ep
 
 num_classes = 3
 
-
-
 path_dict ={'laptop':'/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml',
             'lab':'/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml',
             'komputer':'/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
@@ -183,9 +228,15 @@ model_dict = {'myUNet': UNet(3,num_classes),
               'smpUNet++': smp.UnetPlusPlus(in_channels = 3, classes=num_classes),
 }
 
+mode_dict = {'normal': 'mixed',
+             'intersection': 'intersection_and_union',
+             'intersection_and_union': 'intersection_and_union'
+}
+
 
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
 
+#modes: normal, intersection, intersection_and_union
 
 wandb.init(project="noisy_labels", entity="segsperm",
             config={
@@ -198,13 +249,14 @@ wandb.init(project="noisy_labels", entity="segsperm",
             "loss": "CrossEntropyLossWeight",
             "optimizer": "Adam",
             "scheduler": "CosineAnnealingLR",
-            "place": "lab"
+            "place": "lab",
+            "mode": "intersection"
             })
 
 config = wandb.config
 
-name = (f'Annotator:{config.annotator}_Model:{config.model}_Augmentation:{config.augmentation}_Optimizer:{config.optimizer}_Scheduler:{config.scheduler}_Epochs:_{config.epochs}_Batch_Size:{config.batch_size}_Start_lr:{config.lr}_Loss:{config.loss}_Timestamp:{timestamp}')
-save_name = name = (f'Annotator_{config.annotator}_Model_{config.model}_Augmentation_{config.augmentation}_Optimizer_{config.optimizer}_Scheduler_{config.scheduler}_Epochs_{config.epochs}_Batch_Size_{config.batch_size}_Start_lr_{config.lr}_Loss_{config.loss}_Timestamp_{timestamp}')
+name = (f'Annotator:{config.annotator}_Model:{config.model}_Augmentation:{config.augmentation}_Mode:{config.mode}_Optimizer:{config.optimizer}_Scheduler:{config.scheduler}_Epochs:_{config.epochs}_Batch_Size:{config.batch_size}_Start_lr:{config.lr}_Loss:{config.loss}_Timestamp:{timestamp}')
+save_name = name = (f'Annotator_{config.annotator}_Model_{config.model}_Augmentation_{config.augmentation}_Mode{config.mode}_Optimizer_{config.optimizer}_Scheduler_{config.scheduler}_Epochs_{config.epochs}_Batch_Size_{config.batch_size}_Start_lr_{config.lr}_Loss_{config.loss}_Timestamp_{timestamp}')
 wandb.run.name = name
 
 
@@ -215,7 +267,7 @@ with open(path_dict[config.place], 'r') as config_file:
 
 # batch_maker modes: train, val, test
 # batch_maker segments: full, head, tail, mixed, intersection_and_union
-batch_maker = BatchMaker(config_path=path_dict[config.place], batch_size=config.batch_size,mode ='train',segment = 'mixed',annotator= config.annotator)
+batch_maker = BatchMaker(config_path=path_dict[config.place], batch_size=config.batch_size,mode ='train',segment = mode_dict[config.mode],annotator= config.annotator)
 train_loader = batch_maker.train_loader
 val_loader = batch_maker.val_loader
 
