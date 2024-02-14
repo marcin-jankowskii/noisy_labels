@@ -20,6 +20,18 @@ class SegmentationMetrics:
             iou = true_positive / union if union > 0 else 0
             iou_scores.append(iou)
         return iou_scores
+    
+    def intersection_and_union(self):
+        unions = []
+        intersections = []
+        for class_id in range(self.num_classes):
+            true_positive = self.confusion_matrix[class_id, class_id]
+            false_positive = self.confusion_matrix[:, class_id].sum() - true_positive
+            false_negative = self.confusion_matrix[class_id, :].sum() - true_positive
+            union = true_positive + false_positive + false_negative
+            unions.append(union)
+            intersections.append(true_positive)
+        return unions, intersections
 
     def mean_iou(self):
         iou_scores = self.calculate_iou_per_class()

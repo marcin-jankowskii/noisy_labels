@@ -81,13 +81,6 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
         ids = ids.to(device)
         optimizer.zero_grad()
         output = model(inputs)
-
-        images = inputs.detach().cpu().numpy().transpose(0, 2, 3, 1)
-        ids_numpy = ids.detach().cpu().numpy()
-
-        preds_out = output.detach().cpu().numpy()
-        preds_out = np.argmax(preds_out, axis=1)
-
         preds = torch.argmax(output, dim=1) 
         metrics = SegmentationMetrics(num_classes)
         metrics.update_confusion_matrix(ids.cpu().numpy(), preds.cpu().numpy())
@@ -116,22 +109,22 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
  
     wandb.log(metrics)
 
-    return avg_loss,avg_iou,images,ids_numpy,preds_out
+    return avg_loss,avg_iou
 
 def val(model, validation_loader, loss_fn,epoch_number,scheduler):
     model.eval()
     total_loss = 0
     total_iou = 0
     with torch.no_grad():
-        for batch_idx, (vinputs,vids) in enumerate(val_loader):
+        for batch_idx, (vinputs,vids) in enumerate(validation_loader):
             vids = vids.type(torch.LongTensor)
             vinputs = vinputs.to(device)
-            images = vinputs.cpu().numpy().transpose(0, 2, 3, 1)
+            images = vinputs.detach().cpu().numpy().transpose(0, 2, 3, 1)
             vids = vids.to(device)
-            vids_numpy = vids.cpu().numpy()
+            vids_numpy = vids.detach().cpu().numpy()
             voutputs = model(vinputs)
             preds = torch.argmax(voutputs, dim=1) 
-            preds_out = preds.cpu().numpy()
+            preds_out = preds.detach().cpu().numpy()
             metrics = SegmentationMetrics(num_classes)
             metrics.update_confusion_matrix(vids.cpu().numpy(), preds.cpu().numpy())
             mean_iou = metrics.mean_iou()
@@ -158,9 +151,8 @@ def main(model, train_loader, validation_loader, optimizer,scheduler,loss_fn, ep
 
     for epoch in range(epochs):
         epoch_number = epoch +1
-        train_loss,train_iou,images,lbls,preds = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+        train_loss,train_iou = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
         validation_loss, validation_iou,vimages,vlbls,vpreds = val(model, validation_loader, loss_fn,epoch_number,scheduler)
-        plot_sample(images, lbls,preds, ix=0,mode = 'train')
         plot_sample(vimages,vlbls,vpreds, ix=0,mode = 'val')
 
         print(f'Epoch {epoch_number}, Train Loss: {train_loss}, Train Iou: {train_iou}, Validation Loss: {validation_loss}, Validation IOU: {validation_iou}')
@@ -200,10 +192,10 @@ wandb.init(project="noisy_labels", entity="segsperm",
             "epochs": 300,
             "batch_size": 22,
             "lr": 1e-4,
-            "annotator": 1,
+            "annotator": 2,
             "model": 'smpUNet++',
             "augmentation": True,
-            "loss": "CrossEntropyLoss",
+            "loss": "CrossEntropyLossWeight",
             "optimizer": "Adam",
             "scheduler": "CosineAnnealingLR",
             "place": "lab"
@@ -221,6 +213,8 @@ wandb.run.name = name
 with open(path_dict[config.place], 'r') as config_file:
     yaml_config = yaml.safe_load(config_file)
 
+# batch_maker modes: train, val, test
+# batch_maker segments: full, head, tail, mixed, intersection_and_union
 batch_maker = BatchMaker(config_path=path_dict[config.place], batch_size=config.batch_size,mode ='train',segment = 'mixed',annotator= config.annotator)
 train_loader = batch_maker.train_loader
 val_loader = batch_maker.val_loader
