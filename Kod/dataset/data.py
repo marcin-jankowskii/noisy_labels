@@ -55,7 +55,7 @@ class ProcessData:
         elif self.mode == 'mixed':
             segment = 'mixed/'    
         
-        class_colors = [[0, 0, 0], [0, 255, 0], [0, 0, 255]]  # tło, wić, główka
+        class_colors = [[0, 0, 0], [0, 255, 0], [0, 0, 255],[0,255,255]]  # tło, wić, główka
 
         images = sorted(glob.glob(f"{dataset_path}/images/*"))
 
