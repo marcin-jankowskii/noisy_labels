@@ -1,0 +1,44 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 1, Train Loss: 2.826261210441589, Train Iou: 0.9097404906340893, Validation Loss: 0.0, Validation IOU: 0.870959542070552
+Model saved
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 2, Train Loss: 2.0781348943710327, Train Iou: 0.696900488273627, Validation Loss: 0.0, Validation IOU: 0.619633011150059
+Model saved
+Epoch 3, Train Loss: 1.732179629802704, Train Iou: 0.5621829754786606, Validation Loss: 0.0, Validation IOU: 0.4392856587704244
+Model saved
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 4, Train Loss: 1.463967150449753, Train Iou: 0.43955903911901845, Validation Loss: 0.0, Validation IOU: 0.32289755612195736
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Model saved
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 5, Train Loss: 1.2386455595493318, Train Iou: 0.3726571909376224, Validation Loss: 0.0, Validation IOU: 0.3068674200821282
+Model saved
+Epoch 6, Train Loss: 1.0545495688915252, Train Iou: 0.3542391213295658, Validation Loss: 0.0, Validation IOU: 0.28903773409009526
+Model saved
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 7, Train Loss: 0.9064347475767136, Train Iou: 0.33041284539963456, Validation Loss: 0.0, Validation IOU: 0.3123071699415374
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 8, Train Loss: 0.7849294483661652, Train Iou: 0.3157722457087425, Validation Loss: 0.0, Validation IOU: 0.31744537323465405
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 9, Train Loss: 0.6854446738958359, Train Iou: 0.3021475927750621, Validation Loss: 0.0, Validation IOU: 0.3419232995717137
+Epoch 10, Train Loss: 0.6017033606767654, Train Iou: 0.2985512526958064, Validation Loss: 0.0, Validation IOU: 0.2760068266060476
+Model saved
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 11, Train Loss: 0.5326873451471329, Train Iou: 0.29013601411893847, Validation Loss: 0.0, Validation IOU: 0.2745204970306903
+Model saved
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 320, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 207, in main
+    train_loss,train_iou = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 127, in train
+    total_loss += loss.item()
+                  ^^^^^^^^^^^
+KeyboardInterrupt

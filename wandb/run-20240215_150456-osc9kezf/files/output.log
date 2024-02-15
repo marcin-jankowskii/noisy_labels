@@ -1,0 +1,22 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/dataset/data.py:101: RuntimeWarning: divide by zero encountered in divide
+  intersection = (intersection - min_val) / (max_val - min_val)
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/dataset/data.py:101: RuntimeWarning: invalid value encountered in divide
+  intersection = (intersection - min_val) / (max_val - min_val)
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 274, in <module>
+    batch_maker = BatchMaker(config_path=path_dict[config.place], batch_size=config.batch_size,mode ='train',segment = mode_dict[config.mode],annotator= config.annotator)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/dataset/data.py", line 156, in __init__
+    x_train, int_train,un_train = self.process_data.process_dataset('/train')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/dataset/data.py", line 86, in process_dataset
+    mask = resize(mask, (self.config['image_height'], self.config['image_width'], 3), mode='constant', preserve_range=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/skimage/transform/_warps.py", line 185, in resize
+    out = ndi.zoom(filtered, zoom_factors, order=order, mode=ndi_mode,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/scipy/ndimage/_interpolation.py", line 869, in zoom
+    _nd_image.zoom_shift(filtered, zoom, None, output, order, mode, cval, npad,
+KeyboardInterrupt

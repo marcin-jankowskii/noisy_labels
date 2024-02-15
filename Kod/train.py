@@ -90,27 +90,28 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
             ids = ids.to(device)
         elif len(data) == 3:
             intersections = intersections.type(torch.LongTensor)
-            unions = unions.type(torch.LongTensor)
+            intersections = intersections.to(device)
             ids = intersections.to(device)
             if config.mode == 'intersection_and_union':
-                unions = unions.to(device)
+                #inputs = intersections.to(device)
+                unions = unions.type(torch.LongTensor)
+                ids = unions.to(device)
+
 
     
         optimizer.zero_grad()
 
-        if config.mode == 'intersection_and_union':
-            inputs = intersections.to(device)
-            ids = unions.to(device)
-  
         output = model(inputs)
         preds = torch.argmax(output, dim=1) 
         metrics = SegmentationMetrics(num_classes)
         metrics.update_confusion_matrix(ids.cpu().numpy(), preds.cpu().numpy())
         mean_iou = metrics.mean_iou()
         viou = 1 - mean_iou
+      
+
 
         if config.mode == 'intersection_and_union':
-            loss = loss_fn(output, ids) + 2*loss_fn(output-inputs, ids - inputs)
+            loss = loss_fn(output, ids) + 5*loss_fn(output-inputs, ids - intersections)
         else:
             loss = loss_fn(output, ids)
 
@@ -152,15 +153,17 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
             elif len(data) == 3:
                 vinputs, vintersections, vunions = data
                 vintersections = vintersections.type(torch.LongTensor)
+                vintersections = vintersections.to(device)
                 vids = vintersections.to(device)
                 vids_numpy = vids.detach().cpu().numpy()
                 vunions = vunions.type(torch.LongTensor)
+                vids_numpy = vunions.cpu().numpy()
          
             vinputs = vinputs.to(device)
             images = vinputs.detach().cpu().numpy().transpose(0, 2, 3, 1)
 
             if config.mode == 'intersection_and_union':
-                vinputs = vintersections.to(device)
+                vunions = vunions.type(torch.LongTensor)
                 vids = vunions.to(device)
 
             voutputs = model(vinputs)
@@ -171,26 +174,25 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
             mean_iou = metrics.mean_iou()
             viou = 1 - mean_iou
             
-            if config.mode == 'intersection_and_union':
-                loss = loss_fn(voutputs, vids) + 2*loss_fn(voutputs-vinputs, vids - vinputs)
-            else:
-                loss = loss_fn(voutputs, vids)
+            # if config.mode == 'intersection_and_union':
+            #     loss = loss_fn(voutputs, vids) + 2*loss_fn(voutputs-vinputs, vids - vintersections)
+            # else:
+            #     loss = loss_fn(voutputs, vids)
 
             total_iou += viou
-            total_loss += loss.item()
+            # total_loss += loss.item()
   
-    avg_loss = total_loss / len(validation_loader)
+    #avg_loss = total_loss / len(validation_loader)
     avg_iou = total_iou / len(validation_loader)
 
     if config.scheduler == 'ReduceLROnPlateau':
         scheduler.step(avg_iou)
 
-    val_metrics = {"val/val_loss": avg_loss, 
-                    "val/val_iou": avg_iou,
+    val_metrics = { "val/val_iou": avg_iou,
                     "val/epoch": epoch_number
                        }
     wandb.log(val_metrics)
-    return avg_loss,avg_iou,images,vids_numpy,preds_out
+    return avg_iou,images,vids_numpy,preds_out
 
 def main(model, train_loader, validation_loader, optimizer,scheduler,loss_fn, epochs,augumentation,T_aug,name):
 
@@ -199,10 +201,10 @@ def main(model, train_loader, validation_loader, optimizer,scheduler,loss_fn, ep
     for epoch in range(epochs):
         epoch_number = epoch +1
         train_loss,train_iou = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
-        validation_loss, validation_iou,vimages,vlbls,vpreds = val(model, validation_loader, loss_fn,epoch_number,scheduler)
+        validation_iou,vimages,vlbls,vpreds = val(model, validation_loader, loss_fn,epoch_number,scheduler)
         plot_sample(vimages,vlbls,vpreds, ix=0,mode = 'val')
 
-        print(f'Epoch {epoch_number}, Train Loss: {train_loss}, Train Iou: {train_iou}, Validation Loss: {validation_loss}, Validation IOU: {validation_iou}')
+        print(f'Epoch {epoch_number}, Train Loss: {train_loss}, Train Iou: {train_iou}, Validation IOU: {validation_iou}')
 
         if validation_iou < best_iou:
             best_iou = validation_iou
@@ -218,6 +220,8 @@ def main(model, train_loader, validation_loader, optimizer,scheduler,loss_fn, ep
 
 num_classes = 3
 
+class_colors = [[0, 0, 0], [0, 255, 0], [0, 0, 255],[0,255,255]]  # tło, wić, główka
+
 path_dict ={'laptop':'/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config/config_laptop.yaml',
             'lab':'/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/config/config_lab.yaml',
             'komputer':'/media/marcin/Dysk lokalny/Programowanie/Python/Magisterka/Praca Dyplomowa/noisy_labels/Kod/config/config.yaml'
@@ -229,7 +233,7 @@ model_dict = {'myUNet': UNet(3,num_classes),
 }
 
 mode_dict = {'normal': 'mixed',
-             'intersection': 'intersection_and_union',
+             'intersection': 'intersection',
              'intersection_and_union': 'intersection_and_union'
 }
 
@@ -245,12 +249,12 @@ wandb.init(project="noisy_labels", entity="segsperm",
             "lr": 1e-4,
             "annotator": 2,
             "model": 'smpUNet++',
-            "augmentation": True,
+            "augmentation": False,
             "loss": "CrossEntropyLossWeight",
             "optimizer": "Adam",
             "scheduler": "CosineAnnealingLR",
             "place": "lab",
-            "mode": "intersection"
+            "mode": "intersection_and_union"
             })
 
 config = wandb.config

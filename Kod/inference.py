@@ -63,14 +63,23 @@ def predict(model, test_loader):
     predicted_masks = []
     true_masks = []  
     with torch.no_grad():
-        for inputs, ids in test_loader:
+        for data in test_loader:
+            if len(data) == 2:
+                inputs, ids = data
+            elif len(data) == 3: 
+                inputs, intersections, unions = data
+
             inputs = inputs.to(device)
             outputs = model(inputs)
-
-        
+            if len(data) == 2:
+                true_masks.append(ids.cpu())  
+            elif len(data) == 3:
+                if config.mode == 'intersection_and_union':
+                    true_masks.append(unions.cpu())  
+                else:
+                    true_masks.append(intersections.cpu())
             input_images.append(inputs.cpu())
             predicted_masks.append(outputs.cpu())
-            true_masks.append(ids.cpu())  
 
     input_images = np.concatenate(input_images, axis=0)
     true_masks = np.concatenate(true_masks, axis=0) 
@@ -107,14 +116,21 @@ path_dict ={'laptop':'/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Kod/config
 model_dict = {'myUNet': UNet(3,num_classes),
               'smpUNet': smp.Unet(in_channels = 3, classes=num_classes),
               'smpUNet++': smp.UnetPlusPlus(in_channels = 3, classes=num_classes),
-}   
+}
+
+mode_dict = {'normal': 'mixed',
+             'intersection': 'intersection',
+             'intersection_and_union': 'intersection_and_union'
+}
+
 
 wandb.init(project="noisy_labels", entity="segsperm",
             config={
             "model": "smpUNet++",
             "batch_size": 1,
-            "annotator": 1,
-            "place": 'lab'
+            "annotator": 2,
+            "place": 'lab',
+            "mode": "intersection_and_union"
             })
 
 config = wandb.config
@@ -122,12 +138,12 @@ config = wandb.config
 with open(path_dict[config.place], 'r') as config_file:
     yaml_config = yaml.safe_load(config_file)
 
-saved_model_name = 'Annotator_1_Model_smpUNet++_Augmentation_False_Optimizer_Adam_Scheduler_CosineAnnealingLR_Epochs_300_Batch_Size_22_Start_lr_0.0001_Loss_CrossEntropyLossWeight_Timestamp_2024-02-09-11-26_best_model'    
+saved_model_name = 'Annotator_2_Model_smpUNet++_Augmentation_False_Modeintersection_and_union_Optimizer_Adam_Scheduler_CosineAnnealingLR_Epochs_300_Batch_Size_22_Start_lr_0.0001_Loss_CrossEntropyLossWeight_Timestamp_2024-02-14-19-42_best_model'    
 model_path = yaml_config['save_model_path'] + '/' + saved_model_name
 name = (f'Inference: Model_name: {saved_model_name}')
 
 wandb.run.name = name
-batch_maker = BatchMaker(config_path=path_dict[config.place], batch_size=config.batch_size, mode = 'test',segment = 'mixed',annotator= config.annotator)
+batch_maker = BatchMaker(config_path=path_dict[config.place], batch_size=config.batch_size, mode = 'test',segment = mode_dict[config.mode],annotator= config.annotator)
 test_loader = batch_maker.test_loader
 num_classes = 3
 

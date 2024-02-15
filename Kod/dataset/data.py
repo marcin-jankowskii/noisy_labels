@@ -59,7 +59,7 @@ class ProcessData:
 
         images = sorted(glob.glob(f"{dataset_path}/images/*"))
 
-        if self.mode == 'intersection_and_union':
+        if self.mode == 'intersection_and_union' or self.mode == 'intersection':
             gt_path1 = dataset_path + '/GT1_' + 'mixed/'
             gt_path2 = dataset_path + '/GT2_' + 'mixed/'
             masks = sorted(glob.glob(f"{gt_path1}*.png"))
@@ -95,9 +95,19 @@ class ProcessData:
                 intersection_id = rgb_to_class_id(intersection, class_colors)
                 union_id = rgb_to_class_id(union, class_colors)
 
-                # Save images and masks
+                # Normalize intersection
+                min_val = np.min(intersections)
+                max_val = np.max(intersections)
 
-                X[n] = x_img
+                if (max_val - min_val) > 0:
+                    intersection = (intersection - min_val) / (max_val - min_val)
+                else:
+                    intersection = intersection / 255
+
+                if self.mode == 'intersection_and_union':
+                    X[n] = intersection
+                else:
+                    X[n] = x_img
                 intersections[n] = intersection_id
                 unions[n] = union_id
 
@@ -140,7 +150,7 @@ class BatchMaker:
     
         self.process_data = ProcessData(config_path=config_path,mode = segment,annotator = annotator)
         self.batch_size = batch_size
-        if segment == 'intersection_and_union':
+        if segment == 'intersection_and_union' or segment == 'intersection':
             if mode == 'all':
                 x_train, int_train,un_train = self.process_data.process_dataset('/train')
                 x_val, int_val,un_val = self.process_data.process_dataset('/test_small')
