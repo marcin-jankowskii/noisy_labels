@@ -130,7 +130,7 @@ wandb.init(project="noisy_labels", entity="segsperm",
             "batch_size": 1,
             "annotator": 2,
             "place": 'lab',
-            "mode": "intersection_and_union"
+            "mode": "normal"
             })
 
 config = wandb.config
@@ -138,7 +138,7 @@ config = wandb.config
 with open(path_dict[config.place], 'r') as config_file:
     yaml_config = yaml.safe_load(config_file)
 
-saved_model_name = 'Annotator_2_Model_smpUNet++_Augmentation_False_Modeintersection_and_union_Optimizer_Adam_Scheduler_CosineAnnealingLR_Epochs_300_Batch_Size_22_Start_lr_0.0001_Loss_CrossEntropyLossWeight_Timestamp_2024-02-14-19-42_best_model'    
+saved_model_name = 'Annotator_2_Model_smpUNet++_Augmentation_True_Optimizer_Adam_Scheduler_CosineAnnealingLR_Epochs_300_Batch_Size_22_Start_lr_0.0001_Loss_CrossEntropyLossWeight_Timestamp_2024-02-09-13-31_best_model'
 model_path = yaml_config['save_model_path'] + '/' + saved_model_name
 name = (f'Inference: Model_name: {saved_model_name}')
 

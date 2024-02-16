@@ -25,3 +25,4 @@ config: {'epochs': 300, 'batch_size': 22, 'lr': 0.0001, 'annotator': 2, 'model':
 2024-02-15 15:06:57,086 INFO    MainThread:54580 [wandb_run.py:_redirect():2186] Redirects installed.
 2024-02-15 15:06:57,087 INFO    MainThread:54580 [wandb_init.py:init():847] run started, returning control to user process
 2024-02-15 15:08:33,442 INFO    MainThread:54580 [wandb_watch.py:watch():51] Watching
+2024-02-15 16:30:11,116 WARNING MsgRouterThr:54580 [router.py:message_loop():77] message_loop has been closed

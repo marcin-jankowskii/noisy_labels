@@ -111,7 +111,7 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
 
 
         if config.mode == 'intersection_and_union':
-            loss = loss_fn(output, ids) + 5*loss_fn(output-inputs, ids - intersections)
+            loss = loss_fn(output, ids) + 20*loss_fn(output-inputs, ids - intersections)
         else:
             loss = loss_fn(output, ids)
 
