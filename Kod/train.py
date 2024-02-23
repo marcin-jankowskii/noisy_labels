@@ -1,6 +1,6 @@
 from models.Unet import UNet
 from dataset.data import BatchMaker
-from utils.metrics import SegmentationMetrics
+from utils.metrics2 import iou_per_class, mean_iou
 from utils.augmentation import MyAugmentation
 
 import torch
@@ -34,11 +34,12 @@ def plot_sample(X, y, preds, ix=None,mode = 'train'):
 
 
     mask_to_display = y[ix]
+    print(mask_to_display.shape)
 
     # Utwórz obraz RGB z maski
     mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
-    for i, color in enumerate(colors):
-        mask_rgb[mask_to_display == i] = color
+    for class_id, color in enumerate(colors):
+        mask_rgb[mask_to_display[:, :, class_id] == 1] = color
 
 
     ax[1].imshow(mask_rgb)
@@ -48,8 +49,15 @@ def plot_sample(X, y, preds, ix=None,mode = 'train'):
 
 
     mask_to_display = preds[ix]
+    print(mask_to_display.shape)
 
-    # Utwórz obraz RGB z maski
+    # # Utwórz obraz RGB z maski
+    # mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
+    # for class_id, color in enumerate(colors):
+    #     mask_rgb[mask_to_display[:, :, class_id] == 1] = color
+
+ 
+   # Utwórz obraz RGB z maski
     mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
     for i, color in enumerate(colors):
         mask_rgb[mask_to_display == i] = color
@@ -86,34 +94,31 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
 
         inputs = inputs.to(device)
         if len(data) == 2:
-            ids = ids.type(torch.LongTensor)
+            ids = ids.type(torch.FloatTensor)
             ids = ids.to(device)
         elif len(data) == 3:
-            intersections = intersections.type(torch.LongTensor)
+            intersections = intersections.type(torch.FloatTensor)
             intersections = intersections.to(device)
             ids = intersections.to(device)
             if config.mode == 'intersection_and_union':
                 #inputs = intersections.to(device)
-                unions = unions.type(torch.LongTensor)
+                unions = unions.type(torch.FloatTensor)
                 ids = unions.to(device)
-
-
     
         optimizer.zero_grad()
 
         output = model(inputs)
-        preds = torch.argmax(output, dim=1) 
-        metrics = SegmentationMetrics(num_classes)
-        metrics.update_confusion_matrix(ids.cpu().numpy(), preds.cpu().numpy())
-        mean_iou = metrics.mean_iou()
-        viou = 1 - mean_iou
-      
-
-
+        #preds = torch.argmax(output, dim=1) 
+    
+        
         if config.mode == 'intersection_and_union':
             loss = loss_fn(output, ids) + 20*loss_fn(output-inputs, ids - intersections)
         else:
             loss = loss_fn(output, ids)
+
+        meanIoU = mean_iou(ids.cpu().numpy(), output.detach().cpu().numpy(), ids.shape[-1])
+        viou = 1 - meanIoU
+      
 
         loss.backward()
         optimizer.step()
@@ -147,32 +152,34 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
 
             if len(data) == 2:
                 vinputs, vids = data
-                vids = vids.type(torch.LongTensor)
+                vids = vids.type(torch.FloatTensor)
                 vids = vids.to(device)
-                vids_numpy = vids.detach().cpu().numpy()
+                vids_numpy = vids.detach().cpu().numpy().transpose(0, 2, 3, 1)
             elif len(data) == 3:
                 vinputs, vintersections, vunions = data
-                vintersections = vintersections.type(torch.LongTensor)
+                vintersections = vintersections.type(torch.FloatTensor)
                 vintersections = vintersections.to(device)
                 vids = vintersections.to(device)
-                vids_numpy = vids.detach().cpu().numpy()
-                vunions = vunions.type(torch.LongTensor)
-                vids_numpy = vunions.cpu().numpy()
+                vids_numpy = vids.detach().cpu().numpy().transpose(0, 2, 3, 1)
+                vunions = vunions.type(torch.FloatTensor)
+                vids_numpy = vunions.cpu().numpy().transpose(0, 2, 3, 1)
          
             vinputs = vinputs.to(device)
             images = vinputs.detach().cpu().numpy().transpose(0, 2, 3, 1)
 
             if config.mode == 'intersection_and_union':
-                vunions = vunions.type(torch.LongTensor)
+                vunions = vunions.type(torch.FloatTensor)
                 vids = vunions.to(device)
 
             voutputs = model(vinputs)
+            voutputs_binary = (voutputs > 0.5).type(torch.LongTensor)
+            print(voutputs_binary.shape) 
             preds = torch.argmax(voutputs, dim=1) 
+            #preds_out = voutputs.detach().cpu().numpy().transpose(0, 2, 3, 1)
             preds_out = preds.detach().cpu().numpy()
-            metrics = SegmentationMetrics(num_classes)
-            metrics.update_confusion_matrix(vids.cpu().numpy(), preds.cpu().numpy())
-            mean_iou = metrics.mean_iou()
-            viou = 1 - mean_iou
+            print(iou_per_class(vids.cpu().numpy(), voutputs_binary.cpu().numpy(), 4))
+            meanIoU = mean_iou(vids.cpu().numpy(), voutputs_binary.cpu().numpy(), 4)
+            viou = 1 - meanIoU
             
             # if config.mode == 'intersection_and_union':
             #     loss = loss_fn(voutputs, vids) + 2*loss_fn(voutputs-vinputs, vids - vintersections)
@@ -218,7 +225,7 @@ def main(model, train_loader, validation_loader, optimizer,scheduler,loss_fn, ep
             #wandb.save(model_path)
             print('Model saved')
 
-num_classes = 3
+num_classes = 4
 
 class_colors = [[0, 0, 0], [0, 255, 0], [0, 0, 255],[0,255,255]]  # tło, wić, główka
 
@@ -247,14 +254,14 @@ wandb.init(project="noisy_labels", entity="segsperm",
             "epochs": 300,
             "batch_size": 22,
             "lr": 1e-4,
-            "annotator": 2,
+            "annotator": 1,
             "model": 'smpUNet++',
             "augmentation": False,
             "loss": "CrossEntropyLossWeight",
             "optimizer": "Adam",
             "scheduler": "CosineAnnealingLR",
             "place": "lab",
-            "mode": "intersection_and_union"
+            "mode": "normal"
             })
 
 config = wandb.config
