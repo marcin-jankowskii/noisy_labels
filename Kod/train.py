@@ -20,12 +20,13 @@ import segmentation_models_pytorch as smp
 def plot_sample(X, y, preds, ix=None,mode = 'train'):
     """Function to plot the results"""
     colors = [[0, 0, 0], [0, 255, 0], [255, 0, 0]]  # tło, wić, główka
+    colorsV2 = [[0, 0, 0], [0, 255, 0], [255, 0, 0],[0,255,255]]  # tło, wić, główka, główka+wić
     if ix is None:
         ix = random.randint(0, len(X))
 
     has_mask = y[ix].max() > 0
 
-    fig, ax = plt.subplots(1, 3,figsize=(20, 10))
+    fig, ax = plt.subplots(1, 5,figsize=(20, 10))
     ax[0].imshow(X[ix])
     #if has_mask:
         #ax[0].contour(y[ix].squeeze(), colors='k', levels=[0.5])
@@ -34,7 +35,7 @@ def plot_sample(X, y, preds, ix=None,mode = 'train'):
 
 
     mask_to_display = y[ix]
-    print(mask_to_display.shape)
+   
 
     # Utwórz obraz RGB z maski
     mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
@@ -47,27 +48,54 @@ def plot_sample(X, y, preds, ix=None,mode = 'train'):
     ax[1].set_axis_off()
 
 
-
     mask_to_display = preds[ix]
-    print(mask_to_display.shape)
 
-    # # Utwórz obraz RGB z maski
-    # mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
-    # for class_id, color in enumerate(colors):
-    #     mask_rgb[mask_to_display[:, :, class_id] == 1] = color
+
+    # Utwórz obraz RGB z maski
+    mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
+    for class_id, color in enumerate(colors):
+        mask_rgb[mask_to_display[:, :, class_id] == 1] = color
 
  
-   # Utwórz obraz RGB z maski
-    mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
-    for i, color in enumerate(colors):
-        mask_rgb[mask_to_display == i] = color
+#    # Utwórz obraz RGB z maski
+#     mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
+#     for i, color in enumerate(colors):
+#         mask_rgb[mask_to_display == i] = color
  
 
     ax[2].imshow(mask_rgb)
     #if has_mask:
         #ax[2].contour(y[ix].squeeze(), colors='k', levels=[0.5])
-    ax[2].set_title('Sperm Image Predicted')
+    ax[2].set_title('Sperm Image Predicted (class1 and class2)')
     ax[2].set_axis_off()
+
+
+    mask_to_display = preds[ix]
+
+
+    # Utwórz obraz RGB z maski
+    mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
+    for class_id, color in enumerate(colorsV2):
+        mask_rgb[mask_to_display[:, :, class_id] == 1] = color
+
+    ax[3].imshow(mask_rgb)
+    ax[3].set_title('Sperm Image Predicted (class3)')
+
+
+    mask_to_display = y[ix]
+
+
+    # Utwórz obraz RGB z maski
+    mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
+    for class_id, color in enumerate(colorsV2):
+        mask_rgb[mask_to_display[:, :, class_id] == 1] = color
+
+    ax[4].imshow(mask_rgb)
+    ax[4].set_title('Sperm Image Mask (class3)')
+
+
+
+
     if mode == 'train':
         wandb.log({"train/plot": wandb.Image(fig)})
     if mode == 'val':
@@ -108,9 +136,9 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
         optimizer.zero_grad()
 
         output = model(inputs)
-        #preds = torch.argmax(output, dim=1) 
-    
+        #preds = torch.argmax(output, dim=1)
         
+
         if config.mode == 'intersection_and_union':
             loss = loss_fn(output, ids) + 20*loss_fn(output-inputs, ids - intersections)
         else:
@@ -173,10 +201,10 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
 
             voutputs = model(vinputs)
             voutputs_binary = (voutputs > 0.5).type(torch.LongTensor)
-            print(voutputs_binary.shape) 
-            preds = torch.argmax(voutputs, dim=1) 
-            #preds_out = voutputs.detach().cpu().numpy().transpose(0, 2, 3, 1)
-            preds_out = preds.detach().cpu().numpy()
+            #print(voutputs_binary.shape) 
+            #preds = torch.argmax(voutputs, dim=1) 
+            preds_out = voutputs_binary.detach().cpu().numpy().transpose(0, 2, 3, 1)
+            #preds_out = preds.detach().cpu().numpy()
             print(iou_per_class(vids.cpu().numpy(), voutputs_binary.cpu().numpy(), 4))
             meanIoU = mean_iou(vids.cpu().numpy(), voutputs_binary.cpu().numpy(), 4)
             viou = 1 - meanIoU
@@ -257,7 +285,7 @@ wandb.init(project="noisy_labels", entity="segsperm",
             "annotator": 1,
             "model": 'smpUNet++',
             "augmentation": False,
-            "loss": "CrossEntropyLossWeight",
+            "loss": "BCEWithLogitsLoss",
             "optimizer": "Adam",
             "scheduler": "CosineAnnealingLR",
             "place": "lab",
@@ -299,14 +327,21 @@ optimizer_dict = {'Adam': optim.Adam(model.parameters(), lr=config.lr),
                   'RMSprop': optim.RMSprop(model.parameters(), lr=config.lr)
                   }
 
-weights = torch.ones(num_classes)
-weights[0] = 0.1
-weights[1] = 0.7
-weights[2] = 0.4
+weights = torch.ones([num_classes,512,512])
+# weights[0] = 0.1
+# weights[1] = 0.7
+# weights[2] = 0.4
+# weights[3] = 0.4
+weights[0] = 1
+weights[1] = 7
+weights[2] = 4
+weights[3] = 4
 weights = weights.to(device)
 
 loss_dict = {'CrossEntropyLoss': nn.CrossEntropyLoss(),
-             'CrossEntropyLossWeight': nn.CrossEntropyLoss(weight=weights)}
+             'CrossEntropyLossWeight': nn.CrossEntropyLoss(weight=weights),
+             'BCEWithLogitsLoss': nn.BCEWithLogitsLoss(pos_weight=weights),
+             'BCE': nn.BCELoss(weight=weights)}
 
 loss_fn = loss_dict[wandb.config.loss]
 
