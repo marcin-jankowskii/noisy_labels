@@ -18,23 +18,23 @@ class MyAugmentation(nn.Module):
         self.k5 = K.augmentation.RandomResizedCrop((512, 512), scale=(0.67, 0.67), ratio=(0.75, 1.333), same_on_batch=False,resample='bilinear',p=0.5, align_corners= True)
 
 
-    def forward(self, img: torch.Tensor) -> torch.Tensor:
+    def forward(self, img: torch.Tensor, mask:torch.Tensor) -> torch.Tensor:
     
-        #img_out = self.add_lines_along_tail(img,mask)
-        #img_out = self.add_circles(img_out,mask)
-        #img_out = self.add_blur_along_tail(img_out,mask)
-        img_out = self.k1(img)
+        img_out = self.add_lines_along_tail(img,mask)
+        img_out = self.add_circles(img_out,mask)
+        img_out = self.add_blur_along_tail(img_out,mask)
+        img_out = self.k1(img_out)
         img_out = self.k2(img_out)
-        img_out = self.k3(img_out),
+        img_out = self.k3(img_out)
         img_out = self.k4(img_out)
         #img_out = self.k5(img_out)
-        #mask_out = self.k2(mask, self.k2._params)
-        #mask_out = self.k3(mask_out, self.k3._params)
-        #mask_out = self.k4(mask_out, self.k4._params)
+        mask_out = self.k2(mask, self.k2._params)
+        mask_out = self.k3(mask_out, self.k3._params)
+        mask_out = self.k4(mask_out, self.k4._params)
         #mask_out = self.k5(mask_out, self.k5._params)
         #img_out, mask_out, mhead_out = self.randomDeform3(img_out, mask_out, mhead)
 
-        return img_out
+        return img_out,mask_out
     
 
 
@@ -91,6 +91,8 @@ class MyAugmentation(nn.Module):
         tail_contours = self.find_contours(mask[1,:,:])
         head_contours = self.find_contours(mask[2,:,:])
 
+        #print(tail_contours)
+
         linesNumber = random.randint(1, 3)   
         number = 1
 
@@ -116,6 +118,8 @@ class MyAugmentation(nn.Module):
                 end_point4 = self.calculate_endpoint(start_point-1, -direction, 511)
                 end_point5 = self.calculate_endpoint(start_point-2, direction, 511)
                 end_point6 = self.calculate_endpoint(start_point-2, -direction, 511)
+               
+
                 
 
                 color = torch.tensor([0.3, 0.3, 0.3])
