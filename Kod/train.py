@@ -1,6 +1,6 @@
 from models.Unet import UNet
 from dataset.data import BatchMaker
-from utils.metrics2 import iou_per_class, mean_iou
+from utils.metrics2 import calculate_iou
 from utils.augmentation import MyAugmentation
 
 import torch
@@ -144,7 +144,10 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
         else:
             loss = loss_fn(output, ids)
 
-        meanIoU = mean_iou(ids.cpu().numpy(), output.detach().cpu().numpy(), ids.shape[-1])
+        outputs_binary = (output > 0.5).type(torch.FloatTensor)
+        preds = outputs_binary.detach().cpu().numpy()
+        meanIoU, IoUs = calculate_iou(ids.cpu().numpy(), preds)
+        
         viou = 1 - meanIoU
       
 
@@ -200,13 +203,10 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
                 vids = vunions.to(device)
 
             voutputs = model(vinputs)
-            voutputs_binary = (voutputs > 0.5).type(torch.LongTensor)
-            #print(voutputs_binary.shape) 
-            #preds = torch.argmax(voutputs, dim=1) 
+            voutputs_binary = (voutputs > 0.5).type(torch.FloatTensor)
             preds_out = voutputs_binary.detach().cpu().numpy().transpose(0, 2, 3, 1)
-            #preds_out = preds.detach().cpu().numpy()
-            print(iou_per_class(vids.cpu().numpy(), voutputs_binary.cpu().numpy(), 4))
-            meanIoU = mean_iou(vids.cpu().numpy(), voutputs_binary.cpu().numpy(), 4)
+            meanIoU, IoUs = calculate_iou(vids.cpu().numpy(), voutputs_binary.detach().cpu().numpy())
+            print(IoUs)
             viou = 1 - meanIoU
             
             # if config.mode == 'intersection_and_union':
@@ -328,13 +328,9 @@ optimizer_dict = {'Adam': optim.Adam(model.parameters(), lr=config.lr),
                   }
 
 weights = torch.ones([num_classes,512,512])
-# weights[0] = 0.1
-# weights[1] = 0.7
-# weights[2] = 0.4
-# weights[3] = 0.4
 weights[0] = 1
 weights[1] = 7
-weights[2] = 4
+weights[2] = 2
 weights[3] = 4
 weights = weights.to(device)
 

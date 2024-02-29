@@ -1,25 +1,23 @@
 import numpy as np
 
-def simple_iou(y_true, y_pred):
-     # Flatten the arrays
-    y_true = y_true.reshape(-1)
-    y_pred = y_pred.reshape(-1)
 
-    # Calculate intersection and union
-    intersection = np.logical_and(y_true, y_pred).sum()
-    union = np.logical_or(y_true, y_pred).sum()
+def calculate_iou(labels,preds):
 
-    # Calculate IoU
-    iou = intersection / union
+    num_classes = preds.shape[1]
+    ious = []
 
-    return iou
+    for cls in range(num_classes):
 
-def iou_per_class(y_true, y_pred, num_classes):
-    iou_scores = []
-    for c in range(num_classes):
-        iou = simple_iou(y_true[..., c], y_pred[..., c])
-        iou_scores.append(iou)
-    return iou_scores
+        cls_preds = preds[:,cls,:,:]
+        cls_labels = labels[:,cls,:,:]
 
-def mean_iou(y_true, y_pred, num_classes):
-    return np.mean(iou_per_class(y_true, y_pred, num_classes)[1:3])
+        intersection = np.logical_and(cls_preds, cls_labels).sum()
+        union = np.logical_or(cls_preds, cls_labels).sum()
+        union = union + 1e-6
+        iou = intersection / union
+        mean_iou = iou.mean().item()
+        ious.append(mean_iou)
+
+    average_iou = (ious[1]+ious[2])/2
+
+    return average_iou, ious

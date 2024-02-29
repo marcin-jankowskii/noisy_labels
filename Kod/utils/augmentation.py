@@ -18,23 +18,23 @@ class MyAugmentation(nn.Module):
         self.k5 = K.augmentation.RandomResizedCrop((512, 512), scale=(0.67, 0.67), ratio=(0.75, 1.333), same_on_batch=False,resample='bilinear',p=0.5, align_corners= True)
 
 
-    def forward(self, img: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
+    def forward(self, img: torch.Tensor) -> torch.Tensor:
     
-        img_out = self.add_lines_along_tail(img,mask)
-        img_out = self.add_circles(img_out,mask)
-        img_out = self.add_blur_along_tail(img_out,mask)
-        img_out = self.k1(img_out)
+        #img_out = self.add_lines_along_tail(img,mask)
+        #img_out = self.add_circles(img_out,mask)
+        #img_out = self.add_blur_along_tail(img_out,mask)
+        img_out = self.k1(img)
         img_out = self.k2(img_out)
         img_out = self.k3(img_out),
         img_out = self.k4(img_out)
         #img_out = self.k5(img_out)
-        mask_out = self.k2(mask, self.k2._params)
-        mask_out = self.k3(mask_out, self.k3._params)
-        mask_out = self.k4(mask_out, self.k4._params)
+        #mask_out = self.k2(mask, self.k2._params)
+        #mask_out = self.k3(mask_out, self.k3._params)
+        #mask_out = self.k4(mask_out, self.k4._params)
         #mask_out = self.k5(mask_out, self.k5._params)
         #img_out, mask_out, mhead_out = self.randomDeform3(img_out, mask_out, mhead)
 
-        return img_out, mask_out
+        return img_out
     
 
 
@@ -88,8 +88,8 @@ class MyAugmentation(nn.Module):
     def add_lines_along_tail(self,img: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
         
         
-        tail_contours = self.find_contours(mask == 1)
-        head_contours = self.find_contours(mask == 2)
+        tail_contours = self.find_contours(mask[1,:,:])
+        head_contours = self.find_contours(mask[2,:,:])
 
         linesNumber = random.randint(1, 3)   
         number = 1
@@ -168,7 +168,8 @@ class MyAugmentation(nn.Module):
                 # Sprawdzanie, czy okrąg nakłada się na plemniki
                 x_clamped = torch.clamp(x.long(), 0, mask.shape[0] - 1)
                 y_clamped = torch.clamp(y.long(), 0, mask.shape[1] - 1)
-                overlap = torch.any(mask[y_clamped, x_clamped] > 0)
+                sperm_mask = mask[3,:,:]
+                overlap = torch.any(sperm_mask[y_clamped, x_clamped] > 0)
 
             # Rysowanie okręgu, jeśli nie nakłada się na plemniki
             
@@ -224,7 +225,7 @@ class MyAugmentation(nn.Module):
         return img 
 
     def add_blur_along_tail(self, img:torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
-        tail_contours = self.find_contours(mask == 1)
+        tail_contours = self.find_contours(mask[1,:,:])
     
         for contour in tail_contours:
             if contour.shape[0] > 10 and not None:
