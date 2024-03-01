@@ -1,0 +1,53 @@
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test
+GPU dostępne: NVIDIA GeForce RTX 3090
+sample 0 saved
+sample 1 saved
+sample 2 saved
+sample 3 saved
+sample 4 saved
+sample 5 saved
+sample 6 saved
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 225, in <module>
+    predict(model, test_loader)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 140, in predict
+    plot_sample(x_images, true,pred, ix=i)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 25, in plot_sample
+    fig, ax = plt.subplots(1, 5,figsize=(20, 10))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/pyplot.py", line 1598, in subplots
+    fig = figure(**fig_kw)
+          ^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/pyplot.py", line 934, in figure
+    manager = new_figure_manager(
+              ^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/pyplot.py", line 465, in new_figure_manager
+    return _get_backend_mod().new_figure_manager(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/backend_bases.py", line 3402, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/backend_bases.py", line 3407, in new_figure_manager_given_figure
+    return cls.FigureCanvas.new_manager(figure, num)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/backend_bases.py", line 1785, in new_manager
+    return cls.manager_class.create_with_canvas(cls, figure, num)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/backends/_backend_tk.py", line 507, in create_with_canvas
+    manager = cls(canvas, num, window)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/backends/_backend_tk.py", line 460, in __init__
+    super().__init__(canvas, num)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/backend_bases.py", line 2660, in __init__
+    self.toolbar = self._toolbar2_class(self.canvas)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/backends/_backend_tk.py", line 634, in __init__
+    ToolTip.createToolTip(button, tooltip_text)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/backends/_backend_tk.py", line 915, in createToolTip
+    widget.bind('<Enter>', enter)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/tkinter/__init__.py", line 1448, in bind
+    return self._bind(('bind', self._w), sequence, func, add)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/tkinter/__init__.py", line 1402, in _bind
+    self.tk.call(what + (sequence, cmd))
+KeyboardInterrupt

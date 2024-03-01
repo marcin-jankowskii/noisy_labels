@@ -1,0 +1,46 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test
+GPU dostępne: NVIDIA GeForce RTX 3090
+input_images shape: (119, 3, 512, 512)
+sample 0 saved
+sample 1 saved
+sample 2 saved
+sample 3 saved
+sample 4 saved
+sample 5 saved
+sample 6 saved
+sample 7 saved
+sample 8 saved
+sample 9 saved
+sample 10 saved
+sample 11 saved
+sample 12 saved
+sample 13 saved
+Traceback (most recent call last):
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/PIL/ImageFile.py", line 536, in _save
+    fh = fp.fileno()
+         ^^^^^^^^^
+AttributeError: '_idat' object has no attribute 'fileno'
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 198, in <module>
+    predict(model, test_loader)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 135, in predict
+    plot_sample(x_images, true,pred, ix=i)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 95, in plot_sample
+    wandb.log({"inference/plot2": wandb.Image(fig2)})
+                                  ^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/wandb/sdk/data_types/image.py", line 179, in __init__
+    self._initialize_from_data(data_or_path, mode, file_type)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/wandb/sdk/data_types/image.py", line 336, in _initialize_from_data
+    self._image.save(tmp_path, transparency=None)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/PIL/Image.py", line 2439, in save
+    save_handler(self, fp, filename)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/PIL/PngImagePlugin.py", line 1402, in _save
+    ImageFile._save(im, _idat(fp, chunk), [("zip", (0, 0) + im.size, 0, rawmode)])
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/PIL/ImageFile.py", line 540, in _save
+    _encode_tile(im, fp, tile, bufsize, None, exc)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/PIL/ImageFile.py", line 559, in _encode_tile
+    errcode, data = encoder.encode(bufsize)[1:]
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

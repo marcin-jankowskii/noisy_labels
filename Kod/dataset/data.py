@@ -122,6 +122,46 @@ class ProcessData:
             return X, intersections, unions
         
 
+        elif self.mode == 'both':
+            gt_path1 = dataset_path + '/GT1_' + 'mixed/'
+            gt_path2 = dataset_path + '/GT2_' + 'mixed/'
+            masks = sorted(glob.glob(f"{gt_path1}*.png"))
+            masks2 = sorted(glob.glob(f"{gt_path2}*.png"))
+
+            X = np.zeros((len(images), self.config['image_height'], self.config['image_width'], 3), dtype=np.float32)
+            y1 = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],4), dtype=np.float32)
+            y2 = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],4), dtype=np.float32)
+
+
+            for n, (img, mimg,mimg2) in enumerate(zip(images, masks, masks2)):
+                # Load images
+                img = cv2.imread(img)
+                x_img = img.astype(np.float32)
+                x_img = resize(x_img, (self.config['image_height'], self.config['image_width'], 3), mode='constant', preserve_range=True)
+                # Normalize images
+                min_val = np.min(x_img)
+                max_val = np.max(x_img)
+                x_img = (x_img - min_val) / (max_val - min_val)
+
+                # Load masks
+                mask = cv2.imread(mimg)
+                mask = mask.astype(np.float32)
+                mask = resize(mask, (self.config['image_height'], self.config['image_width'], 3), mode='constant', preserve_range=True)
+                mask_id = rgb_to_class_id(mask, class_colors)
+              
+                mask2 = cv2.imread(mimg2)
+                mask2 = mask2.astype(np.float32)
+                mask2 = resize(mask2, (self.config['image_height'], self.config['image_width'], 3), mode='constant', preserve_range=True)
+                mask2_id = rgb_to_class_id(mask2, class_colors)
+                # Save images and masks
+
+                X[n] = x_img
+                y1[n] = mask_id
+                y2[n] = mask2_id
+
+            return X, y1,y2
+        
+
 
         else:
             gt_path = dataset_path + name + segment
@@ -161,7 +201,7 @@ class BatchMaker:
     
         self.process_data = ProcessData(config_path=config_path,mode = segment,annotator = annotator)
         self.batch_size = batch_size
-        if segment == 'intersection_and_union' or segment == 'intersection':
+        if segment == 'intersection_and_union' or segment == 'intersection' or segment == 'both':
             if mode == 'all':
                 x_train, int_train,un_train = self.process_data.process_dataset('/train')
                 x_val, int_val,un_val = self.process_data.process_dataset('/test_small')
@@ -206,6 +246,8 @@ class BatchMaker:
 
     def create_loader2(self, x, intersection,union,shuffle):
         x = np.transpose(x, (0, 3, 1, 2))
+        intersection = np.transpose(intersection, (0, 3, 1, 2))
+        union = np.transpose(union, (0, 3, 1, 2))
         x_tensor = torch.from_numpy(x)
         intersection_tensor = torch.from_numpy(intersection).type(torch.float64)
         union_tensor = torch.from_numpy(union).type(torch.float64)

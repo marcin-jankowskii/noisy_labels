@@ -281,7 +281,7 @@ wandb.init(project="noisy_labels", entity="segsperm",
             "epochs": 300,
             "batch_size": 22,
             "lr": 1e-4,
-            "annotator": 2,
+            "annotator": 1,
             "model": 'smpUNet++',
             "augmentation": True,
             "loss": "BCEWithLogitsLoss",
@@ -328,9 +328,9 @@ optimizer_dict = {'Adam': optim.Adam(model.parameters(), lr=config.lr),
 
 weights = torch.ones([num_classes,512,512])
 weights[0] = 1
-weights[1] = 7
-weights[2] = 2
-weights[3] = 4
+weights[1] = 10
+weights[2] = 5
+weights[3] = 7
 weights = weights.to(device)
 
 loss_dict = {'CrossEntropyLoss': nn.CrossEntropyLoss(),

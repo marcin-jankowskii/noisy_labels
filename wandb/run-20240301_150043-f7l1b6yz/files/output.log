@@ -1,0 +1,19 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test
+GPU dostępne: NVIDIA GeForce RTX 3090
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 253, in <module>
+    predict(model, test_loader)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 167, in predict
+    video_sample(true,pred,ix=i)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 115, in video_sample
+    wandb.log({"video": wandb.Video(diff,fps=1)})
+                        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/wandb/sdk/data_types/video.py", line 126, in __init__
+    self.encode()
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/wandb/sdk/data_types/video.py", line 133, in encode
+    tensor = self._prepare_video(self.data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/wandb/sdk/data_types/video.py", line 191, in _prepare_video
+    raise ValueError(
+ValueError: Video must be atleast 4 dimensions: time, channels, height, width

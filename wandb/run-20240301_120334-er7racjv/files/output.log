@@ -1,0 +1,186 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test
+GPU dostępne: NVIDIA GeForce RTX 3090
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+torch.Size([1, 4, 512, 512])
+(119, 4, 512, 512)
+(119, 4, 512, 512)
+sample 0 saved
+sample 1 saved
+sample 2 saved
+sample 3 saved
+sample 4 saved
+sample 5 saved
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 205, in <module>
+    predict(model, test_loader)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 142, in predict
+    plot_sample(x_images, true,pred, ix=i)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 93, in plot_sample
+    plt.savefig(yaml_config['save_inf_fig_path']+'/{}.png'.format(ix))
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/pyplot.py", line 1119, in savefig
+    res = fig.savefig(*args, **kwargs)  # type: ignore[func-returns-value]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/figure.py", line 3390, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/backend_bases.py", line 2193, in print_figure
+    result = print_method(
+             ^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/backend_bases.py", line 2043, in <lambda>
+    print_method = functools.wraps(meth)(lambda *args, **kwargs: meth(
+                                                                 ^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/backends/backend_agg.py", line 497, in print_png
+    self._print_pil(filename_or_obj, "png", pil_kwargs, metadata)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/backends/backend_agg.py", line 445, in _print_pil
+    FigureCanvasAgg.draw(self)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/backends/backend_agg.py", line 388, in draw
+    self.figure.draw(self.renderer)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/artist.py", line 95, in draw_wrapper
+    result = draw(artist, renderer, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/artist.py", line 72, in draw_wrapper
+    return draw(artist, renderer)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/figure.py", line 3154, in draw
+    mimage._draw_list_compositing_images(
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/image.py", line 132, in _draw_list_compositing_images
+    a.draw(renderer)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/artist.py", line 72, in draw_wrapper
+    return draw(artist, renderer)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/axes/_base.py", line 3070, in draw
+    mimage._draw_list_compositing_images(
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/image.py", line 132, in _draw_list_compositing_images
+    a.draw(renderer)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/artist.py", line 72, in draw_wrapper
+    return draw(artist, renderer)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/image.py", line 649, in draw
+    im, l, b, trans = self.make_image(
+                      ^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/image.py", line 939, in make_image
+    return self._make_image(self._A, bbox, transformed_bbox, clip,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/image.py", line 560, in _make_image
+    alpha = self._get_scalar_alpha()
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/matplotlib/image.py", line 315, in _get_scalar_alpha
+    def _get_scalar_alpha(self):
+KeyboardInterrupt
