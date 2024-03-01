@@ -1,0 +1,55 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([22, 4, 512, 512])
+torch.Size([14, 4, 512, 512])
+torch.Size([14, 4, 512, 512])
+[0.00035373187124159886, 0.00016515276630883568, 0.2957613814756672, 0.28079397458026045]
+[0.0, 0.0, 0.16176470588235295, 0.24156305506216696]
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 346, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 229, in main
+    plot_sample(vimages,vlbls,vpreds, ix=0,mode = 'val')
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 81, in plot_sample
+    ax[3].imshow(mask_rgb)
+    ~~^^^
+IndexError: index 3 is out of bounds for axis 0 with size 3

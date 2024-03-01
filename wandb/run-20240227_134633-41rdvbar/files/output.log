@@ -1,0 +1,15 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+[8.854258898530193e-05, 0.0582498448444011, 0.006501493586364435, 0.07871920336509572]
+[0.0, 0.0234375, 0.011695906432748537, 0.005859375]
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 356, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 239, in main
+    plot_sample(vimages,vlbls,vpreds, ix=0,mode = 'val')
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 93, in plot_sample
+    ax[4].imshow(mask_rgb)
+    ~~^^^
+IndexError: index 4 is out of bounds for axis 0 with size 4

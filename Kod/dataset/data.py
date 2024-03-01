@@ -19,12 +19,20 @@ path_config = {"place": "lab"
 
 
 def rgb_to_class_id(mask_rgb, class_colors):
-        mask_id = np.zeros(mask_rgb.shape[:2], dtype=np.float32)
+        mask_id = np.zeros((*mask_rgb.shape[:2], len(class_colors)), dtype=np.float32)
         for class_id, color in enumerate(class_colors):
             idx = class_id
             if class_id == 3:
                 idx = 1
-            mask_id[(mask_rgb == color).all(axis=2)] = idx
+                mask = (mask_rgb == color).all(axis=2).astype(np.float32)
+                mask_id[:, :, -1] = np.logical_or(mask_id[:, :, -1], mask)
+            else:
+                mask = (mask_rgb == color).all(axis=2).astype(np.float32)
+                mask_id[:, :, idx] = mask
+
+            if idx == 1 or idx == 2:
+                mask_id[:, :, -1] = np.logical_or(mask_id[:, :, -1], mask)
+
         return mask_id
 
 class ProcessData:
@@ -66,8 +74,8 @@ class ProcessData:
             masks2 = sorted(glob.glob(f"{gt_path2}*.png"))
 
             X = np.zeros((len(images), self.config['image_height'], self.config['image_width'], 3), dtype=np.float32)
-            intersections = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],), dtype=np.float32)
-            unions = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],), dtype=np.float32)
+            intersections = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],4), dtype=np.float32)
+            unions = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],4), dtype=np.float32)
 
 
             for n, (img, mimg,mimg2) in enumerate(zip(images, masks, masks2)):
@@ -112,6 +120,7 @@ class ProcessData:
                 unions[n] = union_id
 
             return X, intersections, unions
+        
 
 
         else:
@@ -119,7 +128,9 @@ class ProcessData:
             masks = sorted(glob.glob(f"{gt_path}*.png"))
 
             X = np.zeros((len(images), self.config['image_height'], self.config['image_width'], 3), dtype=np.float32)
-            y = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],), dtype=np.float32)
+            y = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],4), dtype=np.float32)
+            
+
 
 
             for n, (img, mimg) in enumerate(zip(images, masks)):
@@ -186,6 +197,7 @@ class BatchMaker:
 
     def create_loader(self, x, y, shuffle):
         x = np.transpose(x, (0, 3, 1, 2))
+        y = np.transpose(y, (0, 3, 1, 2))
         x_tensor = torch.from_numpy(x)
         y_tensor = torch.from_numpy(y).type(torch.float64)
         dataset = TensorDataset(x_tensor, y_tensor)

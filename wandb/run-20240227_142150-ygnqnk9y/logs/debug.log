@@ -1,0 +1,28 @@
+2024-02-27 14:21:50,955 INFO    MainThread:201218 [wandb_setup.py:_flush():76] Current SDK version is 0.16.3
+2024-02-27 14:21:50,956 INFO    MainThread:201218 [wandb_setup.py:_flush():76] Configure stats pid to 201218
+2024-02-27 14:21:50,956 INFO    MainThread:201218 [wandb_setup.py:_flush():76] Loading settings from /home/cal314-1/.config/wandb/settings
+2024-02-27 14:21:50,956 INFO    MainThread:201218 [wandb_setup.py:_flush():76] Loading settings from /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/wandb/settings
+2024-02-27 14:21:50,956 INFO    MainThread:201218 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-02-27 14:21:50,956 INFO    MainThread:201218 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-02-27 14:21:50,956 INFO    MainThread:201218 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'Kod/train.py', 'program_abspath': '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py', 'program': '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py'}
+2024-02-27 14:21:50,956 INFO    MainThread:201218 [wandb_init.py:_log_setup():526] Logging user logs to /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/wandb/run-20240227_142150-ygnqnk9y/logs/debug.log
+2024-02-27 14:21:50,956 INFO    MainThread:201218 [wandb_init.py:_log_setup():527] Logging internal logs to /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/wandb/run-20240227_142150-ygnqnk9y/logs/debug-internal.log
+2024-02-27 14:21:50,956 INFO    MainThread:201218 [wandb_init.py:init():566] calling init triggers
+2024-02-27 14:21:50,956 INFO    MainThread:201218 [wandb_init.py:init():573] wandb.init called with sweep_config: {}
+config: {'epochs': 300, 'batch_size': 22, 'lr': 0.0001, 'annotator': 1, 'model': 'smpUNet++', 'augmentation': False, 'loss': 'BCEWithLogitsLoss', 'optimizer': 'Adam', 'scheduler': 'CosineAnnealingLR', 'place': 'lab', 'mode': 'normal'}
+2024-02-27 14:21:50,956 INFO    MainThread:201218 [wandb_init.py:init():616] starting backend
+2024-02-27 14:21:50,956 INFO    MainThread:201218 [wandb_init.py:init():620] setting up manager
+2024-02-27 14:21:50,961 INFO    MainThread:201218 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-02-27 14:21:50,962 INFO    MainThread:201218 [wandb_init.py:init():628] backend started and connected
+2024-02-27 14:21:50,969 INFO    MainThread:201218 [wandb_init.py:init():720] updated telemetry
+2024-02-27 14:21:50,977 INFO    MainThread:201218 [wandb_init.py:init():753] communicating run to backend with 90.0 second timeout
+2024-02-27 14:21:51,438 INFO    MainThread:201218 [wandb_run.py:_on_init():2262] communicating current version
+2024-02-27 14:21:51,592 INFO    MainThread:201218 [wandb_run.py:_on_init():2271] got version response 
+2024-02-27 14:21:51,592 INFO    MainThread:201218 [wandb_init.py:init():804] starting run threads in backend
+2024-02-27 14:21:53,533 INFO    MainThread:201218 [wandb_run.py:_console_start():2241] atexit reg
+2024-02-27 14:21:53,533 INFO    MainThread:201218 [wandb_run.py:_redirect():2096] redirect: wrap_raw
+2024-02-27 14:21:53,534 INFO    MainThread:201218 [wandb_run.py:_redirect():2161] Wrapping output streams.
+2024-02-27 14:21:53,534 INFO    MainThread:201218 [wandb_run.py:_redirect():2186] Redirects installed.
+2024-02-27 14:21:53,534 INFO    MainThread:201218 [wandb_init.py:init():847] run started, returning control to user process
+2024-02-27 14:22:44,465 INFO    MainThread:201218 [wandb_watch.py:watch():51] Watching
+2024-02-27 14:22:54,170 WARNING MsgRouterThr:201218 [router.py:message_loop():77] message_loop has been closed
