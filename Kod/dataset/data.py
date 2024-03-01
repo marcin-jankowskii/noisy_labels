@@ -91,6 +91,8 @@ class ProcessData:
 
                 intersection = cv2.bitwise_and(mask, mask2)
                 union = cv2.bitwise_or(mask, mask2)
+                #union = mask2
+                #intersection = mask2
 
                 intersection_id = rgb_to_class_id(intersection, class_colors)
                 union_id = rgb_to_class_id(union, class_colors)

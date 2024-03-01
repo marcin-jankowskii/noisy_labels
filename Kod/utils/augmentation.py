@@ -25,7 +25,7 @@ class MyAugmentation(nn.Module):
         img_out = self.add_blur_along_tail(img_out,mask)
         img_out = self.k1(img_out)
         img_out = self.k2(img_out)
-        img_out = self.k3(img_out),
+        img_out = self.k3(img_out)
         img_out = self.k4(img_out)
         #img_out = self.k5(img_out)
         mask_out = self.k2(mask, self.k2._params)
