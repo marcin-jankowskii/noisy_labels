@@ -206,7 +206,6 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
             voutputs_binary = (voutputs > 0.5).type(torch.FloatTensor)
             preds_out = voutputs_binary.detach().cpu().numpy().transpose(0, 2, 3, 1)
             meanIoU, IoUs = calculate_iou(vids.cpu().numpy(), voutputs_binary.detach().cpu().numpy())
-            print(IoUs)
             viou = 1 - meanIoU
             
             # if config.mode == 'intersection_and_union':
@@ -282,7 +281,7 @@ wandb.init(project="noisy_labels", entity="segsperm",
             "epochs": 300,
             "batch_size": 22,
             "lr": 1e-4,
-            "annotator": 1,
+            "annotator": 2,
             "model": 'smpUNet++',
             "augmentation": True,
             "loss": "BCEWithLogitsLoss",
