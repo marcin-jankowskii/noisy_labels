@@ -111,7 +111,7 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
             inputs, ids = data
         elif len(data) == 3: 
             inputs, intersections, unions = data
-        
+
         if T_aug == True:
             for i in range(inputs.shape[0]):
                 if len(data) == 2:
@@ -138,19 +138,17 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
         output = model(inputs)
         #preds = torch.argmax(output, dim=1)
         
-
         if config.mode == 'intersection_and_union':
-            loss = loss_fn(output, ids) + 20*loss_fn(output-inputs, ids - intersections)
+            loss = loss_fn(output, ids) + loss_fn(output*intersections, ids - intersections)
         else:
             loss = loss_fn(output, ids)
+      
 
         outputs_binary = (output > 0.5).type(torch.FloatTensor)
         preds = outputs_binary.detach().cpu().numpy()
         meanIoU, IoUs = calculate_iou(ids.cpu().numpy(), preds)
-        
         viou = 1 - meanIoU
       
-
         loss.backward()
         optimizer.step()
 
@@ -189,18 +187,18 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
             elif len(data) == 3:
                 vinputs, vintersections, vunions = data
                 vintersections = vintersections.type(torch.FloatTensor)
-                vintersections = vintersections.to(device)
                 vids = vintersections.to(device)
                 vids_numpy = vids.detach().cpu().numpy().transpose(0, 2, 3, 1)
                 vunions = vunions.type(torch.FloatTensor)
-                vids_numpy = vunions.cpu().numpy().transpose(0, 2, 3, 1)
+                
          
             vinputs = vinputs.to(device)
             images = vinputs.detach().cpu().numpy().transpose(0, 2, 3, 1)
 
             if config.mode == 'intersection_and_union':
-                vunions = vunions.type(torch.FloatTensor)
                 vids = vunions.to(device)
+                vids_numpy = vunions.detach().cpu().numpy().transpose(0, 2, 3, 1)
+                
 
             voutputs = model(vinputs)
             voutputs_binary = (voutputs > 0.5).type(torch.FloatTensor)
@@ -283,12 +281,12 @@ wandb.init(project="noisy_labels", entity="segsperm",
             "lr": 1e-4,
             "annotator": 1,
             "model": 'smpUNet++',
-            "augmentation": True,
+            "augmentation": False,
             "loss": "BCEWithLogitsLoss",
             "optimizer": "Adam",
             "scheduler": "CosineAnnealingLR",
             "place": "lab",
-            "mode": "normal"
+            "mode": "intersection_and_union"
             })
 
 config = wandb.config
@@ -328,9 +326,9 @@ optimizer_dict = {'Adam': optim.Adam(model.parameters(), lr=config.lr),
 
 weights = torch.ones([num_classes,512,512])
 weights[0] = 1
-weights[1] = 10
-weights[2] = 5
-weights[3] = 7
+weights[1] = 10 #7
+weights[2] = 7  #2
+weights[3] = 8  #4
 weights = weights.to(device)
 
 loss_dict = {'CrossEntropyLoss': nn.CrossEntropyLoss(),

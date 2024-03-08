@@ -1,3 +1,31 @@
 
 /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
 /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Epoch 1, Train Loss: 0.49525639563798907, Train Iou: 0.9889249171800969, Validation IOU: 0.9966146160102772
+Model saved
+Epoch 2, Train Loss: 0.38549661487340925, Train Iou: 0.976584021312228, Validation IOU: 0.9600203595501788
+Model saved
+Epoch 3, Train Loss: 0.3273828372359276, Train Iou: 0.9369942561380122, Validation IOU: 0.8942507587282714
+Model saved
+Epoch 4, Train Loss: 0.28994436264038087, Train Iou: 0.8466151706808104, Validation IOU: 0.8217702584206734
+Model saved
+Epoch 5, Train Loss: 0.2601394921541214, Train Iou: 0.8127681625335637, Validation IOU: 0.776541879676111
+Model saved
+Epoch 6, Train Loss: 0.23581221401691438, Train Iou: 0.8051926360754825, Validation IOU: 0.8277483796641198
+Epoch 7, Train Loss: 0.21509642601013185, Train Iou: 0.8165566504592714, Validation IOU: 0.8221698268322282
+Epoch 8, Train Loss: 0.1970791921019554, Train Iou: 0.8151701408182077, Validation IOU: 0.8099528419539137
+Epoch 9, Train Loss: 0.18160445764660835, Train Iou: 0.8105374331060746, Validation IOU: 0.7886135115180897
+Epoch 10, Train Loss: 0.1681819848716259, Train Iou: 0.8060164201863271, Validation IOU: 0.7274035757359706
+Model saved
+Epoch 11, Train Loss: 0.15629340410232545, Train Iou: 0.7985114512994274, Validation IOU: 0.8051339379665525
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 353, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 237, in main
+    train_loss,train_iou = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 147, in train
+    outputs_binary = (output > 0.5).type(torch.FloatTensor)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

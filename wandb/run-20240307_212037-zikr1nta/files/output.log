@@ -1,0 +1,98 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Epoch 1, Train Loss: 1.5047994554042816, Train Iou: 0.9777821548565132, Validation IOU: 0.9706832102752686
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Model saved
+Epoch 2, Train Loss: 1.305133092403412, Train Iou: 0.9729254315226891, Validation IOU: 0.9705155237531282
+Model saved
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 3, Train Loss: 1.215578544139862, Train Iou: 0.9675547250505575, Validation IOU: 0.9735700968220221
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 4, Train Loss: 1.147570013999939, Train Iou: 0.9722792903883255, Validation IOU: 0.9775126346177585
+Epoch 5, Train Loss: 1.0809639036655425, Train Iou: 0.975168267098318, Validation IOU: 0.9685701137794804
+Model saved
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 6, Train Loss: 1.0127271324396134, Train Iou: 0.9786022684759288, Validation IOU: 0.9778498658394217
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 7, Train Loss: 0.9461020529270172, Train Iou: 0.9868701864104843, Validation IOU: 0.9766347190397819
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 8, Train Loss: 0.8982694506645202, Train Iou: 0.9927945671741577, Validation IOU: 0.9762494046320049
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 9, Train Loss: 0.8042793095111846, Train Iou: 0.9945873315409163, Validation IOU: 0.9900075222668905
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 10, Train Loss: 0.7192758649587632, Train Iou: 0.9953913707952223, Validation IOU: 0.968371077487637
+Model saved
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 11, Train Loss: 0.6423534363508224, Train Iou: 0.9965375364885614, Validation IOU: 0.9943141817717654
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 12, Train Loss: 0.5429723560810089, Train Iou: 0.9978600291815207, Validation IOU: 0.991507157443572
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 13, Train Loss: 0.47964949160814285, Train Iou: 0.9985115864137528, Validation IOU: 0.9942877466189948
+Epoch 14, Train Loss: 0.40004549026489256, Train Iou: 0.9987588422076854, Validation IOU: 0.9853529226471058
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 15, Train Loss: 0.3111733630299568, Train Iou: 0.9977833478152867, Validation IOU: 0.9908290563500901
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 16, Train Loss: 0.2338665559887886, Train Iou: 0.998062465259902, Validation IOU: 0.9873037459881204
+Epoch 17, Train Loss: 0.16785284578800203, Train Iou: 0.9981070944837123, Validation IOU: 0.9865056849812331
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 18, Train Loss: 0.05478520393371582, Train Iou: 0.9959466248950335, Validation IOU: 0.9896447905789425
+Epoch 19, Train Loss: -0.02088747322559357, Train Iou: 0.9969672806771829, Validation IOU: 0.9896971677161641
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 20, Train Loss: -0.11887674033641815, Train Iou: 0.9975252090319667, Validation IOU: 0.9938277755394281
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 21, Train Loss: -0.21076498180627823, Train Iou: 0.9980610481691997, Validation IOU: 0.981971683792896
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 22, Train Loss: -0.34725418537855146, Train Iou: 0.9987432300729127, Validation IOU: 0.991395019430747
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 354, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 238, in main
+    train_loss,train_iou = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 120, in train
+    inputs[i],intersections[i] = augumentation(inputs[i], intersections[i])
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/utils/augmentation.py", line 26, in forward
+    img_out = self.k1(img_out)
+              ^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/augmentation/base.py", line 210, in forward
+    output = self.apply_func(in_tensor, params, flags)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/augmentation/_2d/base.py", line 125, in apply_func
+    output = self.transform_inputs(in_tensor, params, flags, trans_matrix)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/augmentation/base.py", line 261, in transform_inputs
+    output = self.apply_transform(in_tensor, params, flags, transform=transform)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/augmentation/_2d/intensity/color_jitter.py", line 100, in apply_transform
+    jittered = t(jittered)
+               ^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/augmentation/_2d/intensity/color_jitter.py", line 94, in <lambda>
+    lambda img: adjust_hue(img, params["hue_factor"] * 2 * pi),
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/enhance/adjust.py", line 211, in adjust_hue
+    out: Tensor = hsv_to_rgb(x_adjusted)
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/color/hsv.py", line 91, in hsv_to_rgb
+    out = torch.stack((v, q, p, p, t, v, t, v, v, q, p, p, p, p, t, v, v, q), dim=-3)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

@@ -1,0 +1,108 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 1, Train Loss: 1.1421204209327698, Train Iou: 0.9887101460128035, Validation IOU: 0.9843056018177867
+Model saved
+Epoch 2, Train Loss: 0.9611248284578323, Train Iou: 0.9941375222956177, Validation IOU: 0.9890083527844646
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 3, Train Loss: 0.8561812520027161, Train Iou: 0.9955054684559725, Validation IOU: 0.9829846225368032
+Model saved
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 4, Train Loss: 0.7591324061155319, Train Iou: 0.9970964475385339, Validation IOU: 0.9828527965020304
+Model saved
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 5, Train Loss: 0.635839182138443, Train Iou: 0.9983315469342415, Validation IOU: 0.9940091161958955
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 6, Train Loss: 0.5718353942036629, Train Iou: 0.9984271390083714, Validation IOU: 0.9883946044995335
+Epoch 7, Train Loss: 0.46708683520555494, Train Iou: 0.9989185538511768, Validation IOU: 0.9956109949389101
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 8, Train Loss: 0.3925956800580025, Train Iou: 0.9989532339093309, Validation IOU: 0.995827541621364
+Epoch 9, Train Loss: 0.2934430979192257, Train Iou: 0.9987333396246167, Validation IOU: 0.9950249390219209
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 10, Train Loss: 0.18205530792474747, Train Iou: 0.9987887630519197, Validation IOU: 0.992295191455293
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 11, Train Loss: 0.08501672297716141, Train Iou: 0.9985276377452739, Validation IOU: 0.9933575114402904
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 12, Train Loss: -0.028354860842227936, Train Iou: 0.9989835763977993, Validation IOU: 0.9926143404297519
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 13, Train Loss: -0.07179003804922104, Train Iou: 0.9987969406115544, Validation IOU: 0.9965045214545784
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 14, Train Loss: -0.20316506177186966, Train Iou: 0.9987849776926281, Validation IOU: 0.9971482987772312
+Epoch 15, Train Loss: -0.30004150718450545, Train Iou: 0.9993058012502228, Validation IOU: 0.9962497631352532
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 16, Train Loss: -0.29716191440820694, Train Iou: 0.9992827438782177, Validation IOU: 0.9373886282924935
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Model saved
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 17, Train Loss: -0.36202113777399064, Train Iou: 0.9989783057296752, Validation IOU: 0.9520302994499431
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 18, Train Loss: -0.5164525717496872, Train Iou: 0.9995097572665292, Validation IOU: 0.9764425514699807
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 19, Train Loss: -0.5509039774537087, Train Iou: 0.9995551928714285, Validation IOU: 0.9165160943979498
+Model saved
+Epoch 20, Train Loss: -0.6312577873468399, Train Iou: 0.9988475152282289, Validation IOU: 0.9791274862863695
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 21, Train Loss: -0.788776370882988, Train Iou: 0.998893789313696, Validation IOU: 0.940748713058805
+Epoch 22, Train Loss: -0.8289194345474243, Train Iou: 0.9991038474094497, Validation IOU: 0.985786434638978
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 23, Train Loss: -0.9124458789825439, Train Iou: 0.9993542042604012, Validation IOU: 0.9309810156346073
+Epoch 24, Train Loss: -1.002374279499054, Train Iou: 0.9995556634132017, Validation IOU: 0.9947229598243894
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 25, Train Loss: -1.1233382523059845, Train Iou: 0.999162971415745, Validation IOU: 0.9754459290621604
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 26, Train Loss: -1.222184532880783, Train Iou: 0.9997920048674123, Validation IOU: 0.9920525471444779
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 27, Train Loss: -1.3038806349039078, Train Iou: 0.9996097648552972, Validation IOU: 0.9929302658107995
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 28, Train Loss: -1.4862832009792328, Train Iou: 0.9996773958000921, Validation IOU: 0.9953437304524639
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 29, Train Loss: -1.4753339052200318, Train Iou: 0.9999446612826957, Validation IOU: 0.9979821770430534
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 30, Train Loss: -1.5919508934020996, Train Iou: 0.9999524467748844, Validation IOU: 0.9927757741149196
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 31, Train Loss: -1.6965992987155913, Train Iou: 0.9999656743897571, Validation IOU: 0.9973273246772516
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 32, Train Loss: -1.8236507952213288, Train Iou: 0.9999547510314333, Validation IOU: 0.9985125139578257
+Epoch 33, Train Loss: -1.9559209644794464, Train Iou: 0.9999867251428094, Validation IOU: 0.9982472841261245
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Epoch 34, Train Loss: -1.9910645484924316, Train Iou: 0.9999973238636904, Validation IOU: 0.997229495260407
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 356, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 240, in main
+    train_loss,train_iou = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 120, in train
+    inputs[i],intersections[i] = augumentation(inputs[i], intersections[i])
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/utils/augmentation.py", line 23, in forward
+    img_out = self.add_lines_along_tail(img,mask)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/utils/augmentation.py", line 131, in add_lines_along_tail
+    mask = K.utils.draw_line(mask, start_point-1, end_point4, color)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/utils/draw.py", line 167, in draw_line
+    rest_y_coords = [
+                    ^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/utils/draw.py", line 167, in <listcomp>
+    rest_y_coords = [
+                    ^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/_tensor.py", line 1032, in __iter__
+    return iter(self.unbind(0))
+                ^^^^^^^^^^^^^^
+KeyboardInterrupt
