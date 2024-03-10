@@ -1,0 +1,16 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test
+
+GPU dostępne: NVIDIA GeForce RTX 3090
+Mean IoU (Unia): 0.23038261886493233
+IoU dla każdej klasy (Unia): [0.0005746227088842718, 0.3237942286309639, 0.13697100909890078, 0.24659341774658938]
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 496, in <module>
+    predict(model, test_loader)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 313, in predict
+    df1,df2 = video_sample(unions_plot,pred,ix=i)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 114, in video_sample
+    union_id = cv2.bitwise_or(true[ix], pred[ix])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.9.0) /io/opencv/modules/core/src/arithm.cpp:212: error: (-209:Sizes of input arguments do not match) The operation is neither 'array op array' (where arrays have the same size and type), nor 'array op scalar', nor 'scalar op array' in function 'binary_op'

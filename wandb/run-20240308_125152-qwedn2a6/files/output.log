@@ -1,0 +1,10 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test
+GPU dostępne: NVIDIA GeForce RTX 3090
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 438, in <module>
+    predict(model, test_loader)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 174, in predict
+    unions.append(unions.cpu())
+    ^^^^^^^^^^^^^
+AttributeError: 'Tensor' object has no attribute 'append'

@@ -67,7 +67,7 @@ class ProcessData:
 
         images = sorted(glob.glob(f"{dataset_path}/images/*"))
 
-        if self.mode == 'intersection_and_union' or self.mode == 'intersection':
+        if self.mode == 'intersection_and_union' or self.mode == 'intersection' or self.mode == 'intersection_and_union_inference' or self.mode == 'intersection_inference':
             gt_path1 = dataset_path + '/GT1_' + 'mixed/'
             gt_path2 = dataset_path + '/GT2_' + 'mixed/'
             masks = sorted(glob.glob(f"{gt_path1}*.png"))
@@ -117,7 +117,7 @@ class ProcessData:
                 else:
                     intersection = intersection / 255
 
-                if self.mode == 'intersection_and_union':
+                if self.mode == 'intersection_and_union' or self.mode == 'intersection_and_union_inference':
                     X[n] = intersection
                 else:
                     X[n] = x_img
@@ -131,6 +131,8 @@ class ProcessData:
             
             if self.mode == 'intersection_and_union_inference' or self.mode == 'intersection_inference':
                 return X, intersections, unions, y1, y2
+            else:
+                return X, intersections, unions
             
 
         elif self.mode == 'both':

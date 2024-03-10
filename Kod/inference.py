@@ -10,6 +10,7 @@ import datetime
 from utils.metrics import SegmentationMetrics
 from utils.metrics2 import calculate_iou
 import segmentation_models_pytorch as smp
+import cv2
 
 def plot_sample(X, y, preds, ix=None, number = '1'):
 
@@ -110,7 +111,8 @@ def video_sample(true,pred,ix=None):
     for class_id, color in enumerate(colors):
         mask_rgb2[mask_to_display[:, :, class_id] == 1] = color
 
-    diff = (mask_rgb - mask_rgb2).transpose((2, 0, 1))
+    union = cv2.bitwise_or(mask_rgb, mask_rgb2)
+    diff = (union - mask_rgb2).transpose((2, 0, 1))
 
 
     # Róznica pomiędzy klasami 1,2 a 3
@@ -126,21 +128,58 @@ def video_sample(true,pred,ix=None):
         if class_id == 0 or class_id == 3:
             mask_rgb2[mask_to_display[:, :, class_id] == 1] = color
 
-    diff2 = (mask_rgb - mask_rgb2).transpose((2, 0, 1))
+    union = cv2.bitwise_or(mask_rgb, mask_rgb2)
+    diff2 = (union - mask_rgb2).transpose((2, 0, 1))
 
 
     
     
     return diff,diff2
     
+def video_sample2(intersection,union,pred,ix=None):
+    if ix is None:
+        ix = random.randint(0, len(intersection))
+
+    colors = [[0, 0, 0], [0, 255, 0], [255, 0, 0]]  # tło, wić, główka
+    colorsV2 = [[0, 0, 0], [0, 255, 0], [255, 0, 0],[0,255,255]]  # tło, wić, główka, główka+wić
+
+    ## (Union - Intersection) - (pred - Intersection)
+    mask_to_display = intersection[ix]
+
+    mask_rgb = np.zeros((mask_to_display.shape[0], mask_to_display.shape[1], 3), dtype=np.uint8)
+    for class_id, color in enumerate(colors):
+        mask_rgb[mask_to_display[:, :, class_id] == 1] = color
+
+    mask_to_display2 = union[ix]
+
+    mask_rgb2 = np.zeros((mask_to_display2.shape[0], mask_to_display2.shape[1], 3), dtype=np.uint8)
+    for class_id, color in enumerate(colors):
+        mask_rgb2[mask_to_display2[:, :, class_id] == 1] = color
+
+
+    mask_to_display3 = pred[ix]
+
+    mask_rgb3 = np.zeros((mask_to_display3.shape[0], mask_to_display3.shape[1], 3), dtype=np.uint8)
+    for class_id, color in enumerate(colors):
+        mask_rgb3[mask_to_display3[:, :, class_id] == 1] = color
+
+    union1 = cv2.bitwise_or(mask_rgb, mask_rgb2)
+    union2 = cv2.bitwise_or(mask_rgb3, mask_rgb)
+    udiff = union1 - mask_rgb
+    pdiff = union2 - mask_rgb
+    union3 = cv2.bitwise_or(udiff, pdiff)
+    diff = (union3 - pdiff).transpose((2, 0, 1))
+
+    return diff
+
 def predict(model, test_loader):
     model.eval() 
     input_images = []
     predicted_masks = []
     true_masks = []
     true_masks2 = []
-    unions =[]
-    intersections = []
+    unions_list =[]
+    intersections_list = []
     with torch.no_grad():
         for data in test_loader:
             if len(data) == 2:
@@ -168,11 +207,11 @@ def predict(model, test_loader):
                     true_masks.append(ids1.cpu())
                     true_masks2.append(ids2.cpu())
             elif len(data) == 5:
-                if config.mode == 'intersection_and_union_inference':
+                if config.mode == 'intersection_and_union_inference' or config.mode == 'intersection_inference':
                     true_masks.append(ids1.cpu())  
                     true_masks2.append(ids2.cpu())
-                    unions.append(unions.cpu())
-                    intersections.append(intersections.cpu())
+                    unions_list.append(unions.cpu())
+                    intersections_list.append(intersections.cpu())
 
 
             input_images.append(inputs.cpu())
@@ -189,7 +228,7 @@ def predict(model, test_loader):
 
     if config.mode == 'intersection_and_union':
         true_masks2 = np.concatenate(true_masks2, axis=0)
-        intersections = true_masks2.transpose((0, 2, 3, 1))
+        intersection = true_masks2.transpose((0, 2, 3, 1))
 
     
     if config.mode == 'both':
@@ -237,20 +276,20 @@ def predict(model, test_loader):
     elif config.mode == 'intersection_and_union_inference':
         true_masks2 = np.concatenate(true_masks2, axis=0)
         true2 = true_masks2.transpose((0, 2, 3, 1))
-        unions = np.concatenate(unions, axis=0)
-        un = unions.transpose((0, 2, 3, 1))
-        intersections = np.concatenate(intersections, axis=0)
-        inter = intersections.transpose((0, 2, 3, 1))
+        unions_numpy = np.concatenate(unions_list, axis=0)
+        unions_plot = unions_numpy.transpose((0, 2, 3, 1))
+        intersections_numpy = np.concatenate(intersections_list, axis=0)
+        intersections_plot = intersections_numpy.transpose((0, 2, 3, 1))
 
 
-        mean_iou_union, iou_union = calculate_iou(unions, predicted_masks)
+        mean_iou_union, iou_union = calculate_iou(unions_numpy, predicted_masks)
         print("Mean IoU (Unia):", mean_iou_union)
         print("IoU dla każdej klasy (Unia):", iou_union)
         diff = []
         diff2 = []
         for i in range(len(x_images)):
-            plot_sample(x_images,un,pred, ix=i)
-            df1,df2 = video_sample(un,pred,ix=i)
+            plot_sample(x_images,unions_plot,pred, ix=i)
+            df1,df2 = video_sample(unions_plot,pred,ix=i)
             diff.append(df1)
             diff2.append(df2)
             print('sample {} saved'.format(i))
@@ -260,7 +299,7 @@ def predict(model, test_loader):
         wandb.log({"video_cdiff(union)": wandb.Video(diff2,fps=1)})
 
 
-        mean_iou_ids1, iou_ids1 = calculate_iou(true, predicted_masks)
+        mean_iou_ids1, iou_ids1 = calculate_iou(true_masks, predicted_masks)
         print("Mean IoU (annotator1):", mean_iou_ids1)
         print("IoU dla każdej klasy (annotator1):", iou_ids1)
         diff = []
@@ -276,7 +315,7 @@ def predict(model, test_loader):
         wandb.log({"video_pdiff(ids1)": wandb.Video(diff,fps=1)})
         wandb.log({"video_cdiff(ids1)": wandb.Video(diff2,fps=1)})
 
-        mean_iou_ids2, iou_ids2 = calculate_iou(true2, predicted_masks)
+        mean_iou_ids2, iou_ids2 = calculate_iou(true_masks2, predicted_masks)
         print("Mean IoU (annotator2):", mean_iou_ids2)
         print("IoU dla każdej klasy (annotator2):", iou_ids2)
         diff = []
@@ -292,18 +331,18 @@ def predict(model, test_loader):
         diff = []
         diff2 = []
         for i in range(len(x_images)):
-            plot_sample(x_images,un-inter,pred-inter, ix=i, number = '4')
-            df1,df2 = video_sample(un-inter,pred-inter,ix=i)
+            plot_sample(x_images,unions_plot-intersections_plot,pred-intersections_plot, ix=i, number = '4')
+            df1 = video_sample2(intersections_plot,unions_plot,pred,ix=i)
             diff.append(df1)
             print('sample {} saved'.format(i))
         diff = np.array(diff)
         wandb.log({"video_pdiff(union-intersection)": wandb.Video(diff,fps=1)})
 
 
-        test_metrics = {"inference/Mean Iou (annotator1)": mean_iou, 
-                     "inference/Iou for each class (annotator1)": iou,
-                     "inference/Mean Iou (annotator2)": mean_iou2,
-                     "inference/Iou for each class (annotator2)": iou2,
+        test_metrics = {"inference/Mean Iou (annotator1)": mean_iou_ids1, 
+                     "inference/Iou for each class (annotator1)": iou_ids1,
+                     "inference/Mean Iou (annotator2)": mean_iou_ids2,
+                     "inference/Iou for each class (annotator2)": iou_ids2,
                      "inference/Mean Iou (union)": mean_iou_union,
                     "inference/Iou for each class (union)": iou_union,
                        }
@@ -311,30 +350,30 @@ def predict(model, test_loader):
     elif config.mode == 'intersection_inference':
         true_masks2 = np.concatenate(true_masks2, axis=0)
         true2 = true_masks2.transpose((0, 2, 3, 1))
-        unions = np.concatenate(unions, axis=0)
-        un = unions.transpose((0, 2, 3, 1))
-        intersections = np.concatenate(intersections, axis=0)
-        inter = intersections.transpose((0, 2, 3, 1))
+        unions_numpy = np.concatenate(unions_list, axis=0)
+        unions_plot = unions_numpy.transpose((0, 2, 3, 1))
+        intersections_numpy = np.concatenate(intersections_list, axis=0)
+        intersections_plot = intersections_numpy.transpose((0, 2, 3, 1))
 
 
-        mean_iou_intersection, iou_intersection = calculate_iou(intersections, predicted_masks)
+        mean_iou_intersection, iou_intersection = calculate_iou(intersections_numpy, predicted_masks)
         print("Mean IoU (Intersection):", mean_iou_intersection)
         print("IoU dla każdej klasy (Intersection):", iou_intersection)
         diff = []
         diff2 = []
         for i in range(len(x_images)):
-            plot_sample(x_images,inter,pred, ix=i)
-            df1,df2 = video_sample(inter,pred,ix=i)
+            plot_sample(x_images,intersections_plot,pred, ix=i)
+            df1,df2 = video_sample(intersections_plot,pred,ix=i)
             diff.append(df1)
             diff2.append(df2)
             print('sample {} saved'.format(i))
         diff = np.array(diff)
         diff2 = np.array(diff2)
-        wandb.log({"video_pdiff(intersection)": wandb.Video(diff,fps=1)})
+        wandb.log({"video_pdiff(union)": wandb.Video(diff,fps=1)})
         wandb.log({"video_cdiff(intersection)": wandb.Video(diff2,fps=1)})
 
 
-        mean_iou_ids1, iou_ids1 = calculate_iou(true, predicted_masks)
+        mean_iou_ids1, iou_ids1 = calculate_iou(true_masks, predicted_masks)
         print("Mean IoU (annotator1):", mean_iou_ids1)
         print("IoU dla każdej klasy (annotator1):", iou_ids1)
         diff = []
@@ -343,14 +382,12 @@ def predict(model, test_loader):
             plot_sample(x_images,true,pred, ix=i,number = '2')
             df1,df2 = video_sample(true,pred,ix=i)
             diff.append(df1)
-            diff2.append(df2)
             print('sample {} saved'.format(i))
         diff = np.array(diff)
-        diff2 = np.array(diff2)
         wandb.log({"video_pdiff(ids1)": wandb.Video(diff,fps=1)})
-        wandb.log({"video_cdiff(ids1)": wandb.Video(diff2,fps=1)})
+        
 
-        mean_iou_ids2, iou_ids2 = calculate_iou(true2, predicted_masks)
+        mean_iou_ids2, iou_ids2 = calculate_iou(true_masks2, predicted_masks)
         print("Mean IoU (annotator2):", mean_iou_ids2)
         print("IoU dla każdej klasy (annotator2):", iou_ids2)
         diff = []
@@ -363,12 +400,12 @@ def predict(model, test_loader):
         diff = np.array(diff)
         wandb.log({"video_pdiff(ids2)": wandb.Video(diff,fps=1)})
 
-        test_metrics = {"inference/Mean Iou (annotator1)": mean_iou, 
-                     "inference/Iou for each class (annotator1)": iou,
-                     "inference/Mean Iou (annotator2)": mean_iou2,
-                     "inference/Iou for each class (annotator2)": iou2,
-                     "inference/Mean Iou (union)": mean_iou_intersection,
-                    "inference/Iou for each class (union)": iou_intersection,
+        test_metrics = {"inference/Mean Iou (annotator1)": mean_iou_ids1, 
+                     "inference/Iou for each class (annotator1)": iou_ids1,
+                     "inference/Mean Iou (annotator2)": mean_iou_ids2,
+                     "inference/Iou for each class (annotator2)": iou_ids2,
+                     "inference/Mean Iou (intersection)": mean_iou_intersection,
+                    "inference/Iou for each class (intersection)": iou_intersection,
                        }
     else:
         print("Mean IoU:", mean_iou)
@@ -395,7 +432,10 @@ model_dict = {'myUNet': UNet(3,num_classes),
 mode_dict = {'normal': 'mixed',
              'intersection': 'intersection',
              'intersection_and_union': 'intersection_and_union',
-             'both': 'both'
+             'both': 'both',
+             'intersection_and_union_inference': 'intersection_and_union_inference',
+             'intersection_inference': 'intersection_inference'
+
 }
 
 
@@ -413,7 +453,7 @@ config = wandb.config
 with open(path_dict[config.place], 'r') as config_file:
     yaml_config = yaml.safe_load(config_file)
 
-saved_model_name = 'Annotator_1_Model_smpUNet++_Augmentation_True_Modenormal_Optimizer_Adam_Scheduler_CosineAnnealingLR_Epochs_300_Batch_Size_22_Start_lr_0.0001_Loss_BCEWithLogitsLoss_Timestamp_2024-03-01-16-04_best_model'
+saved_model_name = 'Annotator_1_Model_smpUNet++_Augmentation_False_Modeintersection_and_union_Optimizer_Adam_Scheduler_CosineAnnealingLR_Epochs_300_Batch_Size_22_Start_lr_0.0001_Loss_BCEWithLogitsLoss_Timestamp_2024-03-09-20-00_best_model'
 model_path = yaml_config['save_model_path'] + '/' + saved_model_name
 name = (f'Inference: Model_name: {saved_model_name}')
 

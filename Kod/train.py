@@ -80,6 +80,7 @@ def plot_sample(X, y, preds, ix=None,mode = 'train'):
 
     ax[3].imshow(mask_rgb)
     ax[3].set_title('Sperm Image Predicted (class3)')
+    ax[3].set_axis_off()
 
 
     mask_to_display = y[ix]
@@ -92,6 +93,7 @@ def plot_sample(X, y, preds, ix=None,mode = 'train'):
 
     ax[4].imshow(mask_rgb)
     ax[4].set_title('Sperm Image Mask (class3)')
+    ax[4].set_axis_off()
 
 
 
@@ -139,7 +141,8 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
         #preds = torch.argmax(output, dim=1)
         
         if config.mode == 'intersection_and_union':
-            loss = loss_fn(output, ids) + loss_fn(output*intersections, ids - intersections)
+            #loss = loss_fn(output, ids) + loss_fn(output*(ids-intersections), ids - intersections)
+            loss = loss_fn(output, ids)
         else:
             loss = loss_fn(output, ids)
       
