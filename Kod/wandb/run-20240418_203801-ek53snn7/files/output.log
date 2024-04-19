@@ -1,0 +1,225 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Epoch 1, Train Loss: 0.1014720775031795, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.9974376546897437, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.9928146442280688
+Model saved
+Epoch 2, Train Loss: 0.02779975044541061, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.7233423463054871, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.8542442993916474
+Model saved
+Epoch 3, Train Loss: 0.02230710360325045, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.5979897365233763, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.7986190470665683
+Model saved
+Epoch 4, Train Loss: 0.02041547481591503, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.5760610610654571, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.6945825323901806
+Model saved
+Epoch 5, Train Loss: 0.01825857888131092, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.5330566099277779, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.6991498201119954
+Epoch 6, Train Loss: 0.016277106465875275, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.4812940404443331, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.7252742505248913
+Epoch 7, Train Loss: 0.01618607271100498, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.4789308309509046, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.7846656859516732
+Epoch 8, Train Loss: 0.01631488572133498, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.48000251219301504, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.6217341921249953
+Model saved
+Epoch 9, Train Loss: 0.01397568510664213, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.436421116993958, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5983789906793443
+Model saved
+Epoch 10, Train Loss: 0.014388622741939293, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.4531357659486799, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.6037567121168783
+Epoch 11, Train Loss: 0.0134222288033925, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.4258312638143118, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.575366485710435
+Model saved
+Epoch 12, Train Loss: 0.012459042203974806, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.4107317517416025, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5932814134974795
+Epoch 13, Train Loss: 0.01251197385136038, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.4165605202810557, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5849078002258624
+Epoch 14, Train Loss: 0.01201397738704044, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.40440425137897995, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5472675900381825
+Model saved
+Epoch 15, Train Loss: 0.011842721096602164, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.4054021136915772, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5677599827588867
+Epoch 16, Train Loss: 0.01157698557815618, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.398172837440422, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4916222963091405
+Model saved
+Epoch 17, Train Loss: 0.011409785333348231, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3988037960368358, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5571045635776919
+Epoch 18, Train Loss: 0.011063172921745313, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3904380239993121, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5202411003838592
+Epoch 19, Train Loss: 0.010985253029502928, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.38848178955496504, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5101642886820922
+Epoch 20, Train Loss: 0.011029276757552806, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3906390805103996, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.6130880386185852
+Epoch 21, Train Loss: 0.011152616520929668, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.39383545650932567, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.6487835659118784
+Epoch 22, Train Loss: 0.010723237957184514, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3886169623586114, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5470040777980547
+Epoch 23, Train Loss: 0.011349630166983439, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3956244198811906, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.6242988917783994
+Epoch 24, Train Loss: 0.010815976304002106, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3868925646079982, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4910819620379918
+Model saved
+Epoch 25, Train Loss: 0.010883813426415954, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.39504359829731894, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5022177110661171
+Epoch 26, Train Loss: 0.010538270011440747, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3829235412893636, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.6203319933721013
+Epoch 27, Train Loss: 0.010402693167432316, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3772940056782373, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5362332697203434
+Epoch 28, Train Loss: 0.010598165875611206, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.38865600857008853, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5703106142156174
+Epoch 29, Train Loss: 0.010139868769329041, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3789094017863477, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5025367552717395
+Epoch 30, Train Loss: 0.010329497318404416, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.38310609010870705, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5167074286184604
+Epoch 31, Train Loss: 0.0098700776644465, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.37009617634871944, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4417028276026045
+Model saved
+Epoch 32, Train Loss: 0.009519383537634794, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3636177231534163, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.47203759619158575
+Epoch 33, Train Loss: 0.009527654367654273, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.36252016016056976, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.47631416526457393
+Epoch 34, Train Loss: 0.00953287005217539, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.36369299773786656, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.47713759923882837
+Epoch 35, Train Loss: 0.009311954432632774, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.36405622432662466, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.45179912643398057
+Epoch 36, Train Loss: 0.009382473149647316, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.362482391163168, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.48893715589884656
+Epoch 37, Train Loss: 0.009485025308094919, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3642218045801186, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4572895579271709
+Epoch 38, Train Loss: 0.009408962317845888, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.35913675912610243, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4801108625969926
+Epoch 39, Train Loss: 0.009351361562342694, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.36071744304454983, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4521669602755488
+Epoch 40, Train Loss: 0.009310352713024864, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.36133011833002493, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43105121394481544
+Model saved
+Epoch 41, Train Loss: 0.009329646211376207, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.35616034537283714, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4380386028344058
+Epoch 42, Train Loss: 0.009207008471195068, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3561378812710215, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4533800172190319
+Epoch 43, Train Loss: 0.009387961226618953, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3603791120225128, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4700020892729496
+Epoch 44, Train Loss: 0.009125153307751235, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3556599414127055, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4240674753324388
+Model saved
+Epoch 45, Train Loss: 0.009258214921121381, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3587790035234055, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5017370273724391
+Epoch 46, Train Loss: 0.009298827311593212, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3601640277623083, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43761416650778484
+Epoch 47, Train Loss: 0.009195144837980883, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3569488044393333, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4917557024131902
+Epoch 48, Train Loss: 0.009219796357986828, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3562242680582082, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4648061869855483
+Epoch 49, Train Loss: 0.00936083345570498, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3557420134141453, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5381820692472834
+Epoch 50, Train Loss: 0.009138023603655811, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3544476276471914, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.44666703552495984
+Epoch 51, Train Loss: 0.00915935191248233, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3538199171885019, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.47224481438059884
+Epoch 52, Train Loss: 0.009087140102767281, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3558130632733571, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4713041861946618
+Epoch 53, Train Loss: 0.009069612650718126, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.35732959402939396, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4615053013610496
+Epoch 54, Train Loss: 0.009007170162577596, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.35553707436361764, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4774097020692349
+Epoch 55, Train Loss: 0.009244788709717492, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3537968364051187, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4734027181478543
+Epoch 56, Train Loss: 0.009069635351705883, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3539241336359363, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.46005376861074593
+Epoch 57, Train Loss: 0.009158831380773336, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3578250324891468, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.46613471402451423
+Epoch 58, Train Loss: 0.009066887743150195, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.35286021604518614, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.45456094878482645
+Epoch 59, Train Loss: 0.009094866335443739, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.35900471291626557, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4600274539346247
+Epoch 60, Train Loss: 0.008966599862712124, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.34760066724761324, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4631029112381785
+Epoch 61, Train Loss: 0.008935739131023487, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.34933383673410573, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43928154485440113
+Epoch 62, Train Loss: 0.00905859521460823, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.35098440041858847, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4756514851238476
+Epoch 63, Train Loss: 0.009071413020137697, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3535763659498381, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43093364705374815
+Epoch 64, Train Loss: 0.009154351382878505, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3553190588682613, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.5354623934381746
+Epoch 65, Train Loss: 0.009473119125080606, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.36151503935489043, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4624946956427581
+Epoch 66, Train Loss: 0.009301403802560849, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3580898356085039, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4296964885614402
+Epoch 67, Train Loss: 0.009034455100643553, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3511760235833458, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4567585484823092
+Epoch 68, Train Loss: 0.0089835265922981, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3536633962539632, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.440082775319448
+Epoch 69, Train Loss: 0.009055567012789348, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3566344833111366, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4814432512743198
+Epoch 70, Train Loss: 0.008952730969111953, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.35129805313875306, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4543831565925799
+Epoch 71, Train Loss: 0.008919171296939667, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3541456011827034, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4521446844595909
+Epoch 72, Train Loss: 0.008979274658486247, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.35120104596304336, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4485446576049874
+Epoch 73, Train Loss: 0.008830873554365503, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3492758711660974, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4631407234319217
+Epoch 74, Train Loss: 0.0089228146437866, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3453566978476158, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43614956043310593
+Epoch 75, Train Loss: 0.008790902418291403, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3478623571782283, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43954364353881653
+Epoch 76, Train Loss: 0.008763060607533488, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3484535061294917, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4364523476890662
+Epoch 77, Train Loss: 0.008830677905482136, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3522815643157815, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.46025741407367554
+Epoch 78, Train Loss: 0.00883964926470071, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.34953445420184165, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.47817617561506776
+Epoch 79, Train Loss: 0.008823115398020795, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.34967787836816755, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.475218784776943
+Epoch 80, Train Loss: 0.00899721885798499, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3508411823185694, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4586382289158773
+Epoch 81, Train Loss: 0.008572735092861371, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.341205498111811, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.44359957113780024
+Epoch 82, Train Loss: 0.008443283040024754, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3380259751914434, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4489601477165014
+Epoch 83, Train Loss: 0.008456414630119171, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.34105581077020364, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.44319570669560493
+Epoch 84, Train Loss: 0.008532082752531601, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.34205430892957506, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4458266741577783
+Epoch 85, Train Loss: 0.008438206542955918, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.34054907137555485, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.42649114715475434
+Epoch 86, Train Loss: 0.008291110920254141, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33754304411457525, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4394354569883015
+Epoch 87, Train Loss: 0.008343285596412089, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3406863786906549, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.42817903278856206
+Epoch 88, Train Loss: 0.00841771652792684, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3392588068939719, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.44047677107694294
+Epoch 89, Train Loss: 0.008554981355296655, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.341047028463059, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4306408404980878
+Epoch 90, Train Loss: 0.008456360180086145, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3408870912735235, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4232921573450404
+Model saved
+Epoch 91, Train Loss: 0.008394320825270066, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3368355610635468, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4286317169516751
+Epoch 92, Train Loss: 0.00831386220589694, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3381252742860995, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4217096397625222
+Model saved
+Epoch 93, Train Loss: 0.008392581289323667, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3375066555896382, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4205525386327825
+Model saved
+Epoch 94, Train Loss: 0.008546304785543017, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3411475668659342, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4322791036159741
+Epoch 95, Train Loss: 0.008549776199894646, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33856200032493716, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4232710275556023
+Epoch 96, Train Loss: 0.008441577193378989, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3388996557331121, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4377442916404441
+Epoch 97, Train Loss: 0.008332097527777983, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33600730529353706, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4316087361665057
+Epoch 98, Train Loss: 0.00842913318451287, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3393392423442461, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4530109943545832
+Epoch 99, Train Loss: 0.008367592475325283, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33504251276453273, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4461233803077672
+Epoch 100, Train Loss: 0.008392198561018126, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33387765769378563, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4427720307931637
+Epoch 101, Train Loss: 0.008282490365672857, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3314474015986892, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4265441906670528
+Epoch 102, Train Loss: 0.008346964863853322, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33489080773849095, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.42254318419272774
+Epoch 103, Train Loss: 0.008410121702278653, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33510416863610826, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4536807280536702
+Epoch 104, Train Loss: 0.00842127799599742, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3400910742532663, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4457266069930927
+Epoch 105, Train Loss: 0.008260409933023362, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3339086107818747, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.430879903917602
+Epoch 106, Train Loss: 0.008322945149201486, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33278950091176307, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.42353209778463574
+Epoch 107, Train Loss: 0.00838278960953984, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3338684445730349, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.459201611312989
+Epoch 108, Train Loss: 0.008320023499739667, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33637274751556023, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.41327550606380065
+Model saved
+Epoch 109, Train Loss: 0.008308123389724642, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33490902657662364, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4321434530264956
+Epoch 110, Train Loss: 0.008170820048285855, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33114346830040176, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.42893369851267277
+Epoch 111, Train Loss: 0.008278559382435761, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3386626835573359, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4176215221223269
+Epoch 112, Train Loss: 0.008464725364723967, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3379000775615132, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4318119550866998
+Epoch 113, Train Loss: 0.00824781921174791, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33494874719454015, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.44295462740398395
+Epoch 114, Train Loss: 0.008251936375422196, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32963888814252035, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4187780759623465
+Epoch 115, Train Loss: 0.008219429531082924, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33155017679364646, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.432342896522072
+Epoch 116, Train Loss: 0.008287966814047346, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3310146566677027, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4469716828607756
+Epoch 117, Train Loss: 0.008208160592605256, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3321946452035486, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.42954885388782266
+Epoch 118, Train Loss: 0.008228395890910178, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3318756710507724, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4179738567876031
+Epoch 119, Train Loss: 0.008320639634297954, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32907980263842856, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4266204888619377
+Epoch 120, Train Loss: 0.008141691828819199, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3282849804359408, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4312431005150262
+Epoch 121, Train Loss: 0.008313604746945202, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3331272163229313, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4419646506229561
+Epoch 122, Train Loss: 0.008180436451867636, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3325990939940825, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4463075231717199
+Epoch 123, Train Loss: 0.008147300512064248, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33409971747478867, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4470403794381454
+Epoch 124, Train Loss: 0.008270529008263515, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32906729833223275, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43475736202185455
+Epoch 125, Train Loss: 0.008289170192761553, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33289905091090705, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4250847588975102
+Epoch 126, Train Loss: 0.008138461355378645, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3273770051026665, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.42490875686552815
+Epoch 127, Train Loss: 0.008186636537882604, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3302036157034729, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4231477950901231
+Epoch 128, Train Loss: 0.008091075016030421, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32967437533701527, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43536906723821767
+Epoch 129, Train Loss: 0.008138494326784793, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3306764214972363, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4350544115992819
+Epoch 130, Train Loss: 0.008160672370447881, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32646183522660555, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4280430759685881
+Epoch 131, Train Loss: 0.008207505730549909, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3306266808084227, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.40722268213730706
+Model saved
+Epoch 132, Train Loss: 0.00814176413566909, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3313083535085051, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43378865242170617
+Epoch 133, Train Loss: 0.008102848951239139, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3306459372892329, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43773272201561525
+Epoch 134, Train Loss: 0.008106607892033126, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3313505841172622, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4069701761387392
+Model saved
+Epoch 135, Train Loss: 0.008179110410209332, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3316683114089807, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.46541711369132666
+Epoch 136, Train Loss: 0.00807734774166925, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3297335420306249, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.41113514278389657
+Epoch 137, Train Loss: 0.008079317844628045, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32682447651844826, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.445879536324023
+Epoch 138, Train Loss: 0.008226687748295566, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3298270467729466, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.42782945569380915
+Epoch 139, Train Loss: 0.008100729597370245, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33069988966065966, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.44381245685825726
+Epoch 140, Train Loss: 0.008162509313681059, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33315592250713105, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.42730021233528404
+Epoch 141, Train Loss: 0.00809408684209403, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32989743677033, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4189137936581421
+Epoch 142, Train Loss: 0.008109841993751211, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33002207818402396, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4354033141869486
+Epoch 143, Train Loss: 0.008001801208592951, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3270275247380291, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4140490349825715
+Epoch 144, Train Loss: 0.008018074822353406, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32392605062716906, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.443353888029184
+Epoch 145, Train Loss: 0.0080713466870495, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32938937141689073, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.41551016728137147
+Epoch 146, Train Loss: 0.00808690733457398, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3261948442316029, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4187832247647904
+Epoch 147, Train Loss: 0.008101007946404733, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32976567324591666, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4387246794747308
+Epoch 148, Train Loss: 0.008009924404581802, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3271075013815401, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4296914803372466
+Epoch 149, Train Loss: 0.008170962986898504, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33180637185631356, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.42356359289186074
+Epoch 150, Train Loss: 0.007969493007597825, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3286359754565678, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4388096536812433
+Epoch 151, Train Loss: 0.00806041264311514, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3298285970193929, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43208339165342285
+Epoch 152, Train Loss: 0.008102953259367496, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3290851320342936, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4528458661688605
+Epoch 153, Train Loss: 0.007907343465679636, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3236577528502947, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.44014763934233797
+Epoch 154, Train Loss: 0.00805267302914419, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3284200510975041, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.41722544788923543
+Epoch 155, Train Loss: 0.00801375626017236, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32683438645892626, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43212912568943906
+Epoch 156, Train Loss: 0.00792544377165743, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3292406817407625, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.44338901233035044
+Epoch 157, Train Loss: 0.00808834589810835, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.33173383979813387, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4280007986000486
+Epoch 158, Train Loss: 0.007997156373069933, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3239758535689925, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4268107447587436
+Epoch 159, Train Loss: 0.00794126211096429, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32418515551752564, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43310394875130614
+Epoch 160, Train Loss: 0.007955762415399982, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3240111874256939, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4280878822916477
+Epoch 161, Train Loss: 0.008075973517002745, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3224347169763971, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.41888877291098714
+Epoch 162, Train Loss: 0.007947338104713708, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32473092368146295, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.42388616647306
+Epoch 163, Train Loss: 0.007989054151241563, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32499609052176726, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43077577661392635
+Epoch 164, Train Loss: 0.007959916411588589, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3225041867415248, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.41842159617663877
+Epoch 165, Train Loss: 0.007944567759598916, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3249890657315052, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4437610232434708
+Epoch 166, Train Loss: 0.008017357723373506, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32698620912323445, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.42044917968827517
+Epoch 167, Train Loss: 0.008077208075620648, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3261150831476195, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.45335767551985756
+Epoch 168, Train Loss: 0.008007235036024617, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3232175384141982, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4257265489874876
+Epoch 169, Train Loss: 0.00797246413357142, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32360494794098327, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.429223823340453
+Epoch 170, Train Loss: 0.007910325127239857, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3242075853442404, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4188802845065473
+Epoch 171, Train Loss: 0.007957407855428755, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.324345811465138, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.40771863507116635
+Epoch 172, Train Loss: 0.007904356752987951, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.31955242245351934, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.439287948167161
+Epoch 173, Train Loss: 0.007762038291225003, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3206934797792881, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4339436145421993
+Epoch 174, Train Loss: 0.007858081177497903, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3232899444580694, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.45523006922091785
+Epoch 175, Train Loss: 0.007868129494858699, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3256283787323278, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4448462868849016
+Epoch 176, Train Loss: 0.00784371119354748, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.31976666895836087, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4151153119194818
+Epoch 177, Train Loss: 0.007885681322982742, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.321840288338085, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4470309210127533
+Epoch 178, Train Loss: 0.007858649711124599, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32316196642154155, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43702301917336656
+Epoch 179, Train Loss: 0.00792052218457684, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.31943003418845417, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4164993288578888
+Epoch 180, Train Loss: 0.00784294216039901, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3215729298513092, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.41794552327428247
+Epoch 181, Train Loss: 0.007913665438536555, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3249157866286208, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4316412649538307
+Epoch 182, Train Loss: 0.007970067646561397, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32458545957382023, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.40320720000387605
+Model saved
+Epoch 183, Train Loss: 0.007914833187694766, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3215887534458415, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4175594838103762
+Epoch 184, Train Loss: 0.0077905628907804685, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3171333202472223, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4114846767758012
+Epoch 185, Train Loss: 0.007896048831753433, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32340905336257697, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4551096879065851
+Epoch 186, Train Loss: 0.007873337483033538, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.31899412005530675, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.430458782868361
+Epoch 187, Train Loss: 0.007892086991988536, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.322863965246474, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.43077171793691005
+Epoch 188, Train Loss: 0.007856183206766017, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32010820135586454, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4389678042020474
+Epoch 189, Train Loss: 0.007778955138443659, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3192459480764409, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4344917738943523
+Epoch 190, Train Loss: 0.007803586570339071, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3194994637514472, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4276771219570366
+Epoch 191, Train Loss: 0.00783963686424411, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3188401286581098, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4213423906239702
+Epoch 192, Train Loss: 0.007894389725859381, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32085477633796006, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4310941230229943
+Epoch 193, Train Loss: 0.007760859269183129, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.31491257308704934, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4150153567898701
+Epoch 194, Train Loss: 0.007833600412899008, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.31909322207552254, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.41647075050176324
+Epoch 195, Train Loss: 0.007812723407470103, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.31902041001596654, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4350663184085416
+Epoch 196, Train Loss: 0.007686223682766367, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.31611243096964897, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.41801526816839285
+Epoch 197, Train Loss: 0.00781387088742728, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3167144906516276, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.41968849040990025
+Epoch 198, Train Loss: 0.007770749727367527, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.32025179863142356, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4207818901856448
+Epoch 199, Train Loss: 0.007830496715743922, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.3184764042211817, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.41466242848505513
+Epoch 200, Train Loss: 0.007642132139557766, Train Iou Multiclass: 0.0, Train Iou Oneclass: 0.313196202891629, Validation Iou Multiclass: 0.0, Validation Iou Oneclass: 0.4219840048582979
+Model saved

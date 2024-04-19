@@ -1,0 +1,33 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Traceback (most recent call last):
+  File "/home/cal314-1/Downloads/pycharm-professional-2023.3.1/pycharm-2023.3.1/plugins/python/helpers/pydev/pydevd.py", line 1534, in _exec
+    pydev_imports.execfile(file, globals, locals)  # execute the script
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/Downloads/pycharm-professional-2023.3.1/pycharm-2023.3.1/plugins/python/helpers/pydev/_pydev_imps/_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 361, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 243, in main
+    train_loss,train_iou = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 152, in train
+    loss = loss_fn(output, ids)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/loss.py", line 618, in forward
+    return F.binary_cross_entropy(input, target, weight=self.weight, reduction=self.reduction)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/functional.py", line 3127, in binary_cross_entropy
+    return torch._C._nn.binary_cross_entropy(input, target, weight, reduction_enum)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.

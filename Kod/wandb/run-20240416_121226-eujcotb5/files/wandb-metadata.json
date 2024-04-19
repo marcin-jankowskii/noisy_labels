@@ -1,0 +1,128 @@
+{
+    "os": "Linux-5.15.0-102-generic-x86_64-with-glibc2.31",
+    "python": "3.11.7",
+    "heartbeatAt": "2024-04-16T10:12:28.180606",
+    "startedAt": "2024-04-16T10:12:26.967541",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py",
+    "codePathLocal": "inference.py",
+    "codePath": "Kod/inference.py",
+    "git": {
+        "remote": "https://github.com/marcin-jankowskii/noisy_labels.git",
+        "commit": "12c32ed30932bd55258d559efa6d0716910be5fb"
+    },
+    "email": "marcinjankowskirep@gmail.com",
+    "root": "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels",
+    "host": "cal3141-X570S-AERO-G",
+    "username": "cal314-1",
+    "executable": "/home/cal314-1/miniconda3/envs/marcinv2/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 2.3721875,
+        "min": 2200.0,
+        "max": 3400.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2.2,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2.2,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2.2,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 3.562,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2.2,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 3.536,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2.2,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2.2,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2.2,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2.2,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2.2,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2.2,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2.2,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2.2,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2.2,
+            "min": 2200.0,
+            "max": 3400.0
+        },
+        {
+            "current": 2.859,
+            "min": 2200.0,
+            "max": 3400.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 425.5165710449219,
+            "used": 389.5216598510742
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3090",
+            "memory_total": 25769803776
+        }
+    ],
+    "memory": {
+        "total": 125.72557830810547
+    }
+}

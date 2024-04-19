@@ -1,0 +1,23 @@
+GPU dostępne: NVIDIA GeForce RTX 3090
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test
+(119, 512, 512)
+Mean IoU oneclass (intersection): 0.5573226634037161
+IoU per class oneclass (intersection): [0.99612964 0.55732266]
+Mean IoU multiclass (intersection): 0
+IoU per class multiclass (intersection): 0
+Mean IoU oneclass (annotator1): 0.5840611728596448
+IoU per class oneclass (annotator1): [0.99535324 0.58406117]
+Mean IoU multiclass (annotator1): 0
+IoU per class multiclass (annotator1): 0
+Mean IoU oneclass (annotator2): 0.5256068079753384
+IoU per class oneclass (annotator2): [0.99512476 0.52560681]
+Mean IoU multiclass (annotator2): 0
+IoU per class multiclass (annotator2): 0
+Mean IoU oneclass (union): 0.5549326943598849
+IoU per class oneclass (union): [0.99434576 0.55493269]
+Mean IoU multiclass (union): 0
+IoU per class multiclass (union): 0
+Mean IoU oneclass (feeling lucky): 0.5551279310808741
+IoU per class oneclass (feeling lucky): [0.99524288 0.55512793]
+Mean IoU multiclass (feeling lucky): 0
+IoU per class multiclass (feeling lucky): 0

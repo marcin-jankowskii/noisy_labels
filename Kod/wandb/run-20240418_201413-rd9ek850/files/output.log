@@ -1,0 +1,56 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Traceback (most recent call last):
+  File "/home/cal314-1/Downloads/pycharm-professional-2023.3.1/pycharm-2023.3.1/plugins/python/helpers/pydev/pydevd.py", line 1534, in _exec
+    pydev_imports.execfile(file, globals, locals)  # execute the script
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/Downloads/pycharm-professional-2023.3.1/pycharm-2023.3.1/plugins/python/helpers/pydev/_pydev_imps/_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 480, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 352, in main
+    train_loss,train_iou_multiclass,train_iou_oneclass = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 135, in train
+    inputs[i],ids[i] = augumentation(inputs[i], ids[i])
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/utils/Emilia_aug.py", line 39, in forward
+    img_out = self.k5(img_out)
+              ^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/augmentation/base.py", line 210, in forward
+    output = self.apply_func(in_tensor, params, flags)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/augmentation/_2d/base.py", line 125, in apply_func
+    output = self.transform_inputs(in_tensor, params, flags, trans_matrix)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/augmentation/base.py", line 261, in transform_inputs
+    output = self.apply_transform(in_tensor, params, flags, transform=transform)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/augmentation/_2d/intensity/gaussian_blur.py", line 82, in apply_transform
+    return gaussian_blur2d(
+           ^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/filters/gaussian.py", line 63, in gaussian_blur2d
+    kernel_x = get_gaussian_kernel1d(kx, sigma[:, 1].view(bs, 1))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/filters/kernels.py", line 519, in get_gaussian_kernel1d
+    _check_kernel_size(kernel_size, allow_even=force_even)
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/filters/kernels.py", line 20, in _check_kernel_size
+    KORNIA_CHECK(
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/core/check.py", line 103, in KORNIA_CHECK
+    raise Exception(f"{condition} not true.\n{msg}")
+Exception: False not true.
+Kernel size must be an odd integer bigger than 0. Gotcha 10 on (10,)

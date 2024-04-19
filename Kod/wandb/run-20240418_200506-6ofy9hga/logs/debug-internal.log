@@ -1,0 +1,40 @@
+2024-04-18 20:05:06,894 INFO    StreamThr :158754 [internal.py:wandb_internal():86] W&B internal server running at pid: 158754, started at: 2024-04-18 20:05:06.894176
+2024-04-18 20:05:06,895 DEBUG   HandlerThread:158754 [handler.py:handle_request():146] handle_request: status
+2024-04-18 20:05:06,900 INFO    WriterThread:158754 [datastore.py:open_for_write():87] open: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240418_200506-6ofy9hga/run-6ofy9hga.wandb
+2024-04-18 20:05:06,901 DEBUG   SenderThread:158754 [sender.py:send():382] send: header
+2024-04-18 20:05:06,908 DEBUG   SenderThread:158754 [sender.py:send():382] send: run
+2024-04-18 20:05:07,306 INFO    SenderThread:158754 [dir_watcher.py:__init__():211] watching files in: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240418_200506-6ofy9hga/files
+2024-04-18 20:05:07,306 INFO    SenderThread:158754 [sender.py:_start_run_threads():1136] run started: 6ofy9hga with start time 1713463506.894107
+2024-04-18 20:05:07,316 DEBUG   HandlerThread:158754 [handler.py:handle_request():146] handle_request: check_version
+2024-04-18 20:05:07,316 DEBUG   SenderThread:158754 [sender.py:send_request():409] send_request: check_version
+2024-04-18 20:05:07,463 DEBUG   HandlerThread:158754 [handler.py:handle_request():146] handle_request: run_start
+2024-04-18 20:05:07,472 DEBUG   HandlerThread:158754 [system_info.py:__init__():27] System info init
+2024-04-18 20:05:07,472 DEBUG   HandlerThread:158754 [system_info.py:__init__():42] System info init done
+2024-04-18 20:05:07,472 INFO    HandlerThread:158754 [system_monitor.py:start():194] Starting system monitor
+2024-04-18 20:05:07,472 INFO    SystemMonitor:158754 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-04-18 20:05:07,473 INFO    HandlerThread:158754 [system_monitor.py:probe():214] Collecting system info
+2024-04-18 20:05:07,473 INFO    SystemMonitor:158754 [interfaces.py:start():190] Started cpu monitoring
+2024-04-18 20:05:07,474 INFO    SystemMonitor:158754 [interfaces.py:start():190] Started disk monitoring
+2024-04-18 20:05:07,474 INFO    SystemMonitor:158754 [interfaces.py:start():190] Started gpu monitoring
+2024-04-18 20:05:07,475 INFO    SystemMonitor:158754 [interfaces.py:start():190] Started memory monitoring
+2024-04-18 20:05:07,475 INFO    SystemMonitor:158754 [interfaces.py:start():190] Started network monitoring
+2024-04-18 20:05:07,500 DEBUG   HandlerThread:158754 [system_info.py:probe():151] Probing system
+2024-04-18 20:05:07,503 DEBUG   HandlerThread:158754 [system_info.py:_probe_git():136] Probing git
+2024-04-18 20:05:07,513 DEBUG   HandlerThread:158754 [system_info.py:_probe_git():144] Probing git done
+2024-04-18 20:05:07,513 DEBUG   HandlerThread:158754 [system_info.py:probe():199] Probing system done
+2024-04-18 20:05:07,513 DEBUG   HandlerThread:158754 [system_monitor.py:probe():223] {'os': 'Linux-5.15.0-102-generic-x86_64-with-glibc2.31', 'python': '3.11.7', 'heartbeatAt': '2024-04-18T18:05:07.501111', 'startedAt': '2024-04-18T18:05:06.883620', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py', 'codePathLocal': 'train.py', 'codePath': 'Kod/train.py', 'git': {'remote': 'https://github.com/marcin-jankowskii/noisy_labels.git', 'commit': '12c32ed30932bd55258d559efa6d0716910be5fb'}, 'email': 'marcinjankowskirep@gmail.com', 'root': '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels', 'host': 'cal3141-X570S-AERO-G', 'username': 'cal314-1', 'executable': '/home/cal314-1/miniconda3/envs/marcinv2/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 2.2799375000000004, 'min': 2200.0, 'max': 3400.0}, 'cpu_freq_per_core': [{'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 3.4, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 4.112, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}], 'disk': {'/': {'total': 425.5165710449219, 'used': 392.14504623413086}}, 'gpu': 'NVIDIA GeForce RTX 3090', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3090', 'memory_total': 25769803776}], 'memory': {'total': 125.72557830810547}}
+2024-04-18 20:05:07,514 INFO    HandlerThread:158754 [system_monitor.py:probe():224] Finished collecting system info
+2024-04-18 20:05:07,514 INFO    HandlerThread:158754 [system_monitor.py:probe():227] Publishing system info
+2024-04-18 20:05:07,514 DEBUG   HandlerThread:158754 [system_info.py:_save_conda():208] Saving list of conda packages installed into the current environment
+2024-04-18 20:05:08,307 INFO    Thread-13 :158754 [dir_watcher.py:_on_file_created():271] file/dir created: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240418_200506-6ofy9hga/files/conda-environment.yaml
+2024-04-18 20:05:09,449 DEBUG   HandlerThread:158754 [system_info.py:_save_conda():220] Saving conda packages done
+2024-04-18 20:05:09,450 INFO    HandlerThread:158754 [system_monitor.py:probe():229] Finished publishing system info
+2024-04-18 20:05:09,451 DEBUG   SenderThread:158754 [sender.py:send():382] send: files
+2024-04-18 20:05:09,451 INFO    SenderThread:158754 [sender.py:_save_file():1403] saving file wandb-metadata.json with policy now
+2024-04-18 20:05:10,308 INFO    Thread-13 :158754 [dir_watcher.py:_on_file_created():271] file/dir created: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240418_200506-6ofy9hga/files/wandb-metadata.json
+2024-04-18 20:05:12,452 DEBUG   HandlerThread:158754 [handler.py:handle_request():146] handle_request: status_report
+2024-04-18 20:05:17,453 DEBUG   HandlerThread:158754 [handler.py:handle_request():146] handle_request: status_report
+2024-04-18 20:05:22,453 DEBUG   HandlerThread:158754 [handler.py:handle_request():146] handle_request: status_report
+2024-04-18 20:05:27,454 DEBUG   HandlerThread:158754 [handler.py:handle_request():146] handle_request: status_report
+2024-04-18 20:05:32,454 DEBUG   HandlerThread:158754 [handler.py:handle_request():146] handle_request: status_report
+2024-04-18 20:05:37,455 DEBUG   HandlerThread:158754 [handler.py:handle_request():146] handle_request: status_report

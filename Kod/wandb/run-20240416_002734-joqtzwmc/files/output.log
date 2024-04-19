@@ -1,0 +1,23 @@
+GPU dostępne: NVIDIA GeForce RTX 3090
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test
+(119, 512, 512)
+Mean IoU oneclass (intersection): 0.46787087404448996
+IoU per class oneclass (intersection): [0.9947135678586162, 0.46787087404448996]
+Mean IoU multiclass (intersection): 0.08422462144818177
+IoU per class multiclass (intersection): [0.994588620389286, 0.16844924289636354, 0.0]
+Mean IoU oneclass (annotator1): 0.48963877066766953
+IoU per class oneclass (annotator1): [0.9939179728386054, 0.48963877066766953]
+Mean IoU multiclass (annotator1): 0.11295152749956422
+IoU per class multiclass (annotator1): [0.9939179728386054, 0.22590305499912844, 0.0]
+Mean IoU oneclass (annotator2): 0.44410548629773516
+IoU per class oneclass (annotator2): [0.9936888341012633, 0.44410548629773516]
+Mean IoU multiclass (annotator2): 0.09209210553809323
+IoU per class multiclass (annotator2): [0.9936888341012633, 0.18418421107618646, 0.0]
+Mean IoU oneclass (union): 0.46707471609046414
+IoU per class oneclass (union): [0.9928917155170175, 0.46707471609046414]
+Mean IoU multiclass (union): 0.11056142301278488
+IoU per class multiclass (union): [0.9928917155170175, 0.22112284602556975, 0.0]
+Mean IoU oneclass (feeling lucky): 0.46801552106430155
+IoU per class oneclass (feeling lucky): [0.9938136307431804, 0.46801552106430155]
+Mean IoU multiclass (feeling lucky): 0.10115227900048195
+IoU per class multiclass (feeling lucky): [0.993774584451522, 0.2023045580009639, 0.0]

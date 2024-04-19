@@ -1,0 +1,49 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Epoch 1, Train Loss: 2.1608060598373413, Train Iou: 0.9959891756737255, Validation IOU: 0.9872460633717889
+Model saved
+Epoch 2, Train Loss: 1.6783651828765869, Train Iou: 0.9929581811264259, Validation IOU: 0.9780178990682555
+Model saved
+Epoch 3, Train Loss: 1.4607024788856506, Train Iou: 0.98494319805674, Validation IOU: 0.9707272721787228
+Model saved
+Epoch 4, Train Loss: 1.2305108547210692, Train Iou: 0.9708168273191898, Validation IOU: 0.9691032790799977
+Model saved
+Epoch 5, Train Loss: 1.0367056906223298, Train Iou: 0.949287240445242, Validation IOU: 0.9565718034705744
+Model saved
+Epoch 6, Train Loss: 0.8819787561893463, Train Iou: 0.9420715278173818, Validation IOU: 0.9734518902665433
+Epoch 7, Train Loss: 0.7552754372358322, Train Iou: 0.9345362559506606, Validation IOU: 0.9409154520725703
+Model saved
+Epoch 8, Train Loss: 0.6486002802848816, Train Iou: 0.9358191736292053, Validation IOU: 0.9347729579179824
+Model saved
+Epoch 9, Train Loss: 0.5606629461050033, Train Iou: 0.9410678257091266, Validation IOU: 0.9435073737776114
+Epoch 10, Train Loss: 0.48960801810026167, Train Iou: 0.9482834293647606, Validation IOU: 0.9429895730072912
+Epoch 11, Train Loss: 0.43116849660873413, Train Iou: 0.9586581343536157, Validation IOU: 0.9691393875991139
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 413, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 295, in main
+    train_loss,train_iou = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 161, in train
+    inputs[i],ids[i] = augumentation(inputs[i], ids[i])
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/utils/augmentation.py", line 24, in forward
+    img_out = self.add_circles(img_out,mask)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/utils/augmentation.py", line 202, in add_circles
+    mask1 = K.utils.draw_convex_polygon(mask1, polygon, color)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/utils/draw.py", line 351, in draw_convex_polygon
+    x_left, x_right = _get_convex_edges(polygons, h_i, w_i)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/kornia/utils/draw.py", line 282, in _get_convex_edges
+    valid_edges = (y_start[..., None, :] <= ys[..., :, None]).logical_and(ys[..., :, None] <= y_end[..., None, :])
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

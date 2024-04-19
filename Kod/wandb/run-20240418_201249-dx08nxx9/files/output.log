@@ -1,0 +1,16 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Traceback (most recent call last):
+  File "/home/cal314-1/Downloads/pycharm-professional-2023.3.1/pycharm-2023.3.1/plugins/python/helpers/pydev/pydevd.py", line 1534, in _exec
+    pydev_imports.execfile(file, globals, locals)  # execute the script
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/Downloads/pycharm-professional-2023.3.1/pycharm-2023.3.1/plugins/python/helpers/pydev/_pydev_imps/_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 476, in <module>
+    aug = EmiliaAugmentation()
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/utils/Emilia_aug.py", line 26, in __init__
+    self.resize = Ka.Resize((512, 512), interpolation='bilinear')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

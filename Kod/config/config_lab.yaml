@@ -2,5 +2,6 @@
 dataset_path: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm
 save_model_path: /media/cal314-1/9E044F59044F3415/Marcin/Data/model
 save_inf_fig_path: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/results
+save_soft_mask_path: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/softmasks
 image_height: 512
 image_width: 512

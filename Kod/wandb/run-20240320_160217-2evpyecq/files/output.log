@@ -1,0 +1,17 @@
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+(512, 512, 4)
+(512, 512, 4)
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 310, in <module>
+    batch_maker = BatchMaker(config_path=path_dict[config.place], batch_size=config.batch_size,mode ='train',segment = mode_dict[config.mode],annotator= config.annotator)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/dataset/data.py", line 311, in __init__
+    x_train, y_train = self.process_data.process_dataset('/train')
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/dataset/data.py", line 155, in process_dataset
+    majority_id = majority_voting(mask_id, mask2_id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/dataset/data.py", line 75, in majority_voting
+    votes = np.bincount(window.reshape(-1), minlength=4)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Cannot cast array data from dtype('float32') to dtype('int64') according to the rule 'safe'

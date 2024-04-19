@@ -1,0 +1,27 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Epoch 1, Train Loss: 1.3820058703422546, Train Iou Multiclass: 0.9786530447609263, Train Iou Oneclass: 0.9733963676972696, Validation Iou Multiclass: 0.99617018429417, Validation Iou Oneclass: 0.983092324198787
+Model saved
+Epoch 2, Train Loss: 0.9429627358913422, Train Iou Multiclass: 0.9126737956808556, Train Iou Oneclass: 0.8513837066049069, Validation Iou Multiclass: 0.9165837899759288, Validation Iou Oneclass: 0.8042067058838538
+Model saved
+Epoch 3, Train Loss: 0.7222992151975631, Train Iou Multiclass: 0.8149849845972013, Train Iou Oneclass: 0.6421747324716364, Validation Iou Multiclass: 0.8231612720758223, Validation Iou Oneclass: 0.8676151058784054
+Epoch 4, Train Loss: 0.5909181237220764, Train Iou Multiclass: 0.7619487353324521, Train Iou Oneclass: 0.5176879178133842, Validation Iou Multiclass: 0.8304350377416935, Validation Iou Oneclass: 0.8344258927083464
+Epoch 5, Train Loss: 0.4954033076763153, Train Iou Multiclass: 0.7284758565889246, Train Iou Oneclass: 0.466639690580787, Validation Iou Multiclass: 0.8166394604361593, Validation Iou Oneclass: 0.6990803544662962
+Model saved
+Epoch 6, Train Loss: 0.422710208594799, Train Iou Multiclass: 0.6594545614860456, Train Iou Oneclass: 0.4346307056012422, Validation Iou Multiclass: 0.7116614852840872, Validation Iou Oneclass: 0.5761470391552554
+Model saved
+Epoch 7, Train Loss: 0.367788964509964, Train Iou Multiclass: 0.5860379104468599, Train Iou Oneclass: 0.41430388892960784, Validation Iou Multiclass: 0.809477969789883, Validation Iou Oneclass: 0.8338909357805592
+Epoch 8, Train Loss: 0.3228350058197975, Train Iou Multiclass: 0.5255122619557238, Train Iou Oneclass: 0.39315602954167317, Validation Iou Multiclass: 0.5217080496797719, Validation Iou Oneclass: 0.49780698368586285
+Model saved
+Epoch 9, Train Loss: 0.28621094673871994, Train Iou Multiclass: 0.4577740401215202, Train Iou Oneclass: 0.37626897192483677, Validation Iou Multiclass: 0.6799704108319332, Validation Iou Oneclass: 0.671607276764799
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 483, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 362, in main
+    train_loss,train_iou_multiclass,train_iou_oneclass = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 221, in train
+    total_loss += loss.item()
+                  ^^^^^^^^^^^

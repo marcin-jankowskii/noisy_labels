@@ -1,0 +1,19 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+GPU dostępne: NVIDIA GeForce RTX 3090
+Epoch 1, Train Loss: 0.5539805233478546, Train Iou: 0.9167589857845126, Validation IOU: 0.7544629916540969
+Model saved
+Epoch 2, Train Loss: 0.43967260122299195, Train Iou: 0.7572466737578407, Validation IOU: 0.7237748723734472
+Model saved
+Epoch 3, Train Loss: 0.3841123878955841, Train Iou: 0.7100161430956204, Validation IOU: 0.7068709921772162
+Model saved
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 356, in <module>
+    main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 238, in main
+    train_loss,train_iou = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 159, in train
+    total_loss += loss.item()
+                  ^^^^^^^^^^^

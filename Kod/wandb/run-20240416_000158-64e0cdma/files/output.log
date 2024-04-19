@@ -1,0 +1,9 @@
+GPU dostępne: NVIDIA GeForce RTX 3090
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 500, in <module>
+    predict(model, test_loader)
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 316, in predict
+    pred1 = predicted_masks_multiclass.transpose((0, 2, 3, 1))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: axes don't match array

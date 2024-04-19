@@ -1,0 +1,20 @@
+
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
+Traceback (most recent call last):
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 436, in <module>
+    batch_maker = BatchMaker(config_path=path_dict[config.place], batch_size=config.batch_size,mode ='train',segment = mode_dict[config.mode],annotator= config.annotator)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/dataset/data.py", line 286, in __init__
+    self.train_loader = self.create_loader(x_train, y_train, shuffle=True)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/dataset/data.py", line 294, in create_loader
+    x = np.transpose(x, (0, 3, 1, 2))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/numpy/core/fromnumeric.py", line 655, in transpose
+    return _wrapfunc(a, 'transpose', axes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/numpy/core/fromnumeric.py", line 59, in _wrapfunc
+    return bound(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^
+ValueError: axes don't match array

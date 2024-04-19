@@ -1,0 +1,229 @@
+2024-04-16 11:36:44,900 INFO    StreamThr :93495 [internal.py:wandb_internal():86] W&B internal server running at pid: 93495, started at: 2024-04-16 11:36:44.899576
+2024-04-16 11:36:44,901 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status
+2024-04-16 11:36:44,907 INFO    WriterThread:93495 [datastore.py:open_for_write():87] open: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/run-ea03ybgw.wandb
+2024-04-16 11:36:44,908 DEBUG   SenderThread:93495 [sender.py:send():382] send: header
+2024-04-16 11:36:44,916 DEBUG   SenderThread:93495 [sender.py:send():382] send: run
+2024-04-16 11:36:45,506 INFO    SenderThread:93495 [dir_watcher.py:__init__():211] watching files in: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files
+2024-04-16 11:36:45,506 INFO    SenderThread:93495 [sender.py:_start_run_threads():1136] run started: ea03ybgw with start time 1713260204.899627
+2024-04-16 11:36:45,515 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: check_version
+2024-04-16 11:36:45,515 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: check_version
+2024-04-16 11:36:45,748 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: run_start
+2024-04-16 11:36:45,775 DEBUG   HandlerThread:93495 [system_info.py:__init__():27] System info init
+2024-04-16 11:36:45,775 DEBUG   HandlerThread:93495 [system_info.py:__init__():42] System info init done
+2024-04-16 11:36:45,775 INFO    HandlerThread:93495 [system_monitor.py:start():194] Starting system monitor
+2024-04-16 11:36:45,775 INFO    SystemMonitor:93495 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-04-16 11:36:45,775 INFO    HandlerThread:93495 [system_monitor.py:probe():214] Collecting system info
+2024-04-16 11:36:45,776 INFO    SystemMonitor:93495 [interfaces.py:start():190] Started cpu monitoring
+2024-04-16 11:36:45,776 INFO    SystemMonitor:93495 [interfaces.py:start():190] Started disk monitoring
+2024-04-16 11:36:45,776 INFO    SystemMonitor:93495 [interfaces.py:start():190] Started gpu monitoring
+2024-04-16 11:36:45,777 INFO    SystemMonitor:93495 [interfaces.py:start():190] Started memory monitoring
+2024-04-16 11:36:45,777 INFO    SystemMonitor:93495 [interfaces.py:start():190] Started network monitoring
+2024-04-16 11:36:45,802 DEBUG   HandlerThread:93495 [system_info.py:probe():151] Probing system
+2024-04-16 11:36:45,806 DEBUG   HandlerThread:93495 [system_info.py:_probe_git():136] Probing git
+2024-04-16 11:36:45,814 DEBUG   HandlerThread:93495 [system_info.py:_probe_git():144] Probing git done
+2024-04-16 11:36:45,814 DEBUG   HandlerThread:93495 [system_info.py:probe():199] Probing system done
+2024-04-16 11:36:45,814 DEBUG   HandlerThread:93495 [system_monitor.py:probe():223] {'os': 'Linux-5.15.0-102-generic-x86_64-with-glibc2.31', 'python': '3.11.7', 'heartbeatAt': '2024-04-16T09:36:45.803040', 'startedAt': '2024-04-16T09:36:44.888403', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py', 'codePathLocal': 'inference.py', 'codePath': 'Kod/inference.py', 'git': {'remote': 'https://github.com/marcin-jankowskii/noisy_labels.git', 'commit': '12c32ed30932bd55258d559efa6d0716910be5fb'}, 'email': 'marcinjankowskirep@gmail.com', 'root': '/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels', 'host': 'cal3141-X570S-AERO-G', 'username': 'cal314-1', 'executable': '/home/cal314-1/miniconda3/envs/marcinv2/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 2.3319375, 'min': 2200.0, 'max': 3400.0}, 'cpu_freq_per_core': [{'current': 4.311, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}, {'current': 2.2, 'min': 2200.0, 'max': 3400.0}], 'disk': {'/': {'total': 425.5165710449219, 'used': 389.5288963317871}}, 'gpu': 'NVIDIA GeForce RTX 3090', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3090', 'memory_total': 25769803776}], 'memory': {'total': 125.72557830810547}}
+2024-04-16 11:36:45,814 INFO    HandlerThread:93495 [system_monitor.py:probe():224] Finished collecting system info
+2024-04-16 11:36:45,814 INFO    HandlerThread:93495 [system_monitor.py:probe():227] Publishing system info
+2024-04-16 11:36:45,814 DEBUG   HandlerThread:93495 [system_info.py:_save_conda():208] Saving list of conda packages installed into the current environment
+2024-04-16 11:36:46,507 INFO    Thread-13 :93495 [dir_watcher.py:_on_file_created():271] file/dir created: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/conda-environment.yaml
+2024-04-16 11:36:48,730 DEBUG   HandlerThread:93495 [system_info.py:_save_conda():220] Saving conda packages done
+2024-04-16 11:36:48,731 INFO    HandlerThread:93495 [system_monitor.py:probe():229] Finished publishing system info
+2024-04-16 11:36:48,750 DEBUG   SenderThread:93495 [sender.py:send():382] send: files
+2024-04-16 11:36:48,750 INFO    SenderThread:93495 [sender.py:_save_file():1403] saving file wandb-metadata.json with policy now
+2024-04-16 11:36:48,754 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: python_packages
+2024-04-16 11:36:48,754 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: python_packages
+2024-04-16 11:36:48,754 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-16 11:36:48,755 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: stop_status
+2024-04-16 11:36:48,755 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: internal_messages
+2024-04-16 11:36:49,085 DEBUG   SenderThread:93495 [sender.py:send():382] send: telemetry
+2024-04-16 11:36:49,085 DEBUG   SenderThread:93495 [sender.py:send():382] send: telemetry
+2024-04-16 11:36:49,085 DEBUG   SenderThread:93495 [sender.py:send():382] send: run
+2024-04-16 11:36:49,263 INFO    SenderThread:93495 [sender.py:send_run():1010] updated run: ea03ybgw
+2024-04-16 11:36:49,508 INFO    Thread-13 :93495 [dir_watcher.py:_on_file_modified():288] file/dir modified: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/conda-environment.yaml
+2024-04-16 11:36:49,509 INFO    Thread-13 :93495 [dir_watcher.py:_on_file_modified():288] file/dir modified: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/config.yaml
+2024-04-16 11:36:49,509 INFO    Thread-13 :93495 [dir_watcher.py:_on_file_created():271] file/dir created: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/output.log
+2024-04-16 11:36:49,509 INFO    Thread-13 :93495 [dir_watcher.py:_on_file_created():271] file/dir created: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/requirements.txt
+2024-04-16 11:36:49,509 INFO    Thread-13 :93495 [dir_watcher.py:_on_file_created():271] file/dir created: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/wandb-metadata.json
+2024-04-16 11:36:49,603 INFO    wandb-upload_0:93495 [upload_job.py:push():131] Uploaded file /tmp/tmp03zom5bhwandb/j0jpq5k2-wandb-metadata.json
+2024-04-16 11:36:50,264 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:36:51,510 INFO    Thread-13 :93495 [dir_watcher.py:_on_file_modified():288] file/dir modified: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/output.log
+2024-04-16 11:36:55,265 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:37:00,266 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:37:03,780 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-16 11:37:03,780 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: stop_status
+2024-04-16 11:37:03,836 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: internal_messages
+2024-04-16 11:37:06,151 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:37:11,152 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:37:16,154 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:37:16,524 INFO    Thread-13 :93495 [dir_watcher.py:_on_file_modified():288] file/dir modified: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/config.yaml
+2024-04-16 11:37:18,816 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-16 11:37:18,816 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: stop_status
+2024-04-16 11:37:18,858 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: internal_messages
+2024-04-16 11:37:22,112 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:37:27,112 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:37:32,113 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:37:33,765 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-16 11:37:33,765 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: stop_status
+2024-04-16 11:37:33,806 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: internal_messages
+2024-04-16 11:37:38,045 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:37:43,045 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:37:45,777 DEBUG   SystemMonitor:93495 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-04-16 11:37:45,778 DEBUG   SenderThread:93495 [sender.py:send():382] send: stats
+2024-04-16 11:37:48,765 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-16 11:37:48,765 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: stop_status
+2024-04-16 11:37:48,806 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: internal_messages
+2024-04-16 11:37:48,989 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:37:51,549 INFO    Thread-13 :93495 [dir_watcher.py:_on_file_modified():288] file/dir modified: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/output.log
+2024-04-16 11:37:53,550 INFO    Thread-13 :93495 [dir_watcher.py:_on_file_modified():288] file/dir modified: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/output.log
+2024-04-16 11:37:54,291 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:37:55,551 INFO    Thread-13 :93495 [dir_watcher.py:_on_file_modified():288] file/dir modified: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/output.log
+2024-04-16 11:37:55,575 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-16 11:37:55,576 DEBUG   SenderThread:93495 [sender.py:send():382] send: history
+2024-04-16 11:37:55,576 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: summary_record
+2024-04-16 11:37:55,577 INFO    SenderThread:93495 [sender.py:_save_file():1403] saving file wandb-summary.json with policy end
+2024-04-16 11:37:55,584 DEBUG   SenderThread:93495 [sender.py:send():382] send: exit
+2024-04-16 11:37:55,584 INFO    SenderThread:93495 [sender.py:send_exit():589] handling exit code: 0
+2024-04-16 11:37:55,584 INFO    SenderThread:93495 [sender.py:send_exit():591] handling runtime: 69
+2024-04-16 11:37:55,584 INFO    SenderThread:93495 [sender.py:_save_file():1403] saving file wandb-summary.json with policy end
+2024-04-16 11:37:55,584 INFO    SenderThread:93495 [sender.py:send_exit():597] send defer
+2024-04-16 11:37:55,585 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:55,585 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 0
+2024-04-16 11:37:55,585 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:55,585 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 0
+2024-04-16 11:37:55,585 INFO    SenderThread:93495 [sender.py:transition_state():617] send defer: 1
+2024-04-16 11:37:55,585 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:55,585 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 1
+2024-04-16 11:37:55,585 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:55,585 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 1
+2024-04-16 11:37:55,585 INFO    SenderThread:93495 [sender.py:transition_state():617] send defer: 2
+2024-04-16 11:37:55,585 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:55,585 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 2
+2024-04-16 11:37:55,585 INFO    HandlerThread:93495 [system_monitor.py:finish():203] Stopping system monitor
+2024-04-16 11:37:55,585 DEBUG   SystemMonitor:93495 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-04-16 11:37:55,586 INFO    HandlerThread:93495 [interfaces.py:finish():202] Joined cpu monitor
+2024-04-16 11:37:55,586 DEBUG   SystemMonitor:93495 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-04-16 11:37:55,586 INFO    HandlerThread:93495 [interfaces.py:finish():202] Joined disk monitor
+2024-04-16 11:37:55,619 INFO    HandlerThread:93495 [interfaces.py:finish():202] Joined gpu monitor
+2024-04-16 11:37:55,619 INFO    HandlerThread:93495 [interfaces.py:finish():202] Joined memory monitor
+2024-04-16 11:37:55,619 INFO    HandlerThread:93495 [interfaces.py:finish():202] Joined network monitor
+2024-04-16 11:37:55,619 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:55,619 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 2
+2024-04-16 11:37:55,619 INFO    SenderThread:93495 [sender.py:transition_state():617] send defer: 3
+2024-04-16 11:37:55,619 DEBUG   SenderThread:93495 [sender.py:send():382] send: stats
+2024-04-16 11:37:55,619 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:55,620 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 3
+2024-04-16 11:37:55,620 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:55,620 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 3
+2024-04-16 11:37:55,620 INFO    SenderThread:93495 [sender.py:transition_state():617] send defer: 4
+2024-04-16 11:37:55,620 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:55,620 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 4
+2024-04-16 11:37:55,620 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:55,620 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 4
+2024-04-16 11:37:55,620 INFO    SenderThread:93495 [sender.py:transition_state():617] send defer: 5
+2024-04-16 11:37:55,620 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:55,620 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 5
+2024-04-16 11:37:55,620 DEBUG   SenderThread:93495 [sender.py:send():382] send: summary
+2024-04-16 11:37:55,621 INFO    SenderThread:93495 [sender.py:_save_file():1403] saving file wandb-summary.json with policy end
+2024-04-16 11:37:55,621 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:55,621 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 5
+2024-04-16 11:37:55,621 INFO    SenderThread:93495 [sender.py:transition_state():617] send defer: 6
+2024-04-16 11:37:55,621 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:55,621 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 6
+2024-04-16 11:37:55,621 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:55,621 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 6
+2024-04-16 11:37:55,621 INFO    SenderThread:93495 [sender.py:transition_state():617] send defer: 7
+2024-04-16 11:37:55,621 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: status_report
+2024-04-16 11:37:55,621 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:55,621 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 7
+2024-04-16 11:37:55,622 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:55,622 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 7
+2024-04-16 11:37:56,553 INFO    Thread-13 :93495 [dir_watcher.py:_on_file_created():271] file/dir created: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/wandb-summary.json
+2024-04-16 11:37:56,584 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: poll_exit
+2024-04-16 11:37:57,275 INFO    SenderThread:93495 [sender.py:transition_state():617] send defer: 8
+2024-04-16 11:37:57,275 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: poll_exit
+2024-04-16 11:37:57,275 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:57,276 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 8
+2024-04-16 11:37:57,276 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:57,276 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 8
+2024-04-16 11:37:57,276 INFO    SenderThread:93495 [job_builder.py:build():296] Attempting to build job artifact
+2024-04-16 11:37:57,277 INFO    SenderThread:93495 [job_builder.py:_get_source_type():426] is repo sourced job
+2024-04-16 11:37:57,427 INFO    SenderThread:93495 [job_builder.py:build():402] adding wandb-job metadata file
+2024-04-16 11:37:57,440 INFO    SenderThread:93495 [sender.py:transition_state():617] send defer: 9
+2024-04-16 11:37:57,441 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:57,441 DEBUG   SenderThread:93495 [sender.py:send():382] send: artifact
+2024-04-16 11:37:57,441 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 9
+2024-04-16 11:37:57,553 INFO    Thread-13 :93495 [dir_watcher.py:_on_file_modified():288] file/dir modified: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/output.log
+2024-04-16 11:37:57,584 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: poll_exit
+2024-04-16 11:37:58,502 INFO    SenderThread:93495 [sender.py:send_artifact():1494] sent artifact job-https___github.com_marcin-jankowskii_noisy_labels.git_Kod_inference.py - {'id': 'QXJ0aWZhY3Q6Nzk4MjMwOTE5', 'state': 'COMMITTED', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjEyNzY5NTE2Mg==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6Nzk4MjYwODEz', 'versionIndex': 40}}}
+2024-04-16 11:37:58,502 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:58,502 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 9
+2024-04-16 11:37:58,502 INFO    SenderThread:93495 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-04-16 11:37:58,555 INFO    SenderThread:93495 [dir_watcher.py:finish():388] scan: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files
+2024-04-16 11:37:58,555 INFO    SenderThread:93495 [dir_watcher.py:finish():402] scan save: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/conda-environment.yaml conda-environment.yaml
+2024-04-16 11:37:58,556 INFO    SenderThread:93495 [dir_watcher.py:finish():402] scan save: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/config.yaml config.yaml
+2024-04-16 11:37:58,558 INFO    SenderThread:93495 [dir_watcher.py:finish():402] scan save: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/output.log output.log
+2024-04-16 11:37:58,560 INFO    SenderThread:93495 [dir_watcher.py:finish():402] scan save: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/requirements.txt requirements.txt
+2024-04-16 11:37:58,562 INFO    SenderThread:93495 [dir_watcher.py:finish():402] scan save: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/wandb-metadata.json wandb-metadata.json
+2024-04-16 11:37:58,562 INFO    SenderThread:93495 [dir_watcher.py:finish():402] scan save: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/wandb-summary.json wandb-summary.json
+2024-04-16 11:37:58,564 INFO    SenderThread:93495 [sender.py:transition_state():617] send defer: 10
+2024-04-16 11:37:58,564 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: poll_exit
+2024-04-16 11:37:58,564 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:58,566 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 10
+2024-04-16 11:37:58,566 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:58,566 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 10
+2024-04-16 11:37:58,566 INFO    SenderThread:93495 [file_pusher.py:finish():172] shutting down file pusher
+2024-04-16 11:37:58,585 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: poll_exit
+2024-04-16 11:37:58,585 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: poll_exit
+2024-04-16 11:37:59,026 INFO    wandb-upload_1:93495 [upload_job.py:push():131] Uploaded file /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/config.yaml
+2024-04-16 11:37:59,101 INFO    wandb-upload_0:93495 [upload_job.py:push():131] Uploaded file /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/conda-environment.yaml
+2024-04-16 11:37:59,265 INFO    wandb-upload_4:93495 [upload_job.py:push():131] Uploaded file /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/wandb-summary.json
+2024-04-16 11:37:59,268 INFO    wandb-upload_2:93495 [upload_job.py:push():131] Uploaded file /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/output.log
+2024-04-16 11:37:59,289 INFO    wandb-upload_3:93495 [upload_job.py:push():131] Uploaded file /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/files/requirements.txt
+2024-04-16 11:37:59,489 INFO    Thread-12 (_thread_body):93495 [sender.py:transition_state():617] send defer: 11
+2024-04-16 11:37:59,490 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:59,490 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 11
+2024-04-16 11:37:59,490 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:59,491 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 11
+2024-04-16 11:37:59,491 INFO    SenderThread:93495 [file_pusher.py:join():178] waiting for file pusher
+2024-04-16 11:37:59,491 INFO    SenderThread:93495 [sender.py:transition_state():617] send defer: 12
+2024-04-16 11:37:59,491 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:59,491 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 12
+2024-04-16 11:37:59,491 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:59,491 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 12
+2024-04-16 11:37:59,491 INFO    SenderThread:93495 [file_stream.py:finish():595] file stream finish called
+2024-04-16 11:37:59,585 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: poll_exit
+2024-04-16 11:37:59,741 INFO    SenderThread:93495 [file_stream.py:finish():599] file stream finish is done
+2024-04-16 11:37:59,741 INFO    SenderThread:93495 [sender.py:transition_state():617] send defer: 13
+2024-04-16 11:37:59,741 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: poll_exit
+2024-04-16 11:37:59,742 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:59,742 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 13
+2024-04-16 11:37:59,742 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:59,742 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 13
+2024-04-16 11:37:59,742 INFO    SenderThread:93495 [sender.py:transition_state():617] send defer: 14
+2024-04-16 11:37:59,743 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: defer
+2024-04-16 11:37:59,743 DEBUG   SenderThread:93495 [sender.py:send():382] send: final
+2024-04-16 11:37:59,743 INFO    HandlerThread:93495 [handler.py:handle_request_defer():172] handle defer: 14
+2024-04-16 11:37:59,743 DEBUG   SenderThread:93495 [sender.py:send():382] send: footer
+2024-04-16 11:37:59,743 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: defer
+2024-04-16 11:37:59,743 INFO    SenderThread:93495 [sender.py:send_request_defer():613] handle sender defer: 14
+2024-04-16 11:37:59,743 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: poll_exit
+2024-04-16 11:37:59,744 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: poll_exit
+2024-04-16 11:37:59,744 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: poll_exit
+2024-04-16 11:37:59,744 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: poll_exit
+2024-04-16 11:37:59,744 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: server_info
+2024-04-16 11:37:59,745 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: server_info
+2024-04-16 11:37:59,745 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: get_summary
+2024-04-16 11:37:59,746 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: sampled_history
+2024-04-16 11:37:59,747 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: internal_messages
+2024-04-16 11:37:59,747 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: job_info
+2024-04-16 11:37:59,946 DEBUG   SenderThread:93495 [sender.py:send_request():409] send_request: job_info
+2024-04-16 11:37:59,946 INFO    MainThread:93495 [wandb_run.py:_footer_history_summary_info():3866] rendering history
+2024-04-16 11:37:59,947 INFO    MainThread:93495 [wandb_run.py:_footer_history_summary_info():3898] rendering summary
+2024-04-16 11:37:59,947 INFO    MainThread:93495 [wandb_run.py:_footer_sync_info():3825] logging synced files
+2024-04-16 11:37:59,947 DEBUG   HandlerThread:93495 [handler.py:handle_request():146] handle_request: shutdown
+2024-04-16 11:37:59,947 INFO    HandlerThread:93495 [handler.py:finish():869] shutting down handler
+2024-04-16 11:38:00,747 INFO    WriterThread:93495 [datastore.py:close():296] close: /media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/wandb/run-20240416_113644-ea03ybgw/run-ea03ybgw.wandb
+2024-04-16 11:38:00,946 INFO    SenderThread:93495 [sender.py:finish():1572] shutting down sender
+2024-04-16 11:38:00,946 INFO    SenderThread:93495 [file_pusher.py:finish():172] shutting down file pusher
+2024-04-16 11:38:00,947 INFO    SenderThread:93495 [file_pusher.py:join():178] waiting for file pusher

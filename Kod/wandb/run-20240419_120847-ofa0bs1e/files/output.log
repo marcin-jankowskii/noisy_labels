@@ -1,0 +1,68 @@
+GPU dostępne: NVIDIA GeForce RTX 3090
+/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test
+(119, 512, 512)
+Mean IoU oneclass (intersection): 0.551397735620119
+IoU per class oneclass (intersection): [0.99597141 0.55139774]
+Mean IoU multiclass (intersection): 0
+IoU per class multiclass (intersection): 0
+Mean IoU oneclass (annotator1): 0.5966899019630684
+IoU per class oneclass (annotator1): [0.99538833 0.5966899 ]
+Mean IoU multiclass (annotator1): 0
+IoU per class multiclass (annotator1): 0
+Mean IoU oneclass (annotator2): 0.5213064201328608
+IoU per class oneclass (annotator2): [0.99493943 0.52130642]
+Mean IoU multiclass (annotator2): 0
+IoU per class multiclass (annotator2): 0
+Mean IoU oneclass (union): 0.5663678489232027
+IoU per class oneclass (union): [0.99435355 0.56636785]
+Mean IoU multiclass (union): 0
+IoU per class multiclass (union): 0
+Mean IoU oneclass (feeling lucky): 0.5584334038681782
+IoU per class oneclass (feeling lucky): [0.99516466 0.5584334 ]
+Mean IoU multiclass (feeling lucky): 0
+IoU per class multiclass (feeling lucky): 0
+Iou 1 calculated
+Iou 2 calculated
+Iou 3 calculated
+Iou 4 calculated
+Iou 5 calculated
+Iou 6 calculated
+Iou 7 calculated
+Iou 8 calculated
+Iou 9 calculated
+Iou 10 calculated
+Iou 11 calculated
+Iou 12 calculated
+Iou 13 calculated
+Iou 14 calculated
+Iou 15 calculated
+Iou 16 calculated
+Iou 17 calculated
+Iou 18 calculated
+Iou 19 calculated
+Iou 20 calculated
+Iou 21 calculated
+Iou 22 calculated
+Iou 23 calculated
+Iou 24 calculated
+Iou 25 calculated
+Iou 26 calculated
+Iou 27 calculated
+Iou 28 calculated
+Iou 29 calculated
+Iou 30 calculated
+Iou 31 calculated
+Iou 32 calculated
+Iou 33 calculated
+Iou 34 calculated
+Iou 35 calculated
+Iou 36 calculated
+Iou 37 calculated
+Iou 38 calculated
+Iou 39 calculated
+Iou 40 calculated
+Iou 41 calculated
+Iou 42 calculated
+Iou 43 calculated
+Iou 44 calculated
+Iou 45 calculated

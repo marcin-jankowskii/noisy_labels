@@ -35,6 +35,25 @@ def rgb_to_class_id(mask_rgb, class_colors):
 
         return mask_id
 
+
+def feeling_lucky(mask1, mask2):
+    # Get the dimensions of the masks
+    height, width, num_classes = mask1.shape
+
+    # Randomly choose which annotator's mask to use for each pixel and class
+    random_indices = np.random.randint(2, size=(height, width, num_classes))
+    result_mask = np.zeros((height, width, num_classes), dtype=mask1.dtype)
+
+    for i in range(height):
+        for j in range(width):
+            for k in range(num_classes):
+                # Choose the mask based on the random index for the given pixel and class
+                chosen_mask_value = mask1[i, j, k] if random_indices[i, j, k] == 0 else mask2[i, j, k]
+                result_mask[i, j, k] = chosen_mask_value
+
+    return result_mask
+
+
 class ProcessData:
     def __init__(self, config_path=path_dict[path_config['place']], mode = 'full',annotator = 1):
         with open(config_path, 'r') as config_file:
@@ -67,7 +86,7 @@ class ProcessData:
 
         images = sorted(glob.glob(f"{dataset_path}/images/*"))
 
-        if self.mode == 'intersection_and_union' or self.mode == 'intersection' or self.mode == 'intersection_and_union_inference' or self.mode == 'intersection_inference':
+        if self.mode == 'intersection_and_union' or self.mode == 'intersection' or self.mode == 'intersection_and_union_inference' or self.mode == 'intersection_inference' or self.mode == 'feeling_lucky' or self.mode == 'union':
             gt_path1 = dataset_path + '/GT1_' + 'mixed/'
             gt_path2 = dataset_path + '/GT2_' + 'mixed/'
             masks = sorted(glob.glob(f"{gt_path1}*.png"))
@@ -76,10 +95,9 @@ class ProcessData:
             X = np.zeros((len(images), self.config['image_height'], self.config['image_width'], 3), dtype=np.float32)
             intersections = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],4), dtype=np.float32)
             unions = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],4), dtype=np.float32)
-
-            if self.mode == 'intersection_and_union_inference' or self.mode == 'intersection_inference':
-                y1 = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],4), dtype=np.float32)
-                y2 = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],4), dtype=np.float32)
+            feelings = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],4), dtype=np.float32)
+            y1 = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],4), dtype=np.float32)
+            y2 = np.zeros((len(masks),  self.config['image_height'], self.config['image_width'],4), dtype=np.float32)
 
 
             for n, (img, mimg,mimg2) in enumerate(zip(images, masks, masks2)):
@@ -107,6 +125,7 @@ class ProcessData:
 
                 intersection_id = cv2.bitwise_and(mask_id, mask2_id)
                 union_id = cv2.bitwise_or(mask_id, mask2_id)
+                feeling_id = feeling_lucky(mask_id, mask2_id)
 
                 # Normalize intersection
                 min_val = np.min(intersection)
@@ -123,16 +142,19 @@ class ProcessData:
                     X[n] = x_img
                 intersections[n] = intersection_id
                 unions[n] = union_id
-
-                if self.mode == 'intersection_and_union_inference' or self.mode == 'intersection_inference':
-                    y1[n] = mask_id
-                    y2[n] = mask2_id
+                feelings[n] = feeling_id
+                y1[n] = mask_id
+                y2[n] = mask2_id
 
             
             if self.mode == 'intersection_and_union_inference' or self.mode == 'intersection_inference':
-                return X, intersections, unions, y1, y2
-            else:
-                return X, intersections, unions
+                return X, intersections, unions,feelings,y1, y2
+            elif self.mode == 'intersection_and_union' or self.mode == 'intersection':
+                return X, y2, intersections
+            elif self.mode == 'feeling_lucky':
+                return X, feelings, unions
+            elif self.mode == 'union':
+                return X, unions,intersections
             
 
         elif self.mode == 'both':
@@ -214,7 +236,7 @@ class BatchMaker:
     
         self.process_data = ProcessData(config_path=config_path,mode = segment,annotator = annotator)
         self.batch_size = batch_size
-        if segment == 'intersection_and_union' or segment == 'intersection' or segment == 'both':
+        if segment == 'intersection_and_union' or segment == 'intersection' or segment == 'both' or segment == 'feeling_lucky' or segment == 'union':
             if mode == 'all':
                 x_train, int_train,un_train = self.process_data.process_dataset('/train')
                 x_val, int_val,un_val = self.process_data.process_dataset('/test_small')
@@ -234,20 +256,20 @@ class BatchMaker:
 
         elif segment == 'intersection_and_union_inference' or segment == 'intersection_inference':
             if mode == 'all':
-                x_train, int_train,un_train,y1_train,y2_train = self.process_data.process_dataset('/train')
-                x_val, int_val,un_val,y1_val,y2_val = self.process_data.process_dataset('/test_small')
-                x_test, int_test,un_test,y1_test,y2_test = self.process_data.process_dataset('/test')
-                self.train_loader = self.create_loader3(x_train, int_train,un_train,y1_train,y2_train,shuffle=False)
-                self.val_loader = self.create_loader3(x_val, int_val,un_val,y1_val,y2_val, shuffle=False)
-                self.test_loader = self.create_loader3(x_test, int_test,un_test,y1_test,y2_test ,shuffle=False)
+                x_train, int_train,un_train,fl_train,y1_train,y2_train = self.process_data.process_dataset('/train')
+                x_val, int_val,un_val,y1_val,fl_val,y2_val = self.process_data.process_dataset('/test_small')
+                x_test, int_test,un_test,y1_test,fl_test,y2_test = self.process_data.process_dataset('/test')
+                self.train_loader = self.create_loader3(x_train, int_train,un_train,fl_train,y1_train,y2_train,shuffle=False)
+                self.val_loader = self.create_loader3(x_val, int_val,un_val,fl_val,y1_val,y2_val, shuffle=False)
+                self.test_loader = self.create_loader3(x_test, int_test,un_test,fl_test,y1_test,y2_test ,shuffle=False)
             elif mode == 'train':
-                x_train, int_train,un_train,y1_train,y2_train = self.process_data.process_dataset('/train')
-                x_val, int_val,un_val,y1_val,y2_val = self.process_data.process_dataset('/test_small')
-                self.train_loader = self.create_loader3(x_train, int_train,un_train,y1_train,y2_train,shuffle=True)
-                self.val_loader = self.create_loader3(x_val, int_val,un_val,y1_val,y2_val, shuffle=True)
+                x_train, int_train,un_train,fl_train,y1_train,y2_train = self.process_data.process_dataset('/train')
+                x_val, int_val,un_val,fl_val,y1_val,y2_val = self.process_data.process_dataset('/test_small')
+                self.train_loader = self.create_loader3(x_train, int_train,un_train,fl_train,y1_train,y2_train,shuffle=True)
+                self.val_loader = self.create_loader3(x_val, int_val,un_val,fl_val,y1_val,y2_val, shuffle=True)
             elif mode == 'test':
-                x_test, int_test,un_test,y1_test,y2_test = self.process_data.process_dataset('/test')
-                self.test_loader = self.create_loader3(x_test, int_test,un_test,y1_test,y2_test ,shuffle=False)
+                x_test, int_test,un_test,fl_test,y1_test,y2_test = self.process_data.process_dataset('/test')
+                self.test_loader = self.create_loader3(x_test, int_test,un_test,fl_test,y1_test,y2_test ,shuffle=False)
 
 
         else:
@@ -287,17 +309,19 @@ class BatchMaker:
         dataset = TensorDataset(x_tensor, intersection_tensor,union_tensor)
         return DataLoader(dataset, batch_size=self.batch_size, shuffle=shuffle)
     
-    def create_loader3(self,x,intersection,union,y1,y2,shuffle):
+    def create_loader3(self,x,intersection,union,feeling,y1,y2,shuffle):
         x = np.transpose(x,(0,3,1,2))
         intersection = np.transpose(intersection, (0, 3, 1, 2))
         union = np.transpose(union, (0, 3, 1, 2))
+        feeling = np.transpose(feeling, (0, 3, 1, 2))
         y1 = np.transpose(y1, (0, 3, 1, 2))
         y2 = np.transpose(y2, (0, 3, 1, 2))   
         x_tensor = torch.from_numpy(x)
         intersection_tensor = torch.from_numpy(intersection).type(torch.float64)
         union_tensor = torch.from_numpy(union).type(torch.float64)
+        feeling_tensor = torch.from_numpy(feeling).type(torch.float64)
         y1_tensor = torch.from_numpy(y1).type(torch.float64)
         y2_tensor = torch.from_numpy(y2).type(torch.float64)
-        dataset = TensorDataset(x_tensor, intersection_tensor,union_tensor,y1_tensor,y2_tensor)
+        dataset = TensorDataset(x_tensor, intersection_tensor,union_tensor,feeling_tensor,y1_tensor,y2_tensor)
         return DataLoader(dataset, batch_size=self.batch_size, shuffle=shuffle)
         
