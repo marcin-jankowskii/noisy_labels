@@ -1,1 +1,0 @@
-{"inference/plot": {"_type": "image-file", "sha256": "865ef17a44deaec232aee9887cbf484f7725e1b4cf9f1a7ed2d20ce237078f61", "size": 100311, "path": "media/images/inference/plot_0_865ef17a44deaec232ae.png", "format": "png", "width": 2000, "height": 1000}, "_timestamp": 1709301666.0901752, "_runtime": 22.107563257217407, "_step": 0, "_wandb": {"runtime": 21}}

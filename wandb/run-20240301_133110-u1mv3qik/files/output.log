@@ -1,9 +1,0 @@
-/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test
-GPU dostępne: NVIDIA GeForce RTX 3090
-Traceback (most recent call last):
-  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 223, in <module>
-    predict(model, test_loader)
-  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/inference.py", line 117, in predict
-    true_masks.append(ids1.cpu())
-                      ^^^^
-UnboundLocalError: cannot access local variable 'ids1' where it is not associated with a value

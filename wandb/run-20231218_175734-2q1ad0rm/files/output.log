@@ -1,7 +1,0 @@
-
-/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/train
-/home/nitro/Studia/Praca Dyplomowa/noisy_labels/Dataset/SegSperm/test_small
-GPU dostępne: NVIDIA GeForce RTX 3070 Laptop GPU
-(512, 512)
-Epoch 1, Train Loss: 0.903411463730865, Validation Loss: 0.9367688074707985, Validation IOU: 0.706003953231511
-Model saved
