@@ -1,9 +1,0 @@
-
-/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
-/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
-GPU dostępne: NVIDIA GeForce RTX 3090
-Traceback (most recent call last):
-  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 457, in <module>
-    weights[2] = 7  #2
-    ~~~~~~~^^^
-IndexError: index 2 is out of bounds for dimension 0 with size 2

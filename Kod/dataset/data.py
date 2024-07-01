@@ -125,7 +125,8 @@ class ProcessData:
 
                 intersection_id = cv2.bitwise_and(mask_id, mask2_id)
                 union_id = cv2.bitwise_or(mask_id, mask2_id)
-                feeling_id = feeling_lucky(mask_id, mask2_id)
+                #feeling_id = feeling_lucky(mask_id, mask2_id)
+                feeling_id = np.zeros_like(mask_id)
 
                 # Normalize intersection
                 min_val = np.min(intersection)
@@ -264,9 +265,9 @@ class BatchMaker:
                 self.test_loader = self.create_loader3(x_test, int_test,un_test,fl_test,y1_test,y2_test ,shuffle=False)
             elif mode == 'train':
                 x_train, int_train,un_train,fl_train,y1_train,y2_train = self.process_data.process_dataset('/train')
-                x_val, int_val,un_val,fl_val,y1_val,y2_val = self.process_data.process_dataset('/test_small')
+                x_test, int_test,un_test,y1_test,fl_test,y2_test = self.process_data.process_dataset('/test')
                 self.train_loader = self.create_loader3(x_train, int_train,un_train,fl_train,y1_train,y2_train,shuffle=True)
-                self.val_loader = self.create_loader3(x_val, int_val,un_val,fl_val,y1_val,y2_val, shuffle=True)
+                self.test_loader = self.create_loader3(x_test, int_test,un_test,fl_test,y1_test,y2_test ,shuffle=True)
             elif mode == 'test':
                 x_test, int_test,un_test,fl_test,y1_test,y2_test = self.process_data.process_dataset('/test')
                 self.test_loader = self.create_loader3(x_test, int_test,un_test,fl_test,y1_test,y2_test ,shuffle=False)
@@ -282,9 +283,9 @@ class BatchMaker:
                 self.test_loader = self.create_loader(x_test, y_test ,shuffle=False)
             elif mode == 'train':
                 x_train, y_train = self.process_data.process_dataset('/train')
-                x_val, y_val = self.process_data.process_dataset('/test_small')
+                x_test, y_test = self.process_data.process_dataset('/test')
                 self.train_loader = self.create_loader(x_train, y_train, shuffle=True)
-                self.val_loader = self.create_loader(x_val, y_val, shuffle=True)
+                self.test_loader = self.create_loader(x_test, y_test, shuffle=True)
             elif mode == 'test':
                 x_test, y_test = self.process_data.process_dataset('/test')
                 self.test_loader = self.create_loader(x_test, y_test, shuffle=False)

@@ -1,3 +1,5 @@
+import cv2
+
 from models.Unet import UNet
 from dataset.data import BatchMaker
 from utils.metrics2 import calculate_iou, calculate_ap_for_segmentation
@@ -5,6 +7,7 @@ from utils.augmentation import MyAugmentation
 from utils.metrics import SegmentationMetrics
 from utils.Emilia_aug import EmiliaAugmentation
 from utils.better_aug import BetterAugmentation
+from utils.better_aug_2masks import BetterAugmentation as BetterAugmentation2
 
 import torch
 import torch.nn as nn
@@ -127,38 +130,72 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
     for batch_idx, data in enumerate(train_loader):
         if len(data) == 2:
             inputs, ids = data
-        elif len(data) == 3: 
-            inputs, intersections, unions = data
+        elif len(data) == 6:
+            inputs,intersections, unions,feelings,ids_y1, ids_y2 = data
 
         if T_aug == True:
             for i in range(inputs.shape[0]):
                 if len(data) == 2:
                     inputs[i],ids[i] = augumentation(inputs[i], ids[i])
-                elif len(data) == 3:
-                    inputs[i],intersections[i] = augumentation(inputs[i], intersections[i])
+                elif len(data) == 6:
+                    inputs[i],unions[i],intersections[i] = augumentation(inputs[i], unions[i],intersections[i])
 
 
         inputs = inputs.to(device)
         if len(data) == 2:
-            ids = ids.type(torch.LongTensor)
+            if config.loss == 'CrossEntropyLoss':
+                ids = ids.type(torch.LongTensor)
+            if config.loss == 'BCEWithLogitsLoss':
+                ids = ids.type(torch.FloatTensor)
             ids = ids.to(device)
-        elif len(data) == 3:
+            idsBCE = ids[:, [0, -1], :, :]
+            idsBCE = idsBCE.to(device)
+        elif len(data) == 6:
+
             intersections = intersections.type(torch.LongTensor)
             intersections = intersections.to(device)
-            ids = intersections.to(device)
+            intersections1 = transform_batch(intersections.cpu())
+            intersections2 = transform_batch2(intersections.cpu())
+            intersections1 = torch.from_numpy(intersections1).type(torch.LongTensor).to(device)
+            intersections2 = torch.from_numpy(intersections2).type(torch.LongTensor).to(device)
+
+            ids_y1 =ids_y1.type(torch.LongTensor)
+            ids_y1 = ids_y1.to(device)
+
+            ids_y2 = ids_y2.type(torch.LongTensor)
+            ids_y2 = ids_y2.to(device)
+
+            ids = ids_y2.to(device)
+
+
             unions = unions.type(torch.LongTensor)
             unions = unions.to(device)
+            unions1 = transform_batch(unions.cpu())
+            unions2 = transform_batch2(unions.cpu())
+            unions1 = torch.from_numpy(unions1).type(torch.LongTensor).to(device)
+            unions2 = torch.from_numpy(unions2).type(torch.LongTensor).to(device)
 
-            if config.mode == 'intersection_and_union':
-                #inputs = intersections.to(device)
-                unions = unions.type(torch.LongTensor)
-                ids = unions.to(device)
+            un_diff_inter = ids - intersections
+            un_diff_inter = un_diff_inter.type(torch.LongTensor)
+            un_diff_inter = un_diff_inter.to(device)
+
+            un_diff_inter1 = transform_batch(un_diff_inter.cpu())
+            un_diff_inter2 = transform_batch2(un_diff_inter.cpu())
+
+            un_diff_inter1 = torch.from_numpy(un_diff_inter1).type(torch.LongTensor).to(device)
+            un_diff_inter2 = torch.from_numpy(un_diff_inter2).type(torch.LongTensor).to(device)
+
 
         ids1 = transform_batch(ids.cpu())
         ids2 = transform_batch2(ids.cpu())
 
+        # for i in range(ids1.shape[0]):
+        #     ids1[i] = cv2.morphologyEx(ids1[i], cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
+
         ids1 = torch.from_numpy(ids1).type(torch.LongTensor).to(device)
         ids2 = torch.from_numpy(ids2).type(torch.LongTensor).to(device)
+
+
 
         # zamienic nazwy bo unions to intersections a intersections to y2
         optimizer.zero_grad()
@@ -167,7 +204,7 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
         output1 = output[:, :3, :, :]
         output2 = output[:, [0, -1], :, :]
 
-        weights1 = torch.tensor([0.2, 1, 0.5]).to(device)
+        weights1 = torch.tensor([0.2, 1.0, 0.5]).to(device)
         weights2 = torch.tensor([1.0, 1.0]).to(device)
         loss_fn1 = nn.CrossEntropyLoss(weight=weights1)
         loss_fn2 = nn.CrossEntropyLoss(weight=weights2)
@@ -176,14 +213,23 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
         # Obliczanie straty
         
         if config.mode == 'intersection_and_union':
-            loss = loss_fn(output, ids) + 2*loss_fn(output*unions, ids - unions)
+            k = config.k
+            l1 = loss_fn1(output1, intersections1)  + k*loss_fn1(output1, un_diff_inter1)
+            l2 = loss_fn2(output2, intersections2) + k*loss_fn2(output2, un_diff_inter2)
+            loss = l1 + l2
             #loss = loss_fn(output, ids)
         elif config.mode == 'oneclass':
-            loss = loss_fn2(output, ids2)
-        else:
-            l1 = loss_fn1(output1, ids1)
-            l2 = loss_fn2(output2, ids2)
-            loss = l1 + l2
+            if config.loss == 'CrossEntropyLoss':
+                loss = loss_fn2(output, ids2)
+            elif config.loss == 'BCEWithLogitsLoss':
+                loss = loss_fn(output, idsBCE)
+        elif config.mode == 'multiclass':
+            if config.loss == 'CrossEntropyLoss':
+                l1 = loss_fn1(output1, ids1)
+                l2 = loss_fn2(output2, ids2)
+                loss = l1 + l2
+            if config.loss == 'BCEWithLogitsLoss':
+                loss = loss_fn(output, ids)
 
         if config.mode == 'oneclass':
             preds2 = torch.argmax(output, dim=1)
@@ -196,7 +242,8 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
             total_iou_multiclass += 0
             total_iou_oneclass += iou_oneclass
             total_loss += loss.item()
-        else:
+
+        elif config.mode == 'multiclass' or config.mode == 'intersection_and_union':
             preds1 = torch.argmax(output1, dim=1)
             preds2 = torch.argmax(output2, dim=1)
 
@@ -212,9 +259,12 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
             total_iou_multiclass += iou_multiclass
             total_iou_oneclass += iou_oneclass
             total_loss += loss.item()
-            total_loss_oneclass += l2.item()
-            total_loss_multiclass += l1.item()
-        
+            if config.loss == 'CrossEntropyLoss':
+                total_loss_oneclass += l2.item()
+                total_loss_multiclass += l1.item()
+
+
+
     avg_loss = total_loss / len(train_loader)
     avg_loss_oneclass = total_loss_oneclass / len(train_loader)
     avg_loss_multiclass = total_loss_multiclass / len(train_loader)
@@ -241,6 +291,9 @@ def train(model, train_loader, optimizer,scheduler,loss_fn,augumentation,T_aug,e
 
 def val(model, validation_loader, loss_fn,epoch_number,scheduler):
     model.eval()
+    softmask_oneclass_list = []
+    softmask_multiclass_list = []
+    vids_list = []
     total_iou_multiclass = 0
     total_iou_oneclass = 0
     with torch.no_grad():
@@ -250,10 +303,10 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
                 vinputs, vids = data
                 vids = vids.type(torch.FloatTensor)
                 vids = vids.to(device)
-            elif len(data) == 3:
-                vinputs, vintersections, vunions = data
+            elif len(data) == 6:
+                vinputs, vintersections, vunions, vfeelings, vids_y1, vids_y2 = data
                 vintersections = vintersections.type(torch.FloatTensor)
-                vids = vintersections.to(device)
+                vids = vids_y1.to(device)
                 vunions = vunions.type(torch.FloatTensor)
                 
          
@@ -264,8 +317,11 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
                 vids = vunions.to(device)
 
             if config.mode == 'oneclass':
+                vids_list.append(vids.cpu())
                 vids1 = transform_batch(vids.cpu())
                 vids2 = transform_batch2(vids.cpu())
+
+
 
                 vids1 = torch.from_numpy(vids1).type(torch.LongTensor).to(device)
                 vids2 = torch.from_numpy(vids2).type(torch.LongTensor).to(device)
@@ -282,8 +338,8 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
                 vpreds2 = torch.argmax(voutputs, dim=1)
                 vsofts2 = torch.softmax(voutputs, dim=1)
                 vsofts2 = vsofts2.squeeze(0)
-                vsoftmask_oneclass_np = np.array(vsofts2.cpu())
-                vsoftmask_oneclass_np = vsoftmask_oneclass_np.transpose((0, 2, 3, 1))
+                softmask_oneclass_list.append(vsofts2.cpu())
+
 
 
                 #preds_out_multiclass = np.zeros((512, 512))
@@ -293,10 +349,11 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
                 total_iou_multiclass = 0
 
                 mean_iou, IoUs = calculate_iou(vids2.cpu().numpy(), vpreds2.cpu().numpy(),2)
-                ap_score_oneclass = calculate_ap_for_segmentation(vsoftmask_oneclass_np[:, :, :, 1], vids2.cpu().numpy())
+
                 viou = 1 - mean_iou
                 total_iou_oneclass += viou
             else:
+                vids_list.append(vids.cpu())
                 vids1 = transform_batch(vids.cpu())
                 vids2 = transform_batch2(vids.cpu())
 
@@ -318,6 +375,15 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
                 vpreds1 = torch.argmax(voutput1, dim=1)
                 vpreds2 = torch.argmax(voutput2, dim=1)
 
+
+                vsofts1 = torch.softmax(voutput1, dim=1)
+                vsofts2 = torch.softmax(voutput2, dim=1)
+                vsofts1 = vsofts1.squeeze(0)
+                vsofts2 = vsofts2.squeeze(0)
+                softmask_multiclass_list.append(vsofts1.cpu())
+                softmask_oneclass_list.append(vsofts2.cpu())
+
+
                 preds_out_multiclass = vpreds1.detach().cpu().numpy()
                 preds_out_oneclass = vpreds2.detach().cpu().numpy()
 
@@ -332,10 +398,29 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
                 total_iou_oneclass += viou
 
 
+    vids_list = np.concatenate(vids_list, axis=0)
+    ids1 = transform_batch(vids_list)
+    ids2 = transform_batch2(vids_list)
+
+
+    softmasks_oneclass = [mask for batch in softmask_oneclass_list for mask in batch]
+    softmasks_oneclass_np = np.array(softmasks_oneclass)
+    softmasks_oneclass_np = softmasks_oneclass_np.transpose(0, 2, 3, 1)
+    ap_score_oneclass = calculate_ap_for_segmentation(softmasks_oneclass_np[:, :, :, 1], ids2)
+    ap_score_head = 0
+    ap_score_tail = 0
+
+    if config.mode == 'multiclass' or config.mode == 'intersection_and_union':
+        softmasks_multiclass = [mask for batch in softmask_multiclass_list for mask in batch]
+        softmasks_multiclass_np = np.array(softmasks_multiclass)
+        softmasks_multiclass_np = softmasks_multiclass_np.transpose(0, 2, 3, 1)
+        ap_score_head = calculate_ap_for_segmentation(softmasks_multiclass_np[:, :, :, 2], vids_list[:,2,:,:])
+        ap_score_tail = calculate_ap_for_segmentation(softmasks_multiclass_np[:, :, :, 1], vids_list[:,1,:,:])
 
 
     avg_iou_multiclass = total_iou_multiclass / len(validation_loader)
     avg_iou_oneclass = total_iou_oneclass / len(validation_loader)
+
 
     if config.scheduler == 'ReduceLROnPlateau':
         scheduler.step(avg_iou_multiclass)
@@ -343,24 +428,31 @@ def val(model, validation_loader, loss_fn,epoch_number,scheduler):
     val_metrics = { "val/val_iou_multiclass": avg_iou_multiclass,
                     "val/val_iou_oneclass": avg_iou_oneclass,
                     "val/val_ap_oneclass": ap_score_oneclass,
+                    "val/val_ap_head": ap_score_head,
+                    "val/val_ap_tail": ap_score_tail,
                     "val/epoch": epoch_number
                        }
     wandb.log(val_metrics)
-    return avg_iou_multiclass,avg_iou_oneclass,images,vids_numpy,vids_numpy2,preds_out_multiclass,preds_out_oneclass,ap_score_oneclass
+    return avg_iou_multiclass,avg_iou_oneclass,images,vids_numpy,vids_numpy2,preds_out_multiclass,preds_out_oneclass,ap_score_oneclass,ap_score_head,ap_score_tail,
 
 def main(model, train_loader, validation_loader, optimizer,scheduler,loss_fn, epochs,augumentation,T_aug,name):
 
     best_iou = 1000000
+    best_iou_multiclass = 1000000
+    best_iou_opt_oneclass = 0
     best_ap_oneclass = 0
+    best_ap_head = 0
+    best_ap_tail = 0
 
     for epoch in range(epochs):
         epoch_number = epoch +1
         train_loss,train_iou_multiclass,train_iou_oneclass = train(model, train_loader, optimizer,scheduler, loss_fn,augumentation,T_aug,epoch_number)
-        validation_iou_multiclass,validation_iou_oneclass,vimages,vlbls_multiclass,vlbls_oneclass,vpreds_multiclass,vpreds_oneclass,ap_score_oneclass = val(model, validation_loader, loss_fn,epoch_number,scheduler)
+        validation_iou_multiclass,validation_iou_oneclass,vimages,vlbls_multiclass,vlbls_oneclass,vpreds_multiclass,vpreds_oneclass,ap_score_oneclass,ap_score_head,ap_score_tail = val(model, validation_loader, loss_fn,epoch_number,scheduler)
         plot_sample(vimages,vlbls_multiclass,vpreds_multiclass, ix=0,mode = 'val',number = '1')
         plot_sample(vimages, vlbls_oneclass, vpreds_oneclass, ix=0, mode='val',number = '2')
 
         print(f'Epoch {epoch_number}, Train Loss: {train_loss}, Train Iou Multiclass: {train_iou_multiclass}, Train Iou Oneclass: {train_iou_oneclass}, Validation Iou Multiclass: {validation_iou_multiclass}, Validation Iou Oneclass: {validation_iou_oneclass}')
+        print(f'Validation AP Oneclass: {ap_score_oneclass}',f'Validation AP Head: {ap_score_head}',f'Validation AP Tail: {ap_score_tail}')
 
         if validation_iou_oneclass < best_iou:
             best_iou = validation_iou_oneclass
@@ -373,6 +465,21 @@ def main(model, train_loader, validation_loader, optimizer,scheduler,loss_fn, ep
             model_path = yaml_config['save_model_path'] +'/'+ name + '_best_model_ap_oneclass'
             torch.save(model.state_dict(), model_path)
             print("Model saved (ap_oneclass)")
+        if ap_score_head > best_ap_head:
+            best_ap_head = ap_score_head
+            model_path = yaml_config['save_model_path'] +'/'+ name + '_best_model_ap_head'
+            torch.save(model.state_dict(), model_path)
+            print("Model saved (ap_head)")
+        if ap_score_tail > best_ap_tail:
+            best_ap_tail = ap_score_tail
+            model_path = yaml_config['save_model_path'] +'/'+ name + '_best_model_ap_tail'
+            torch.save(model.state_dict(), model_path)
+            print("Model saved (ap_tail)")
+        if validation_iou_multiclass < best_iou_multiclass:
+            best_iou_multiclass = validation_iou_multiclass
+            model_path = yaml_config['save_model_path'] +'/'+ name + '_best_model_iou_multiclass'
+            torch.save(model.state_dict(), model_path)
+            print('Model saved (iou_multiclass)')
         if epoch_number == epochs:
             model_path = yaml_config['save_model_path'] +'/'+ name + '_last_model'
             torch.save(model.state_dict(), model_path)
@@ -387,21 +494,22 @@ class_colors = [[0, 0, 0], [0, 255, 0], [0, 0, 255],[0,255,255]]  # tło, wić, 
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
 
 
-
-wandb.init(project="noisy_labels", entity="segsperm",
+wandb.init(project="Noisy_label", entity="noisy_label",
             config={
-            "epochs": 200,
+            "epochs": 300,
             "batch_size": 6,
             "lr": 1e-3,
             "annotator": 1,
             "model": 'smpUNet++',
-            "augmentation": True,
+            "augmentation": False,
             "loss": "CrossEntropyLoss",
             "optimizer": "Adam",
-            "scheduler": "MultiStepLR",
+            "scheduler": "CosineAnnealingLR",
             "place": "lab",
-            "mode": "oneclass",
-            "aug_type": "EmiliaAugmentation"
+            "mode": "intersection_and_union",
+            "aug_type": "BetterAugmentation",
+            "k": 5
+
             })
 
 config = wandb.config
@@ -427,7 +535,7 @@ model_dict = {'myUNet': UNet(3,num_classes),
 
 mode_dict = {'normal': 'mixed',
              'intersection': 'intersection',
-             'intersection_and_union': 'intersection_and_union',
+             'intersection_and_union': 'intersection_and_union_inference',
              'feeling_lucky': 'feeling_lucky',
              'union': 'union',
              "oneclass": 'mixed',
@@ -436,7 +544,10 @@ mode_dict = {'normal': 'mixed',
 
 name = (f'Annotator:{config.annotator}_Model:{config.model}_Augmentation:{config.augmentation}_Mode:{config.mode}_Optimizer:{config.optimizer}_Scheduler:{config.scheduler}_Epochs:_{config.epochs}_Batch_Size:{config.batch_size}_Start_lr:{config.lr}_Loss:{config.loss}_Timestamp:{timestamp}')
 save_name = name = (f'Annotator_{config.annotator}_Model_{config.model}_Augmentation_{config.augmentation}_Mode{config.mode}_Optimizer_{config.optimizer}_Scheduler_{config.scheduler}_Epochs_{config.epochs}_Batch_Size_{config.batch_size}_Start_lr_{config.lr}_Loss_{config.loss}_Timestamp_{timestamp}')
-wandb.run.name = name
+
+description = f'y2_Two_segment_loss alfa = {config.k}'
+#description = f'One_segment_loss'
+wandb.run.name = description + name
 
 
 
@@ -467,9 +578,22 @@ optimizer_dict = {'Adam': optim.Adam(model.parameters(), lr=config.lr),
                   'RMSprop': optim.RMSprop(model.parameters(), lr=config.lr)
                   }
 
+if config.mode == "multiclass" or config.mode == "intersection_and_union":
+    weights = torch.ones([num_classes,512,512])
+    weights[0] = 1
+    weights[1] = 10 #7
+    weights[2] = 7  #2
+    weights[3] = 8  #4
+    weights = weights.to(device)
+if config.mode =="oneclass":
+    weights = torch.ones([num_classes,512,512])
+    weights[0] = 1
+    weights[1] = 1
+    weights = weights.to(device)
+
 loss_dict = {'CrossEntropyLoss': nn.CrossEntropyLoss(),
              'CrossEntropyLossWeight': nn.CrossEntropyLoss(),
-             'BCEWithLogitsLoss': nn.BCEWithLogitsLoss(),
+             'BCEWithLogitsLoss': nn.BCEWithLogitsLoss(pos_weight=weights),
              'BCE': nn.BCELoss()}
 
 loss_fn = loss_dict[wandb.config.loss]
@@ -489,7 +613,10 @@ elif config.aug_type == 'MyAugmentation':
     aug = MyAugmentation()
 elif config.aug_type == 'BetterAugmentation':
     aug = BetterAugmentation()
+    if config.mode == 'intersection_and_union':
+        aug = BetterAugmentation2()
 t_aug = config.augmentation
+print(config.aug_type)
 main(model, train_loader, val_loader, optimizer,scheduler, loss_fn, config.epochs,aug,t_aug,save_name)
 
 

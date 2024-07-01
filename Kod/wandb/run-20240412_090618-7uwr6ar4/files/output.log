@@ -1,9 +1,0 @@
-
-/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/train
-/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Dataset/SegSperm/test_small
-/home/cal314-1/miniconda3/envs/marcinv2/lib/python3.11/site-packages/torch/cuda/__init__.py:141: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
-  return torch._C._cuda_getDeviceCount() > 0
-Traceback (most recent call last):
-  File "/media/cal314-1/9E044F59044F3415/Marcin/noisy_labels/Kod/train.py", line 444, in <module>
-    raise Exception("Brak dostępnej karty GPU.")
-Exception: Brak dostępnej karty GPU.

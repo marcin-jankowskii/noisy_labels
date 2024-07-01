@@ -15,14 +15,14 @@ class EmiliaAugmentation(nn.Module):
         self.k3 = Ka.RandomVerticalFlip(p=0.5, p_batch=1.0, same_on_batch=False, keepdim=False)
 
         # Rotation
-        self.k4 = Ka.RandomRotation(45.0, same_on_batch=False, align_corners=True, p=0.5, keepdim=False, resample='nearest')
+        self.k6 = Ka.RandomRotation(45.0, same_on_batch=False, align_corners=True, p=0.5, keepdim=False, resample='nearest')
 
 
         # Gaussian blur with a kernel size chosen randomly between 2 and 10
         self.k5 = Ka.RandomGaussianBlur((3, 9), (0.1, 2.0), p=0.5)
 
         # Random resized crop (if needed)
-        self.k6 = Ka.RandomResizedCrop((512, 512), scale=(0.67, 0.67), ratio=(0.75, 1.333), same_on_batch=False,resample='bilinear',p=0.5, align_corners= True)
+        self.k4 = Ka.RandomResizedCrop((512, 512), scale=(0.67, 0.67), ratio=(0.75, 1.333), same_on_batch=False,resample='bilinear',p=0.5, align_corners= True)
 
         self.resize = Ka.Resize((512, 512))
 

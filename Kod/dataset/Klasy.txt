@@ -1,0 +1,16 @@
+1.zęby
+2.wiertło
+3.język
+4.lusterko
+5.dziąsło
+6.usta
+7.wacik
+8.tło
+9.inne narzędzie np.ssak
+10.Artefakt
+11.rękawica
+12.Skóra
+13.lusterko(bez odbicia)
+
+
+

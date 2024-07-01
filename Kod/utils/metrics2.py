@@ -16,6 +16,10 @@ def compute_iou_per_class(mask1, mask2, num_classes):
 
 
 def calculate_iou(mask1, mask2, num_classes):
+
+    if len(mask1.shape) == 2:
+        mask1 = mask1[np.newaxis, :, :]
+        mask2 = mask2[np.newaxis, :, :]
     num_layers = mask1.shape[0]
     all_iou_scores = []
 
@@ -26,7 +30,7 @@ def calculate_iou(mask1, mask2, num_classes):
     # Obliczamy średni IoU ignorując NaN
     iou = np.nanmean(all_iou_scores, axis=0)
     average_iou = np.nanmean(iou[1:])
-    return average_iou,iou
+    return average_iou, iou
 
 def calculate_ap_for_segmentation(predicted_probabilities, true_labels):
     # Spłaszcz maski do formatu 1D
